@@ -55,8 +55,8 @@ if ! gem list -i asciidoctor-diagram &> /dev/null; then
 fi
 
 # Build the document
-echo "Converting README.adocs to HTML with Mermaid diagrams..."
-asciidoctor -r asciidoctor-diagram -a imagesoutdir=images README.adocs
+echo "Converting README.adoc to HTML with Mermaid diagrams..."
+asciidoctor -r asciidoctor-diagram -a imagesoutdir=images README.adoc
 
 # Check if build was successful
 if [ -f "README.html" ]; then
