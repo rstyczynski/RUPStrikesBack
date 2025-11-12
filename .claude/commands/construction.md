@@ -4,15 +4,15 @@ Proceed with implementation of sprints in `Designed` state.
 
 ## Analysis and design
 
-Follow design document available in `progress` directory for given sprint. Build your understanding lookin into `inception` document available in `progress` directory for given sprint.
+Follow design document available in `progress` directory for given sprint. Build your understanding looking into `inception` document available in `progress` directory for given sprint.
 
 ## Progress board
 
-When the impelementation phase is started mark it by setting Sprint's status to `under_construction` in the `PROGRESS_BOARD.md` file. Note it's allowed extension of general project rules.
+When the implementation phase is started mark it by setting Sprint's status to `under_construction` in the `PROGRESS_BOARD.md` file. Note it's allowed extension of general project rules.
 
 Progress board is a table showing sprint, and backlog items state. It's the only purpose of this file. All potential comments, progress notes, etc. always keep in dedicated files for each phase.
 
-When the impelementation if the Backlog Item belonging to the Sprint is started mark it by setting Backlog Item's status to `under_construction` in the Sprint's chapter of the `PROGRESS_BOARD.md` file. Note it's allowed extension of general project rules.
+When the implementation if the Backlog Item belonging to the Sprint is started mark it by setting Backlog Item's status to `under_construction` in the Sprint's chapter of the `PROGRESS_BOARD.md` file. Note it's allowed extension of general project rules.
 
 Run test for each software product to confirm proper execution before passing to the Product Owner. Run the test loops for me. Report to me success or failure once you test loops are finished.
 
@@ -53,7 +53,7 @@ Adherence to this checklist is mandatory for shipping completed implementation a
 
 ## Functional Test
 
-All the functionale tests are documented in a form of copy/paste able sequences that Product Owner of user may execute to see exactly the same results.
+All the functional tests are documented in a form of copy/paste able sequences that Product Owner of user may execute to see exactly the same results.
 
 ### Functional Test Implementation Checklist
 
@@ -92,7 +92,7 @@ Before marking a Sprint as complete, verify:
 
 ## Finalization
 
-Once all Backlog Items for the Sprint are implemented and tested with sucess report end of the implementantino phase, by setting Sprint's status to `implemented`. When some of Backlog Items failed report overallal `implemented_partially`. When all failed mark status as `failed`.
+Once all Backlog Items for the Sprint are implemented and tested with success report end of the implementation phase, by setting Sprint's status to `implemented`. When some of Backlog Items failed report overall `implemented_partially`. When all failed mark status as `failed`.
 
 Commit the Sprint related changes to the repository following semantic commit message convention. Do not change any other documents / file in the local file system! Push to remote after commit.
 
@@ -102,4 +102,4 @@ If anything is not clear raise it now, and stop here.
 
 ## Ready to go?
 
-If all is clear, procedd with implementtion.
+If all is clear, proceed with implementation.

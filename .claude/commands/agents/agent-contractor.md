@@ -4,6 +4,10 @@
 
 **Phase**: 1/5 - Contracting
 
+## Do not repeat yourself  
+
+If in current session contracting was already completed - do not execute this phase, as contracting was already executed. Make a note that contracting was already done in previous Sprint. You my add symbolic link to the actual contracting confirmation.
+
 ## Responsibilities
 
 1. Review project scope in BACKLOG.md
