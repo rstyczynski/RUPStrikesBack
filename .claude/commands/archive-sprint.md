@@ -69,7 +69,7 @@ Move completed PBIs to `COMPLETED_BACKLOG.md` with this format:
    [Completed PBIs]
    ```
 
-### Step 6: Summary Report
+### Phase 6: Summary Report
 Provide a summary showing:
 - Number of PBIs archived
 - Sprint number

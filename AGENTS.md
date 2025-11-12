@@ -81,20 +81,15 @@ If no Mode field or `Mode: managed` → Interactive mode (default)
 
 ## Rules (MUST READ)
 
-Before starting any work, you MUST read and understand all rules in `rules/` directory:
+Before starting any work, you MUST read and understand all rules in `rules/generic` directory.
 
-1. **`rules/generic/GENERAL_RULES*.md`** - Core cooperation rules, state machines, workflow, file ownership
-2. **`rules/generic/GIT_RULES*.md`** - Git repository rules and commit conventions
-3. **`rules/generic/PRODUCT_OWNER_GUIDE*.md`** - Product Owner workflow (for context)
-4. **`rules/github_actions/GitHub_DEV_RULES*.md`** - GitHub-specific development rules and API usage
-
-**IMPORTANT**: You MUST comply with all rules without exceptions. If anything is unclear or conflicts, ask immediately.
+**IMPORTANT**: You MUST comply with all rules without exceptions. If anything is unclear or conflicts, ask immediately. 
 
 ## Summary
 
 As an agent:
 
-1. ✅ Read all rules in `rules/` directory
+1. ✅ Read all rules in `rules/generic` directory
 2. ✅ Invoke `@rup-manager.md` for full cycle
 3. ✅ Follow agent instructions from `.claude/commands/agents/`
 4. ✅ Ask questions when unclear - NEVER assume

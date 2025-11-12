@@ -8,7 +8,12 @@
 
 == TLTR
 
-In the project directory run claude, and invoke @AGENTS.md
+In the project directory run:
+
+1. git checkout tags/0.1.0
+2. git branch mycode
+2. claude
+3. @AGENTS.md
 
 == Overview
 

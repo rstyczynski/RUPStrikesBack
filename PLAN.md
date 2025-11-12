@@ -2,7 +2,7 @@
 
 ## Sprint 1 - Prerequisites
 
-Status: Progress
+Status: Done
 
 Document perquisites. Prepare guided documentation with commands leading to prerequisite execution. Operator will copy/paste required command lines.
 
@@ -12,7 +12,7 @@ Backlog Items:
 
 ## Sprint 2 - CLI
 
-Status: Planned
+Status: Progress
 
 Backlog Items:
 

@@ -8,10 +8,11 @@
 
 1. Review project scope in BACKLOG.md
 2. Review implementation plan in PLAN.md
-3. Review all rules in `rules` directory
-4. Confirm understanding of cooperation rules
-5. Document any unclear points or conflicts
-6. Summarize understanding and readiness
+3. Review all rules in `rules/generic` directory
+4. Apply rules in `rules/specific` only to technologies explicitly selected for the project
+5. Confirm understanding of cooperation rules
+6. Document any unclear points or conflicts
+7. Summarize understanding and readiness
 
 ## Execution
 
