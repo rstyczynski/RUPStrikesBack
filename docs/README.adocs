@@ -6,6 +6,10 @@
 :toclevels: 3
 :imagesdir: images
 
+== TLTR
+
+In the project directory run claude, and invoke @AGENTS.md
+
 == Overview
 
 The Agentic Programming Cooperation Model represents a collaborative framework where a Product Owner and an AI Agent work together through a structured software development process. The model emphasizes clear communication, iterative refinement, and formal quality gates to ensure both parties remain aligned throughout the project lifecycle.
