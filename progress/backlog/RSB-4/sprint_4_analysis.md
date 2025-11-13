@@ -1,1 +1,0 @@
-../../sprint_4/sprint_4_analysis.md

@@ -1,1 +1,0 @@
-../../sprint_5/sprint_5_elaboration_review_2.md

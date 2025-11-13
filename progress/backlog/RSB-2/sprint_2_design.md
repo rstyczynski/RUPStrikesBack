@@ -1,1 +1,0 @@
-../../sprint_2/sprint_2_design.md

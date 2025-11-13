@@ -1,7 +1,7 @@
 # RUP Strikes Back: Agentic Programming Cooperation Model
 
 **Author:** Ryszard Styczynski  
-**Date:** 2025-11-12
+**Date:** 2025-11-13
 
 ## TLDR
 
@@ -10,7 +10,9 @@ In the project directory run:
 1. `git checkout tags/0.1.0`
 2. `git branch mycode`
 3. `claude`
-4. `@AGENTS.md`
+4. `@rup-manager.md`
+
+You may work with `codex` or `cursor` however Claude Code gives the best results.
 
 ## Overview
 
