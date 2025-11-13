@@ -7,3 +7,4 @@ Progress board is a table showing sprint, and backlog items state. It's the only
 | Sprint 1 | implemented | RSB-1 | tested |
 | Sprint 2 | implemented | RSB-2 | tested |
 | Sprint 4 | implemented | RSB-4 | implemented |
+| Sprint 5 | under_analysis | RSB-5 | under_analysis |
