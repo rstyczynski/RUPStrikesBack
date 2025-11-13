@@ -41,7 +41,7 @@ Read `.claude/commands/construction.md` and execute all its instructions.
 **Important**: After completing this phase, commit all changes following semantic commit message conventions as described in `.rules/generic/GIT_RULES*`. Push to remote after commit.
 This phase implements the design, runs functional and performance tests, and delivers the product increment.
 
-## Step 5: Update documention
+## Step 5: Update documentation
 
 Read `.claude/commands/documentation.md` and execute all its instructions.
 

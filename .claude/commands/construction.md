@@ -96,10 +96,18 @@ Once all Backlog Items for the Sprint are implemented and tested with success re
 
 Commit the Sprint related changes to the repository following semantic commit message convention. Do not change any other documents / file in the local file system! Push to remote after commit.
 
-## Any questions?
+## Feedback
+
+Enumerate required changes as instructed in general rules.
+
+Ask questions in case of clarifications needed as instructed in general rules.
 
 If anything is not clear raise it now, and stop here.
 
 ## Ready to go?
 
 If all is clear, proceed with implementation.
+
+## Commit
+
+Commit the change to the repository following semantic commit message conventions as defined in generic GitHub rules.

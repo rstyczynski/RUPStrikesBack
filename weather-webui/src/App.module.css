@@ -37,6 +37,10 @@
   margin-top: var(--space-4);
 }
 
+.mapSection {
+  margin-bottom: var(--space-6);
+}
+
 .resultsSection {
   display: flex;
   flex-direction: column;

@@ -6,6 +6,7 @@ import { StatusBanner } from './components/StatusBanner'
 import { CurrentConditionsCard } from './components/CurrentConditionsCard'
 import { ForecastGrid } from './components/ForecastGrid'
 import { RecentSearches } from './components/RecentSearches'
+import { MapView } from './components/MapView'
 import { useWeatherSearch } from './hooks/useWeatherSearch'
 import { useHealthHeartbeat } from './hooks/useHealthHeartbeat'
 import styles from './App.module.css'
@@ -68,10 +69,19 @@ export function App() {
       </section>
 
       {data ? (
-        <section className={styles.resultsSection}>
-          <CurrentConditionsCard weather={data} />
-          <ForecastGrid weather={data} />
-        </section>
+        <>
+          <section className={styles.mapSection}>
+            <MapView
+              latitude={data.location.latitude}
+              longitude={data.location.longitude}
+              cityName={data.location.name}
+            />
+          </section>
+          <section className={styles.resultsSection}>
+            <CurrentConditionsCard weather={data} />
+            <ForecastGrid weather={data} />
+          </section>
+        </>
       ) : (
         <section className={styles.placeholder}>
           <p>Run a search to see the forecast for any city or coordinate pair.</p>

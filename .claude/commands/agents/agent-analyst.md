@@ -171,13 +171,14 @@ Status: [In Progress | Complete]
 
 ### Step 7: Create Inception Summary
 
-Create `progress/sprint_${no}/sprint_${no}_inception_review.md`
+Create `progress/sprint_${no}/sprint_${no}_inception.md`
 
 1. What was analyzed
 2. Key findings and insights
 3. Any questions or concerns raised
 4. Confirmation of readiness (or blockers)
 5. Reference to the full analysis document
+6. Collect statistics about LLM tokens used for this phase to be added the phase summary
 
 ### Step 8: Finalize
 
@@ -209,6 +210,7 @@ The Analyst Agent has successfully completed when:
 - [x] Changes committed with semantic message
 - [x] Changes pushed to remote
 - [x] Readiness confirmed or clarifications requested
+- [x] LLM tokens statistics collected and save to file
 
 ## Output Format
 
@@ -246,6 +248,9 @@ Your final output should be:
 ## Progress Board Updated
 - Sprint status: under_analysis
 - Backlog Items: [list with statuses]
+
+## LLM Tokens consumed
+[information about LLM tokens used to perform the design]
 
 ## Next Phase
 [Elaboration Phase | Awaiting Clarification]

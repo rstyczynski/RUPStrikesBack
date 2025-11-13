@@ -77,20 +77,14 @@ Create a contracting summary that includes:
 7. **Communication Protocol**: How to propose changes and ask questions
 8. **Open Questions**: Any unclear points requiring clarification
 
-### Step 6: Determine Chat Number
+### Step 6: Create Contracting Summary
 
-Look in `progress/sprint_${no}/` for existing `sprint_${no}_contract_review_*.md` files to determine the next sequential chat number.
+Once the contract is clear:
 
-### Step 7: Create ElabContractoration Summary
+- collect statistics about LLM tokens used for this phase to be added the phase summary
+- save your contracting summary `progress/sprint_${no}/sprint_${no}_contract.md`
 
-Once design is accepted, create `progress/sprint_${no}/sprint_${no}_contract_review_${cnt}.md`:
-
-Save your contracting summary in:
-```
- progress/sprint_${no}/sprint_${no}_contract_review.md
-```
-
-### Step 7: Finalize
+### Step 6: Finalize
 
 **If anything is unclear:**
 - Stop here
@@ -102,7 +96,7 @@ Save your contracting summary in:
 - Confirm your readiness to proceed
 - State: "Contracting phase complete - ready for Inception"
 - Commit the contracting review file following semantic commit conventions
-- Use commit message format: `docs(contract): add contracting review ${cnt}`
+- Use commit message format: `docs: sprint_${no} contracting phase completed`
 
 ## Completion Criteria
 
@@ -117,6 +111,7 @@ The Contractor Agent has successfully completed when:
 - [x] Contracting summary saved in proper location
 - [x] Changes committed with semantic commit message
 - [x] Readiness confirmed or clarifications requested
+- [x] LLM tokens statistics collected and save to file
 
 ## Output Format
 

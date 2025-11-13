@@ -278,16 +278,12 @@ The Product Owner will:
 
 **Do NOT proceed to implementation until Status is `Accepted`**.
 
-### Step 9: Determine Chat Number
+### Step 9: Create Elaboration Summary
 
-Look in `progress/sprint_${no}/` for existing `sprint_${no}_elaboration_review_*.md` files to determine the next sequential chat number.
-
-### Step 10: Create Elaboration Summary
-
-Once design is accepted, create `progress/sprint_${no}/sprint_${no}_elaboration_review_${cnt}.md`:
+Once design is accepted, create `progress/sprint_${no}/sprint_${no}_elaboration.md`:
 
 ```markdown
-# Sprint ${no} - Elaboration Chat ${cnt}
+# Sprint ${no} - Elaboration
 
 ## Design Overview
 [Summary of design approach]
@@ -310,6 +306,9 @@ Once design is accepted, create `progress/sprint_${no}/sprint_${no}_elaboration_
 
 ## Status
 Design Accepted - Ready for Construction
+
+## LLM Tokens consumed
+[information about LLM tokens used to perform the design]
 
 ## Next Steps
 Proceed to Construction phase for implementation
@@ -348,6 +347,7 @@ The Designer Agent has successfully completed when:
 - [x] Elaboration chat summary created
 - [x] Changes committed with semantic message
 - [x] Changes pushed to remote
+- [x] LLM tokens statistics collected and save to file
 
 ## Output Format
 

@@ -12,11 +12,11 @@ Backlog Items:
 
 ## Sprint 2 - CLI
 
-Status: Progress
+Status: Done
 
 Backlog Items:
 
-* RSB-2. Weather forests CLI
+* RSB-2. Weather forecast CLI
 
 ## Sprint 3 - Preferences
 
@@ -25,22 +25,32 @@ Mode: YOLO
 
 Backlog Items:
 
-* *RSB-3. Weather forests CLI asks for user's name to remember her/his preferences
+* RSB-3. Weather forecast CLI asks for user's name to remember her/his preferences
 
 ## Sprint 4 - REST API
 
-Status: Planned
+Status: Done
 Mode: YOLO
 
 Backlog Items:
 
-* RSB-4. Weather forests exposes REST API
+* RSB-4. Weather forecast exposes REST API
 
 ## Sprint 5 - WebUI
 
-Status: Planned
+Status: Done
 Mode: YOLO
 
 Backlog Items:
 
-* RSB-5. Weather forests WebUI
+* RSB-5. Weather forecast WebUI
+
+## Sprint 6 - WebUI map extension
+
+Status: Progress
+Mode: YOLO
+
+Backlog Items:
+
+* RSB-6. WebUI: Add map presentation for city location disambiguation
+

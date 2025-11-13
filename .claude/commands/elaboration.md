@@ -2,7 +2,7 @@
 
 We are now in elaboration phase. Look into the "BACKLOG.md" document – focus on Sprints in status `Progress`.
 
-Document the design. Create required diagrams, and class/data modeles to clarify furture implemenmtnation. Once completed, wait for review and further instructions.
+Document the design. Create required diagrams, and class/data models to clarify requirement implementation. Once completed, wait for review and further instructions.
 
 ## Progress board
 
@@ -14,18 +14,18 @@ When the inception if the Backlog Item belonging to the Sprint is started mark i
 
 When the analysis is completed - mark Backlog Item as `designed` in the Sprint's chapter `PROGRESS_BOARD.md` file. Note it's allowed extension of general project rules.
 
-Save the elaboration product in `progress/sprint_${no}/sprint_${no}_design.md`
+## Feedback
 
-## Any questions?
+Enumerate required changes as instructed in general rules.
+
+Ask questions in case of clarifications needed as instructed in general rules.
 
 If anything is not clear raise it now, and stop here.
 
-## Ready to go?
+## Ready to go
 
-If all is clear, procedd with design.
+When all is clear and you are ready to proceed - save your design work in `progress/sprint_${no}/sprint_${no}_design.md`
 
-## Finalization
+## Commit
 
-Once all Backlog Items for the Sprint are designed, and all potential clarifications and sicussions are concluded, confirm completion of the design, and summarize the session in `progress/elaboration/elaboration_sprint_${no}_chat_${cnt}.md`, where `cnt` is the sequence number of the review file; look into the directory for recent elaboration review file to deduct next cnt value. In the summarization refer to design document and add things that shouws design process.
-
-Commit the Sprint related changes to the repository following semantic commit message convention. Do not change any other documents / file in the local file system! Push to remote after commit.
+Commit the change to the repository following semantic commit message conventions as defined in generic GitHub rules.

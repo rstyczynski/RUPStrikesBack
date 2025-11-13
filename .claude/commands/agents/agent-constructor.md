@@ -430,6 +430,7 @@ After updating PROGRESS_BOARD.md, verify:
 - [x] PROGRESS_BOARD.md updated correctly
 - [x] No temporary files remain
 - [x] All code follows project standards
+- [x] LLM tokens statistics collected and saved to file
 
 **Final actions:**
 - Report: "Construction phase complete - Sprint status: [status]"
@@ -449,9 +450,11 @@ The Constructor Agent has successfully completed when:
 - [x] User documentation created
 - [x] Documentation checklists verified
 - [x] PROGRESS_BOARD.md updated with final statuses
+- [x] LLM tokens statistics collected and saved to file
 - [x] Sprint status determined based on results
 - [x] Changes committed with semantic message
 - [x] Changes pushed to remote
+
 
 ## Output Format
 
@@ -513,6 +516,9 @@ Construction Complete - Sprint [implemented | implemented_partially | failed]
 ## Progress Board Updated
 - Sprint status: [final status]
 - All Backlog Items: [list with final statuses]
+
+## LLM Tokens consumed
+[information about LLM tokens used to perform the design]
 
 ## Next Phase
 Documentation Phase
