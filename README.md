@@ -2,7 +2,7 @@
 
 A comprehensive weather forecast application demonstrating the RUP Strikes Back methodology through iterative development from CLI to REST API to Web UI.
 
-**Current Status**: Sprint 1 - Prerequisites Documentation
+**Current Status**: Sprint 2 - Weather Forecast CLI
 
 ---
 
@@ -628,6 +628,51 @@ Once your environment is set up and verified:
 ---
 
 ## Recent Updates
+
+### Sprint 2 - Weather Forecast CLI (Completed)
+
+**Status:** ✅ implemented (100% tested)
+
+**Backlog Items Completed:**
+- **RSB-2**: Weather Forecast CLI - ✅ tested
+
+**Key Features Delivered:**
+- Functional command-line weather application (~330 lines Go code)
+- Modular architecture (main, geocode, weather, display packages)
+- City name geocoding via Open-Meteo Geocoding API
+- Weather data fetching via Open-Meteo Forecast API
+- Current weather display with temperature, conditions, wind speed
+- 3-day forecast table with max/min temps, conditions, precipitation
+- Comprehensive error handling and input validation
+- Help and version information flags
+- Cross-platform support (OSX/Linux/Windows)
+- Zero external dependencies (standard library only)
+
+**Documentation:**
+- Implementation: `progress/sprint_2/sprint_2_implementation.md`
+- Tests: `progress/sprint_2/sprint_2_tests.md` (10/10 passed)
+- Design: `progress/sprint_2/sprint_2_design.md`
+- Analysis: `progress/sprint_2/sprint_2_analysis.md`
+- Backlog Traceability: `progress/backlog/RSB-2/`
+
+**Usage Example:**
+```bash
+cd weather-cli
+go build
+./weather-cli "Berlin"
+./weather-cli --lat 52.52 --lon 13.41
+./weather-cli --help
+```
+
+**Test Results:**
+- Total Tests: 10
+- Passed: 10
+- Failed: 0
+- Success Rate: 100%
+
+**Next Sprint:** Sprint 3 - User Preferences (YOLO mode)
+
+---
 
 ### Sprint 1 - Prerequisites Documentation (Completed)
 
