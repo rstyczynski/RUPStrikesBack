@@ -5,14 +5,15 @@
 
 ## TL;DR
 
-This document contains description of philosophy behind combining classic RUP method with agentic coding. Reading is good, hoverer seeing is better, so before reading try it. Repository comes with exemplary weather forecast project, that is implemented to CLI level; other capabilities as REST API and WEB UI will be coded autonomously.
+This document contains description of philosophy behind combining classic RUP method with agentic coding. Reading is good, hoverer seeing is better, so before reading try it. Repository comes with exemplary weather forecast project, that is implemented to CLI level; other capabilities as REST API and WEB UI will be coded autonomously. Note that this README file is extended by the implementor with progress information. Detailed progress traceability is available in `progress/` directory.
 
 In the project directory run:
 
-1. `git branch agentic_lab`
-2. `git checkout agentic_lab`
-3. `claude`
-4. `@rup-manager.md`
+```bash
+git branch agentic_lab_$(whoami)
+git checkout agentic_lab_$(whoami)
+claude @rup-manager.md
+```
 
 You may work with `codex` or `cursor` however Claude Code gives the best results.
 
