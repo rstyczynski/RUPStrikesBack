@@ -8,7 +8,7 @@ Instruction for implementor: keep analysis, design and implementation as simple 
 
 ## Sprint 1 - Prerequisites
 
-Status: Done
+Status: Planned
 
 Document perquisites. Prepare guided documentation with commands leading to prerequisite execution. Operator will copy/paste required command lines. Keep it as simple as possible to achieve MVP level.
 
@@ -18,7 +18,7 @@ Backlog Items:
 
 ## Sprint 2 - CLI
 
-Status: Done
+Status: Planned
 
 Backlog Items:
 
@@ -26,7 +26,7 @@ Backlog Items:
 
 ## Sprint 3 - REST API
 
-Status: Planned
+Status: Progress
 Mode: YOLO
 
 Backlog Items:
