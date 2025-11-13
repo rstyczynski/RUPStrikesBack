@@ -18,7 +18,7 @@ Backlog Items:
 
 ## Sprint 2 - CLI
 
-Status: Progress
+Status: Done
 
 Backlog Items:
 
