@@ -3,11 +3,11 @@
 **Date**: 2025-11-13
 **Sprint**: 5 - WebUI
 **Mode**: YOLO (Autonomous)
-**Status**: Proposed (awaiting acceptance)
+**Status**: Accepted
 
 ## RSB-5: Weather Forecast WebUI
 
-Status: Proposed
+Status: Accepted
 
 ### Requirement Summary
 Deliver a fully featured browser client as an independent module (`weather-webui/`) that communicates with the existing Sprint 4 REST API exclusively via HTTP. The WebUI must expose city and GPS lookups, show current conditions plus a three-day forecast, surface health information, and remain responsive across desktop/mobile. The front-end runs independently (Vite dev server or static hosting) yet targets the same REST contract already defined by `weather-api`.
