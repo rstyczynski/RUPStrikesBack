@@ -2,7 +2,7 @@
 
 A comprehensive weather forecast application demonstrating the RUP Strikes Back methodology through iterative development from CLI to REST API to Web UI.
 
-**Current Status**: Sprint 4 - REST API
+**Current Status**: Sprint 5 - WebUI (weather-webui module consuming REST API)
 
 ---
 
@@ -39,6 +39,22 @@ curl "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&curr
 ```
 
 For detailed setup instructions, continue reading below.
+
+### WebUI Preview
+
+```bash
+# Terminal 1 - run REST API
+cd weather-api
+go run .
+
+# Terminal 2 - run WebUI (Node 20+)
+cd weather-webui
+cp .env.example .env          # optional, override API base URL
+npm install
+npm run dev                   # http://localhost:5173
+```
+
+For production bundles use `npm run check && npm run build` inside `weather-webui/`, then host the generated `dist/` directory on any static server.
 
 ---
 

@@ -1,0 +1,27 @@
+.container {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-sm);
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  color: var(--color-foreground-muted);
+  font-size: 0.95rem;
+}
+
+li span {
+  font-weight: 600;
+  color: var(--color-foreground);
+}

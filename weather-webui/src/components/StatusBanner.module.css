@@ -1,0 +1,22 @@
+.banner {
+  border-radius: var(--radius-lg);
+  padding: var(--space-3) var(--space-4);
+  font-weight: 500;
+  margin-bottom: var(--space-4);
+  transition: opacity 0.2s ease;
+}
+
+.loading {
+  background: var(--color-info-bg);
+  color: var(--color-info-fg);
+}
+
+.success {
+  background: var(--color-success-bg);
+  color: var(--color-success-fg);
+}
+
+.error {
+  background: var(--color-danger-bg);
+  color: var(--color-danger-fg);
+}

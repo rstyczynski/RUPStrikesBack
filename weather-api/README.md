@@ -58,3 +58,13 @@ See `progress/sprint_4/sprint_4_tests.md` for comprehensive test documentation.
 - **Status**: implemented
 - **Backlog Item**: RSB-4
 - **Mode**: YOLO (autonomous)
+
+## WebUI Integration (Sprint 5)
+
+The `weather-webui/` module (Sprint 5) consumes this REST API via the following endpoints:
+
+- `GET /api/v1/weather/city/{city}`
+- `GET /api/v1/weather/coordinates?lat={lat}&lon={lon}`
+- `GET /api/v1/health`
+
+Ensure the API is reachable (default `http://localhost:8080`) before running `npm run dev` inside `weather-webui/`. Review `.env.example` in that module to override the base URL for remote deployments.

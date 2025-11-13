@@ -1,0 +1,32 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.subtitle {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.85rem;
+  color: var(--color-foreground-muted);
+}
+
+.title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin: 0;
+}
+
+.statusBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  align-items: flex-end;
+}
+
+.timestamp {
+  color: var(--color-foreground-muted);
+  font-size: 0.9rem;
+}

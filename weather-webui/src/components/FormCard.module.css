@@ -1,0 +1,86 @@
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.tabList {
+  display: inline-flex;
+  border-radius: var(--radius-full);
+  background: var(--color-surface-subtle);
+  padding: var(--space-1);
+  gap: var(--space-2);
+}
+
+.tabButton {
+  border: none;
+  border-radius: var(--radius-full);
+  padding: var(--space-2) var(--space-4);
+  background: transparent;
+  color: var(--color-foreground-muted);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tabButton[data-active='true'] {
+  background: var(--color-foreground);
+  color: var(--color-background);
+}
+
+.form {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.label {
+  font-weight: 600;
+}
+
+.input {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  padding: var(--space-3);
+  font-size: 1rem;
+  background: var(--color-surface-subtle);
+  color: inherit;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button {
+  border: none;
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-5);
+  font-weight: 600;
+  background: var(--color-accent);
+  color: var(--color-background);
+  cursor: pointer;
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.helper {
+  color: var(--color-foreground-muted);
+  font-size: 0.9rem;
+}
+
+.errorText {
+  color: var(--color-danger-fg);
+  font-size: 0.9rem;
+}
