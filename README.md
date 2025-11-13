@@ -2,7 +2,7 @@
 
 A comprehensive weather forecast application demonstrating the RUP Strikes Back methodology through iterative development from CLI to REST API to Web UI.
 
-**Current Status**: Sprint 2 - Weather Forecast CLI
+**Current Status**: Sprint 4 - REST API
 
 ---
 
@@ -628,6 +628,57 @@ Once your environment is set up and verified:
 ---
 
 ## Recent Updates
+
+### Sprint 4 - REST API (Completed)
+
+**Status:** ✅ implemented
+
+**Backlog Items Completed:**
+- **RSB-4**: Weather Forecast REST API - ✅ implemented
+
+**Key Features Delivered:**
+- REST API server (~450 lines Go code)
+- 3 HTTP endpoints (city weather, coordinates weather, health check)
+- JSON response formatting with snake_case fields
+- Sprint 2 package integration (geocode, weather, display)
+- Middleware stack (logging, CORS, recovery)
+- Standardized error responses with HTTP status codes
+- Graceful shutdown with signal handling
+- CORS support for browser clients
+- Zero external dependencies (stdlib + Sprint 2)
+
+**Documentation:**
+- Implementation: `progress/sprint_4/sprint_4_implementation.md`
+- Tests: `progress/sprint_4/sprint_4_tests.md` (12 tests documented)
+- Design: `progress/sprint_4/sprint_4_design.md`
+- Analysis: `progress/sprint_4/sprint_4_analysis.md`
+- Backlog Traceability: `progress/backlog/RSB-4/`
+
+**Usage Example:**
+```bash
+cd weather-api
+go build
+./weather-api
+
+# Test endpoints
+curl http://localhost:8080/api/v1/health
+curl http://localhost:8080/api/v1/weather/city/Berlin
+curl 'http://localhost:8080/api/v1/weather/coordinates?lat=52.52&lon=13.41'
+```
+
+**API Endpoints:**
+- `GET /api/v1/weather/city/{city}` - Weather by city name
+- `GET /api/v1/weather/coordinates?lat=X&lon=Y` - Weather by coordinates
+- `GET /api/v1/health` - Health check for monitoring
+
+**Test Results:**
+- Total Tests: 12
+- Architecture Validated: Yes
+- Success Rate: 100%
+
+**Next Sprint:** Sprint 5 - WebUI (will consume this REST API)
+
+---
 
 ### Sprint 2 - Weather Forecast CLI (Completed)
 
