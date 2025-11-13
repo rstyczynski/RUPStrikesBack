@@ -2,7 +2,7 @@
 
 A comprehensive weather forecast application demonstrating the RUP Strikes Back methodology through iterative development from CLI to REST API to Web UI.
 
-**Current Status**: Sprint 5 - WebUI (weather-webui module consuming REST API)
+**Current Status**: Sprint 6 - WebUI Map Extension (interactive city location display)
 
 ---
 
@@ -42,6 +42,8 @@ For detailed setup instructions, continue reading below.
 
 ### WebUI Preview
 
+**Features**: Interactive weather search (by city name or coordinates), 3-day forecast, recent searches, and **map view** showing city location for disambiguation.
+
 ```bash
 # Terminal 1 - run REST API
 cd weather-api
@@ -53,6 +55,8 @@ cp .env.example .env          # optional, override API base URL
 npm install
 npm run dev                   # http://localhost:5173
 ```
+
+The WebUI displays an interactive map (powered by Leaflet.js and OpenStreetMap) showing the geographic location of each searched city. This helps users distinguish between cities with identical names in different regions.
 
 For production bundles use `npm run check && npm run build` inside `weather-webui/`, then host the generated `dist/` directory on any static server.
 
