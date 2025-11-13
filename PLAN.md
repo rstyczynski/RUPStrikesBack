@@ -8,7 +8,7 @@ Instruction for implementor: keep analysis, design and implementation as simple 
 
 ## Sprint 1 - Prerequisites
 
-Status: Planned
+Status: Progress
 
 Document perquisites. Prepare guided documentation with commands leading to prerequisite execution. Operator will copy/paste required command lines. Keep it as simple as possible to achieve MVP level.
 
