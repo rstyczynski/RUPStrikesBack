@@ -309,5 +309,96 @@ See implementation documentation for complete usage examples and verification pr
 
 ---
 
-###
+### Sprint 2 - Weather CLI
+
+**Status:** implemented
+
+**Backlog Items Implemented:**
+- **RSB-2. Create Weather Forecast CLI**: Command-line tool accepting city names or GPS coordinates - tested
+
+**Key Features Added:**
+- Weather CLI with dual input modes (city name and GPS coordinates)
+- Current weather display with human-readable conditions
+- 3-day forecast with max/min temperatures
+- Comprehensive error handling (invalid input, city not found, API errors)
+- Exit codes for proper shell integration (0: success, 1: invalid input, 2: API error)
+- Zero-code-duplication architecture for Sprint 3 REST API reuse
+
+**Architecture Highlights:**
+- **Reusable core package** (`weather/`): API client, data structures, business logic (80% Sprint 3 reuse)
+- **CLI-specific code** (`cli/` and `main.go`): Text formatting and argument parsing (20% CLI-only)
+- Standard library only (zero external dependencies)
+- 10-second HTTP timeout protection
+- Binary size: 8.2 MB
+
+**Documentation:**
+- Implementation: `progress/sprint_2/sprint_2_implementation.md`
+- Tests: `progress/sprint_2/sprint_2_tests.md`
+- Design: `progress/sprint_2/sprint_2_design.md`
+- Analysis: `progress/sprint_2/sprint_2_analysis.md`
+- Contract Review: `progress/sprint_2/sprint_2_contract_review_1.md`
+
+**Usage Examples:**
+
+To use the Weather CLI:
+
+1. Build the CLI:
+   ```bash
+   cd weather-cli
+   go build -o weather-cli
+   ```
+
+2. Get weather by city name:
+   ```bash
+   ./weather-cli "San Francisco"
+   ```
+
+3. Get weather by GPS coordinates:
+   ```bash
+   ./weather-cli "37.7749,-122.4194"
+   ```
+
+4. Display help:
+   ```bash
+   ./weather-cli --help
+   ```
+
+**Sample Output:**
+```
+Weather Forecast
+================
+
+Location: San Francisco, California, United States
+Coordinates: 37.77°N, -122.42°W
+
+Current Weather:
+  Temperature: 15.3°C
+  Conditions: Overcast
+
+3-Day Forecast:
+  2025-11-13: ↑17.4°C ↓12.7°C - Moderate rain
+  2025-11-14: ↑15.2°C ↓10.5°C - Moderate rain
+  2025-11-15: ↑17.5°C ↓9.9°C - Overcast
+```
+
+**Sprint 3 Integration:**
+
+The Weather CLI was architected with explicit zero-code-duplication for Sprint 3 REST API. The reusable `weather/` package will be imported directly by the REST API:
+
+```go
+// Sprint 3 REST API will import Sprint 2 logic:
+import "weather-cli/weather"
+
+func handleCityWeather(w http.ResponseWriter, r *http.Request) {
+    // SAME function as CLI uses:
+    forecast, location, err := weather.GetWeatherForCity(cityName)
+
+    // Different output format (JSON instead of text):
+    json.NewEncoder(w).Encode(forecast)
+}
+```
+
+This architecture ensures Sprint 3 will reuse ~80% of Sprint 2 code with zero duplication.
+
+---
 
