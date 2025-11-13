@@ -7,10 +7,11 @@
 
 In the project directory run:
 
-1. `git checkout tags/0.1.0`
-2. `git branch mycode`
-3. `claude`
-4. `@rup-manager.md`
+1. `git checkout tags/0.2.0`
+2. `git branch agentic_lab`
+3. `git checkout agentic_lab`
+4. `claude`
+5. `@rup-manager.md`
 
 You may work with `codex` or `cursor` however Claude Code gives the best results.
 
