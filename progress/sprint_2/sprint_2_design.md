@@ -80,34 +80,40 @@ Terminal Display
 
 **Key Components:**
 
-1. **Main Entry Point**
-   - Parse command-line arguments
-   - Validate input
-   - Coordinate workflow
-   - Handle errors and exit codes
+**REUSABLE COMPONENTS (Sprint 3 REST API will import these):**
 
-2. **Input Handler**
-   - Detect input type (city name vs coordinates)
-   - Validate GPS coordinates if provided
-   - Prepare API requests
+1. **Core Weather Client** (`weather/client.go`)
+   - High-level weather retrieval functions
+   - Coordinates geocoding + forecast fetching
+   - Business logic layer
+   - **REUSED BY:** REST API handlers in Sprint 3
 
-3. **API Client**
+2. **API Client** (`weather/api.go`)
    - Geocoding API caller
    - Weather Forecast API caller
    - HTTP request handling
    - Response parsing
+   - **REUSED BY:** REST API in Sprint 3
 
-4. **Output Formatter**
+3. **Data Structures** (`weather/types.go`)
+   - API response types
+   - Location data
+   - Forecast data
+   - **REUSED BY:** REST API JSON responses in Sprint 3
+
+**CLI-SPECIFIC COMPONENTS (NOT reused by REST API):**
+
+4. **Main Entry Point** (`main.go`)
+   - Parse command-line arguments
+   - Validate input
+   - Call weather package functions
+   - Handle errors and exit codes
+   - **CLI-specific:** REST API will have HTTP server instead
+
+5. **CLI Output Formatter** (`cli/format.go`)
    - Format weather data for terminal display
-   - Handle units (Celsius)
-   - Format dates and times
    - Create human-readable text
-
-5. **Error Handler**
-   - Network errors
-   - API errors
-   - Parsing errors
-   - User-friendly error messages
+   - **CLI-specific:** REST API will use JSON encoding instead
 
 **Data Flow:**
 
@@ -123,15 +129,27 @@ Terminal Display
 
 **Project Structure:**
 
+**IMPORTANT: Designed for Reusability with Sprint 3 REST API**
+
+This structure ensures **zero code duplication** when building the REST API in Sprint 3:
+
 ```
 weather-cli/
-├── main.go           # Entry point, CLI handling
-├── weather/
-│   ├── api.go        # API client functions
-│   ├── types.go      # Data structures for API responses
-│   └── format.go     # Output formatting functions
+├── main.go           # Entry point, CLI handling (CLI-specific)
+├── weather/          # ← REUSABLE CORE PACKAGE (Sprint 3 will import this!)
+│   ├── client.go     # Core weather logic (REUSABLE)
+│   ├── api.go        # API client functions (REUSABLE)
+│   └── types.go      # Data structures for API responses (REUSABLE)
+├── cli/
+│   └── format.go     # CLI-specific text formatting (NOT reused by REST API)
 └── README.md         # Build and usage instructions
 ```
+
+**Reusability Strategy:**
+- `weather/` package contains ALL business logic (API calls, data structures, core functions)
+- `cli/format.go` contains ONLY CLI-specific text formatting
+- Sprint 3 REST API will `import "weather-cli/weather"` and provide JSON formatting instead
+- **Result:** ~80% code reuse, zero duplication of API logic
 
 **APIs Used:**
 
@@ -208,9 +226,10 @@ type ForecastResponse struct {
 
 **Data Structures:**
 
-```go
-// types.go
+**File: `weather/types.go` - REUSABLE by Sprint 3 REST API**
 
+```go
+// types.go - Shared data structures for CLI and REST API
 package weather
 
 type GeocodingResponse struct {
@@ -382,38 +401,57 @@ if err != nil {
 
 ### Implementation Approach
 
+**REUSABILITY PRINCIPLE:** Implement core logic in `weather/` package for Sprint 3 reuse.
+
 **Step 1: Project Setup**
 - Create `weather-cli/` directory
 - Initialize Go module: `go mod init weather-cli`
-- Create package structure
+- Create package structure: `weather/` and `cli/`
 
-**Step 2: Implement Data Types**
-- Define structs in `weather/types.go`
-- Match JSON response structures
+**Step 2: Implement Reusable Data Types**
+- Create `weather/types.go`
+- Define structs matching API JSON responses
+- **Note:** Sprint 3 REST API will reuse these exact types
 
-**Step 3: Implement API Client**
+**Step 3: Implement Reusable API Client**
 - Create `weather/api.go`
 - Implement `GeocodeCity(cityName string) (*Location, error)`
 - Implement `GetForecast(lat, lon float64) (*ForecastResponse, error)`
 - Add HTTP client with timeouts
+- **Note:** Sprint 3 REST API will import and reuse these functions
 
-**Step 4: Implement Output Formatter**
-- Create `weather/format.go`
+**Step 4: Implement Reusable Core Logic**
+- Create `weather/client.go`
+- Implement `GetWeatherForCity(cityName string) (*ForecastResponse, *Location, error)`
+- Implement `GetWeatherForCoordinates(lat, lon float64) (*ForecastResponse, error)`
+- Coordinate geocoding + forecast calls
+- **Note:** Sprint 3 REST API handlers will call these high-level functions
+
+**Step 5: Implement CLI-Specific Formatter**
+- Create `cli/format.go` (separate from reusable `weather/` package)
 - Implement `FormatForecast(forecast *ForecastResponse, location *Location) string`
 - Add weather code mapping
-- Format temperatures and dates
+- Format temperatures and dates as text
+- **Note:** Sprint 3 will NOT use this; it will use JSON encoding instead
 
-**Step 5: Implement Main CLI**
+**Step 6: Implement Main CLI**
 - Create `main.go`
 - Parse command-line arguments
 - Implement input detection
-- Wire up API calls and formatting
-- Add error handling
+- Call `weather.GetWeatherForCity()` or `weather.GetWeatherForCoordinates()`
+- Use `cli.FormatForecast()` for text output
+- Add error handling and exit codes
 
-**Step 6: Build and Test**
+**Step 7: Build and Test**
 - Build binary: `go build -o weather-cli`
 - Test with various inputs
 - Verify error handling
+- Document reusable components for Sprint 3
+
+**Step 8: Prepare for Sprint 3 Reuse**
+- Document which packages are reusable (`weather/`)
+- Note that `cli/` package is CLI-specific
+- Sprint 3 will import `weather-cli/weather` package
 
 ### Testing Strategy
 
@@ -473,17 +511,42 @@ Documented in `sprint_2_tests.md`:
 
 **Compatibility:**
 
-Forward compatibility with future Sprints:
-- REST API (Sprint 3) can import `weather` package for reuse
-- WebUI (Sprint 4-5) will consume REST API
-- Same weather data structures can be shared
+**Forward Compatibility - ZERO CODE DUPLICATION with Sprint 3:**
 
-**Reusability:**
+```
+Sprint 2 (CLI) - Creates reusable core:
+  weather-cli/
+    ├── weather/           ← REUSABLE CORE
+    │   ├── client.go      ← Sprint 3 imports this
+    │   ├── api.go         ← Sprint 3 imports this
+    │   └── types.go       ← Sprint 3 imports this
+    └── cli/
+        └── format.go      ← CLI-specific, NOT reused
 
-The `weather` package can be extracted and reused:
-- API client functions standalone
-- Data types reusable
-- Formatting logic adaptable
+Sprint 3 (REST API) - Imports Sprint 2 core:
+  weather-api/
+    ├── main.go            ← HTTP server
+    └── handlers/
+        └── weather.go     ← import "weather-cli/weather"
+                              Calls weather.GetWeatherForCity()
+                              Returns JSON instead of formatted text
+
+Sprint 4-5 (WebUI) - Consumes Sprint 3 REST API
+```
+
+**Reusability Guarantee:**
+
+| Component | Sprint 2 Implementation | Sprint 3 Reuse |
+|-----------|------------------------|----------------|
+| Geocoding API calls | weather/api.go | ✅ Imported directly |
+| Forecast API calls | weather/api.go | ✅ Imported directly |
+| Data structures | weather/types.go | ✅ Used for JSON responses |
+| Core weather logic | weather/client.go | ✅ Called by HTTP handlers |
+| HTTP client | weather/api.go | ✅ Reused |
+| JSON parsing | weather/api.go | ✅ Reused |
+| **Text formatting** | cli/format.go | ❌ Not reused (JSON instead) |
+
+**Result:** ~80% code reuse, ZERO duplication of API logic!
 
 ### Documentation Requirements
 
@@ -502,6 +565,53 @@ Create `weather-cli/README.md`:
 - Example code
 
 ### Design Decisions
+
+**Decision 0: Code Reusability for Sprint 3 - CRITICAL ARCHITECTURAL DECISION**
+
+**Decision Made:** Separate reusable core (`weather/`) from CLI-specific code (`cli/`)
+
+**Rationale:**
+- **Zero duplication:** Sprint 3 REST API will import `weather-cli/weather` package
+- **Single source of truth:** API logic written once, used by both CLI and REST API
+- **Maintainability:** Bug fixes in API logic automatically benefit both CLI and REST API
+- **Consistency:** Both interfaces use identical weather data and logic
+
+**Implementation:**
+```
+weather/           ← Core business logic (REUSABLE)
+  ├── client.go    ← High-level functions (GetWeatherForCity, etc.)
+  ├── api.go       ← API calls (GeocodeCity, GetForecast)
+  └── types.go     ← Data structures
+
+cli/               ← CLI-specific (NOT reused)
+  └── format.go    ← Text formatting only
+
+main.go            ← CLI entry point (NOT reused)
+```
+
+**Sprint 3 Reuse Pattern:**
+```go
+// Sprint 3 REST API handler
+import "weather-cli/weather"
+
+func WeatherHandler(w http.ResponseWriter, r *http.Request) {
+    city := r.URL.Query().Get("city")
+
+    // Reuse Sprint 2 core logic - NO CODE DUPLICATION!
+    forecast, location, err := weather.GetWeatherForCity(city)
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusBadRequest)
+        return
+    }
+
+    // Different output format (JSON vs text)
+    json.NewEncoder(w).Encode(forecast)
+}
+```
+
+**Benefit:** ~80% code reuse, zero API logic duplication between CLI and REST API
+
+---
 
 **Decision 1: Positional Arguments vs Flags**
 
