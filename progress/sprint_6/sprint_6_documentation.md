@@ -68,11 +68,22 @@ Updated `README.md`:
 - [x] Build verification passed
 - [x] Documentation consistency verified
 
-## Traceability
+## Backlog Traceability
 
 **Backlog Item**: RSB-6 - Add map presentation for city location disambiguation
 **Sprint**: 6 - WebUI map extension
 **Status**: Implemented
+
+**Symbolic Links Created**: ✓
+- Created `progress/backlog/RSB-6/` directory
+- Linked all Sprint 6 documents for complete traceability:
+  - sprint_6_contract.md → ../../sprint_6/sprint_6_contract.md
+  - sprint_6_inception.md → ../../sprint_6/sprint_6_inception.md
+  - sprint_6_design.md → ../../sprint_6/sprint_6_design.md
+  - sprint_6_elaboration.md → ../../sprint_6/sprint_6_elaboration.md
+  - sprint_6_implementation.md → ../../sprint_6/sprint_6_implementation.md
+  - sprint_6_documentation.md → ../../sprint_6/sprint_6_documentation.md
+
 **Files Modified**:
 - weather-webui/src/components/MapView.tsx (created)
 - weather-webui/src/components/MapView.module.css (created)
