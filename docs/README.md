@@ -10,9 +10,10 @@ This document contains description of philosophy behind combining classic RUP me
 In the project directory run:
 
 ```bash
-git branch agentic_lab_$(whoami)
-git checkout agentic_lab_$(whoami)
-claude @rup-manager.md
+git branch agentic_lab_$(whoami)_$(RAND)
+git checkout agentic_lab_$(whoami)_$(RAND)
+claude
+@.claude/commands/rup-manager.md
 ```
 
 You may work with `codex` or `cursor` however Claude Code gives the best results.
