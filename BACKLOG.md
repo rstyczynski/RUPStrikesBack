@@ -24,11 +24,11 @@ Application provides personalization by prompting for the user's name and storin
 
 ### RSB-4. Weather forecast exposes REST API
 
-Application provides a RESTful API that exposes weather forecast data through standard HTTP methods. The API enables programmatic access to weather information in formats like JSON, allowing multiple client types to consume the service. This creates a service-oriented architecture that separates data logic from presentation layers.
+Application provides a RESTful API that exposes weather forecast data through standard HTTP methods. The API enables programmatic access to weather information in formats like JSON, allowing multiple client types to consume the service. This creates a service-oriented architecture that separates data logic from presentation layers. The product is kept in ./weather-api following ./weather-cli approach.
 
 ### RSB-5. Weather forecast WebUI
 
-Application provides a web-based graphical user interface accessible through browsers. The WebUI would provide an interactive experience with visual elements like weather icons, maps, and charts while consuming the REST API. This represents the most sophisticated presentation layer demonstrating full-stack development with modern frontend frameworks and responsive design. WebUI is another process consuming REST API by http requests.
+Application provides a web-based graphical user interface accessible through browsers. The WebUI would provide an interactive experience with visual elements like weather icons, maps, and charts while consuming the REST API. This represents the most sophisticated presentation layer demonstrating full-stack development with modern frontend frameworks and responsive design. WebUI is another process consuming REST API by http requests. The product is kept in ./weather-web following ./weather-cli and ./weather-api approach.
 
 ### RSB-6. WebUI: Add map presentation for city location disambiguation
 
