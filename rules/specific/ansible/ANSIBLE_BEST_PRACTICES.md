@@ -39,10 +39,29 @@ Obey to `ANSIBLE_BEST_PRACTICES.md` document for information about Ansible Best 
 
 1. Always use `ansible.builtin.validate_argument_spec` module to validate arguments
 
-2. Use inline `ansible.builtin.validate_argument_spec` module's specification
+2. **For roles**: Use `meta/argument_specs.yml` to define argument specifications. This enables `ansible-doc` documentation and is the standard Ansible approach for roles. Optionally, also use inline `ansible.builtin.validate_argument_spec` in `tasks/main.yml` for runtime validation (using the same specification structure).
 
    ```yaml
-   - name: Validate role arguments
+   # meta/argument_specs.yml
+   ---
+   argument_specs:
+     main:
+       short_description: Brief role description
+       options:
+         myapp_port:
+           description: "Application port number"
+           type: int
+           required: true
+         myapp_host:
+           description: "Application hostname"
+           type: str
+           default: "localhost"
+   ```
+
+   **For playbooks or ad-hoc validation**: Use inline `ansible.builtin.validate_argument_spec` module's specification:
+
+   ```yaml
+   - name: Validate arguments
      ansible.builtin.validate_argument_spec:
        argument_spec:
          myapp_port:
