@@ -147,6 +147,23 @@ If no Mode field or `Mode: managed` → Interactive mode (default)
 
 The `PROGRESS_BOARD.md` file serves as the **single source of truth** for real-time Sprint and Backlog Item status tracking. This file is updated by agents during each phase and provides visibility into the current state of all work.
 
+**Template:**
+
+```Markdown
+# Progress board
+
+Progress board is a table showing sprint, and backlog items state. It's the only purpose of this file. All potential comments, progress notes, etc. always keep in dedicated files for each phase.
+
+| Sprint | Sprint Status | Backlog Item | Item Status |
+|--------|---------------|--------------|-------------|
+| Sprint 1 | implemented | GHC-1 | tested |
+| Sprint 2 | implemented | GHC-3 | implemented |
+| Sprint 3 | implemented | GHC-4 | tested |
+| Sprint 3 | implemented | GHC-5 | tested |
+| Sprint 4 | implemented | GHC-6 | implemented |
+| Sprint 5 | implemented | GHC-7 | tested |
+```
+
 **Purpose:**
 
 - Track Sprint progress through RUP phases
