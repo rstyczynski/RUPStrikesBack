@@ -26,7 +26,7 @@ Backlog Items:
 
 ## Sprint 3 - REST API
 
-Status: Progress
+Status: Done
 Mode: YOLO
 
 Backlog Items:
