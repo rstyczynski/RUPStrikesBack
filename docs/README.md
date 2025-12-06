@@ -405,3 +405,113 @@ This architecture ensures Sprint 3 will reuse ~80% of Sprint 2 code with zero du
 
 ---
 
+### Sprint 3 - REST API
+
+**Status:** implemented
+
+**Backlog Items Implemented:**
+- **RSB-4. Weather forecast exposes REST API**: RESTful JSON API with 3 endpoints - tested
+
+**Key Features Added:**
+- REST API server with three endpoints:
+  - `GET /weather/city?name={cityName}` - Weather by city name
+  - `GET /weather/coordinates?lat={lat}&lon={lon}` - Weather by GPS coordinates
+  - `GET /health` - Health check endpoint
+- JSON responses with complete weather forecast data
+- RESTful HTTP status codes (200, 400, 404, 503, 500)
+- Consistent JSON error format: `{"error": "message", "status": code}`
+- Graceful shutdown support (SIGINT/SIGTERM)
+- Configurable PORT via environment variable
+- Request and error logging
+- Production-ready timeouts (15s read/write, 60s idle)
+
+**Architecture Highlights:**
+- **80% code reuse from Sprint 2** - Zero duplication maintained
+- **Standard library only** - No external dependencies (net/http, encoding/json)
+- **Three-tier architecture**: Client → HTTP Layer (NEW) → Business Logic (Sprint 2 reuse)
+- Binary size: 8.2 MB
+- Test success rate: 100% (8/8 functional tests passed)
+
+**Documentation:**
+- Implementation: `progress/sprint_3/sprint_3_implementation.md`
+- Tests: `progress/sprint_3/sprint_3_tests.md`
+- Design: `progress/sprint_3/sprint_3_design.md`
+- Analysis: `progress/sprint_3/sprint_3_analysis.md`
+- Elaboration: `progress/sprint_3/sprint_3_elaboration.md`
+- Contract Review: `progress/sprint_3/sprint_3_contract_review_1.md`
+
+**Usage Examples:**
+
+To use the Weather REST API:
+
+1. Build the API server:
+   ```bash
+   cd weather-api
+   go build -o weather-api
+   ```
+
+2. Start the server:
+   ```bash
+   ./weather-api
+   # Server starts on http://localhost:8080
+   ```
+
+3. Get weather by city name:
+   ```bash
+   curl "http://localhost:8080/weather/city?name=San Francisco"
+   ```
+
+4. Get weather by GPS coordinates:
+   ```bash
+   curl "http://localhost:8080/weather/coordinates?lat=37.7749&lon=-122.4194"
+   ```
+
+5. Health check:
+   ```bash
+   curl "http://localhost:8080/health"
+   ```
+
+**Sample API Response:**
+```json
+{
+  "latitude": 37.7749,
+  "longitude": -122.4194,
+  "timezone": "America/Los_Angeles",
+  "current": {
+    "time": "2025-12-06T07:15",
+    "temperature_2m": 15.3,
+    "weather_code": 3
+  },
+  "daily": {
+    "time": ["2025-12-06", "2025-12-07", "2025-12-08"],
+    "temperature_2m_max": [17.4, 15.2, 17.5],
+    "temperature_2m_min": [12.7, 10.5, 9.9],
+    "weather_code": [3, 61, 3]
+  }
+}
+```
+
+**Error Response Example:**
+```json
+{"error":"missing required parameter: name","status":400}
+```
+
+**Configuration:**
+```bash
+# Custom port
+PORT=9090 ./weather-api
+
+# Background mode
+./weather-api > weather-api.log 2>&1 &
+```
+
+**Sprint 4 Integration:**
+
+The REST API is ready for Sprint 4 WebUI consumption:
+- JSON endpoints ready for JavaScript fetch() calls
+- Consistent error responses for UI error handling
+- Health check for API availability verification
+- Note: CORS headers will be added in Sprint 4 for browser requests
+
+---
+
