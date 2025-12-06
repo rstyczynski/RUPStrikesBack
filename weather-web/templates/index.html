@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast WebUI</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Weather Forecast</h1>
+            <p class="subtitle">Get current weather and 3-day forecast</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-button active" data-tab="city">Search by City</button>
+            <button class="tab-button" data-tab="coordinates">Search by Coordinates</button>
+        </div>
+
+        <div class="tab-content">
+            <form id="city-form" class="tab-panel active">
+                <div class="form-group">
+                    <label for="city-input">City Name:</label>
+                    <input type="text" id="city-input" placeholder="e.g., Portland" autocomplete="off">
+                </div>
+                <button type="submit" class="btn-primary">Get Weather</button>
+            </form>
+
+            <form id="coordinates-form" class="tab-panel">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="lat-input">Latitude:</label>
+                        <input type="text" id="lat-input" placeholder="e.g., 45.5152" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="lon-input">Longitude:</label>
+                        <input type="text" id="lon-input" placeholder="e.g., -122.6784" autocomplete="off">
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary">Get Weather</button>
+            </form>
+        </div>
+
+        <div id="loading" class="loading" style="display: none;">
+            <div class="loading-spinner"></div>
+            <p>Loading weather data...</p>
+        </div>
+
+        <div id="error-message" class="error-message" style="display: none;"></div>
+
+        <div id="weather-display" class="weather-display" style="display: none;">
+            <div id="current-weather" class="current-weather"></div>
+            <div id="forecast" class="forecast"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_ENDPOINT = '{{.APIEndpoint}}';
+    </script>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
