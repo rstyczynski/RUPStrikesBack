@@ -1,10 +1,10 @@
 # Development plan
 
-Weather forecast application is three tier application presenting weather information for a given city. Interacts with externals providers to provide data.
+Weather forecast application is three tier Go! application presenting weather information for a given city. Interacts with externals providers to provide data.
 
-Instruction for operator: keep the development sprint by sprint by changing `Status` label form Planned via Progress to Planned. To achieve simplicity each iteration contains exactly one feature. YOu may add more backlog Items in `BACKLOG.md` file, refereeing them in this plan.
+Instruction for the operator: keep the development sprint by sprint by changing `Status` label form Planned via Progress to Planned. To achieve simplicity each iteration contains exactly one feature. YOu may add more backlog Items in `BACKLOG.md` file, refereeing them in this plan.
 
-Instruction for implementor: keep analysis, design and implementation as simple as possible to achieve goals presented as Backlog Items. Remove each not required feature sticking to the Backlog Items definitions.
+Instruction for the implementor: keep analysis, design and implementation as simple as possible to achieve goals presented as Backlog Items. Remove each not required feature sticking to the Backlog Items definitions.
 
 ## Sprint 1 - Prerequisites
 
@@ -53,3 +53,13 @@ Speed: FAST
 Backlog Items:
 
 * RSB-6. WebUI: Add map presentation for city location disambiguation
+
+## Sprint 6 - WebUI weather by click extension
+
+Status: Planned
+Mode: YOLO
+Speed: FAST
+
+Backlog Items:
+
+* RSB-7. WebUI: User clicks on a map to get forecast for this point

@@ -24,7 +24,7 @@ Application provides personalization by prompting for the user's name and storin
 
 ### RSB-4. Weather forecast exposes REST API
 
-Application provides a RESTful API that exposes weather forecast data through standard HTTP methods. The API enables programmatic access to weather information in formats like JSON, allowing multiple client types to consume the service. This creates a service-oriented architecture that separates data logic from presentation layers. The product is kept in ./weather-api following ./weather-cli approach.
+Application provides a RESTful API that exposes weather forecast data through standard HTTP methods. The API enables programmatic access to weather information in formats like JSON, allowing multiple client types to consume the service. This creates a service-oriented architecture that separates data logic from presentation layers. The product is kept in ./weather-api following ./weather-cli approach. Prepare CORS as Web UI will call the API from different origin.
 
 ### RSB-5. Weather forecast WebUI
 
@@ -32,7 +32,7 @@ Application provides a web-based graphical user interface accessible through bro
 
 ### RSB-6. WebUI: Add map presentation for city location disambiguation
 
-Enhance the WebUI by integrating a map view that visually presents the location of the searched city. As city names can often be ambiguous (multiple cities with the same name in different regions or countries), this feature will display a map centered on the selected city's coordinates to help users confirm the intended location. The map should update dynamically based on the user's search input and be clearly visible alongside or near the weather data. Incorporate open-source map solutions (such as OpenStreetMap or Leaflet.js) and ensure seamless interaction between the map and the existing REST API-based weather data retrieval. Weather REST API need to return geo-coordinates for searched city to be sure that map shows always the same location that weather REST API uses.
+Enhance the WebUI by integrating a map view that visually presents the location of the searched city. As city names can often be ambiguous (multiple cities with the same name in different regions or countries), this feature will display a map centered on the selected city's coordinates to help users confirm the intended location. The map should update dynamically based on the user's search input and be clearly visible alongside or near the weather data. Incorporate open-source map solutions (such as OpenStreetMap or Leaflet.js) and ensure seamless interaction between the map and the existing REST API-based weather data retrieval. Weather REST API need to return geo-coordinates for searched city to be sure that map shows always the same location that weather REST API uses. 
 
 ### RSB-7. WebUI: User clicks on a map to get forecast for this point
 
