@@ -160,6 +160,10 @@ function displayWeather(data) {
         .bindPopup(locationName + (locationCountry ? ', ' + locationCountry : ''))
         .openPopup();
 
+    // FIX: Update lat/lon form fields with current coordinates
+    document.getElementById('latInput').value = latitude.toFixed(2);
+    document.getElementById('lonInput').value = longitude.toFixed(2);
+
     // Show results, hide error and loading
     document.getElementById('results').classList.remove('hidden');
     document.getElementById('error').classList.add('hidden');
