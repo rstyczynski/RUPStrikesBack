@@ -126,6 +126,20 @@ async function handleMapClick(e) {
     const lat = e.latlng.lat;
     const lon = e.latlng.lng;
     
+    // Update lat/lon input fields with clicked coordinates
+    document.getElementById('lat-input').value = lat.toFixed(6);
+    document.getElementById('lon-input').value = lon.toFixed(6);
+    
+    // Switch to coordinates tab if not already active
+    const coordTab = document.querySelector('.tab[data-tab="coord"]');
+    const cityTab = document.querySelector('.tab[data-tab="city"]');
+    if (coordTab && !coordTab.classList.contains('active')) {
+        cityTab.classList.remove('active');
+        coordTab.classList.add('active');
+        document.getElementById('city-search').classList.remove('active');
+        document.getElementById('coord-search').classList.add('active');
+    }
+    
     // Immediately update marker to clicked location
     if (map) {
         map.setView([lat, lon], map.getZoom());
