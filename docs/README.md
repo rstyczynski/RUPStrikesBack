@@ -559,3 +559,94 @@ All tiers share the same `weather/` package core from Sprint 2, maintaining zero
 
 ---
 
+### Sprint 6 - WebUI Map Click Functionality
+
+**Status:** implemented
+
+**Backlog Items Implemented:**
+- **RSB-7. WebUI: User clicks on a map to get forecast for this point**: Map click handler extracts coordinates and displays weather - tested
+
+**Key Features Added:**
+- Map click event handler
+- Extract coordinates from click event
+- Request weather for clicked location
+- Display weather using existing function
+- Map marker updates to clicked location
+
+**Architecture Highlights:**
+- Reuses existing `/weather/coord` API endpoint
+- Reuses existing `displayWeather()` function
+- Leaflet.js click event integration
+
+**Documentation:**
+- Implementation: `progress/sprint_6/sprint_6_implementation.md`
+- Tests: `progress/sprint_6/sprint_6_tests.md`
+- Design: `progress/sprint_6/sprint_6_design.md`
+
+**Usage Examples:**
+See implementation documentation for complete usage examples.
+
+---
+
+### Sprint 5 - WebUI Map Extension
+
+**Status:** implemented
+
+**Backlog Items Implemented:**
+- **RSB-6. WebUI: Add map presentation for city location disambiguation**: Leaflet.js map showing city coordinates - tested
+
+**Key Features Added:**
+- Leaflet.js map integration via CDN
+- Map displays city location coordinates from weather API
+- Dynamic map updates on new searches
+- Marker shows exact location
+- Works with both city name and coordinate searches
+- OpenStreetMap tile layer
+
+**Architecture Highlights:**
+- Leaflet.js from CDN (no build step)
+- Map container in HTML layout
+- Map initialization/update in JavaScript
+- Coordinates extracted from location/forecast objects
+- Frontend-only implementation
+
+**Test Results:**
+- Total Tests: 4
+- Passed: 4
+- Failed: 0
+- Success Rate: 100% ✅
+
+**Documentation:**
+- Implementation: `progress/sprint_5/sprint_5_implementation.md`
+- Tests: `progress/sprint_5/sprint_5_tests.md`
+- Design: `progress/sprint_5/sprint_5_design.md`
+- Analysis: `progress/sprint_5/sprint_5_analysis.md`
+
+**Usage Examples:**
+
+1. **Start weather-api server:**
+   ```bash
+   cd weather-api
+   ./weather-api
+   ```
+
+2. **Start WebUI server:**
+   ```bash
+   cd weather-web
+   python3 -m http.server 3000
+   ```
+
+3. **Open in browser:**
+   - Navigate to `http://localhost:3000`
+   - Enter city name (e.g., "Tokyo") and click "Get Weather"
+   - Map displays below location info showing city coordinates
+   - OR enter coordinates and click "Get Weather" - map shows coordinate location
+
+**Map Features:**
+- Map centered on searched location
+- Marker pinpoints exact coordinates
+- Updates automatically on new searches
+- OpenStreetMap tiles for open-source mapping
+
+---
+

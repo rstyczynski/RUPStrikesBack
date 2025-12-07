@@ -98,6 +98,9 @@ function updateMap(lat, lon) {
             attribution: '© OpenStreetMap contributors',
             maxZoom: 19
         }).addTo(map);
+        
+        // Add click handler for map clicks
+        map.on('click', handleMapClick);
     } else {
         map.setView([lat, lon], 10);
     }
@@ -116,6 +119,31 @@ function updateMap(lat, lon) {
             map.invalidateSize();
         }
     }, 100);
+}
+
+// Handle map click to get weather for clicked location
+async function handleMapClick(e) {
+    const lat = e.latlng.lat;
+    const lon = e.latlng.lng;
+    
+    hideError();
+    showLoading();
+    hideWeather();
+    
+    try {
+        const response = await fetch(`${API_BASE}/weather/coord?lat=${lat}&lon=${lon}`);
+        
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(errorText || `HTTP ${response.status}`);
+        }
+        
+        const data = await response.json();
+        displayWeather(data);
+    } catch (error) {
+        showError(`Failed to get weather: ${error.message}`);
+        hideLoading();
+    }
 }
 
 // Display weather data

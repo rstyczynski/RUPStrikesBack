@@ -36,7 +36,7 @@ Backlog Items:
 
 ## Sprint 4 - WebUI
 
-Status: Progress
+Status: Done
 Mode: YOLO
 Speed: FAST
 
@@ -46,10 +46,20 @@ Backlog Items:
 
 ## Sprint 5 - WebUI map extension
 
-Status: Planned
+Status: Done
 Mode: YOLO
 Speed: FAST
 
 Backlog Items:
 
 * RSB-6. WebUI: Add map presentation for city location disambiguation
+
+## Sprint 6 - WebUI map extension
+
+Status: Progress
+Mode: YOLO
+Speed: FAST
+
+Backlog Items:
+
+* RSB-7. WebUI: User clicks on a map to get forecast for this point

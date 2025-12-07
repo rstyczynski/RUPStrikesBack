@@ -22,7 +22,7 @@ func main() {
 	// Create file server that only serves files from the executable's directory
 	// and disables directory listings
 	fs := http.FileServer(http.Dir(exeDir))
-	
+
 	// Wrap with handler that:
 	// 1. Serves index.html for root path
 	// 2. Disables directory listings
@@ -33,23 +33,23 @@ func main() {
 			http.ServeFile(w, r, filepath.Join(exeDir, "index.html"))
 			return
 		}
-		
+
 		// For other paths, check if file exists before serving
 		requestedPath := filepath.Join(exeDir, r.URL.Path)
-		
+
 		// Security: Ensure the requested path is within exeDir (prevent directory traversal)
 		relPath, err := filepath.Rel(exeDir, requestedPath)
 		if err != nil || relPath == ".." || len(relPath) > 0 && relPath[:2] == ".." {
 			http.NotFound(w, r)
 			return
 		}
-		
+
 		// Check if file exists
 		if _, err := os.Stat(requestedPath); os.IsNotExist(err) {
 			http.NotFound(w, r)
 			return
 		}
-		
+
 		// Serve the file
 		fs.ServeHTTP(w, r)
 	})

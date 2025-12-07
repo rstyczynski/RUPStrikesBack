@@ -24,7 +24,7 @@ Application provides personalization by prompting for the user's name and storin
 
 ### RSB-4. Weather forecast exposes REST API
 
-Application provides a RESTful API that exposes weather forecast data through standard HTTP methods. The API enables programmatic access to weather information in formats like JSON, allowing multiple client types to consume the service. This creates a service-oriented architecture that separates data logic from presentation layers. The product is kept in ./weather-api following ./weather-cli approach.
+Application provides a RESTful API that exposes weather forecast data through standard HTTP methods. The API enables programmatic access to weather information in formats like JSON, allowing multiple client types to consume the service. This creates a service-oriented architecture that separates data logic from presentation layers. The product is kept in ./weather-api following ./weather-cli approach. Note to take care of CORS as web interface will call the API form different origin URL.
 
 ### RSB-5. Weather forecast WebUI
 
