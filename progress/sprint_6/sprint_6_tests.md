@@ -18,7 +18,7 @@ cd weather-api
 
 # Terminal 2: Start WebUI server
 cd weather-web
-python3 -m http.server 3000
+./weather-web
 ```
 
 ## Test 1: Map Click Displays Weather
