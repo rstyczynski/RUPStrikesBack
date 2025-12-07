@@ -1,5 +1,44 @@
 const API_URL = 'http://localhost:8080';
 
+// Global map instance and marker
+let map = null;
+let marker = null;
+
+// Initialize map on page load
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize map (hidden initially, world view)
+    map = L.map('map').setView([0, 0], 2);
+
+    // Add OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors',
+        maxZoom: 19
+    }).addTo(map);
+
+    // Add click event handler for RSB-7 (click-to-forecast)
+    map.on('click', async (e) => {
+        const lat = e.latlng.lat.toFixed(2);
+        const lon = e.latlng.lng.toFixed(2);
+
+        // Show loading state
+        showLoading();
+
+        try {
+            const response = await fetch(`${API_URL}/weather?lat=${lat}&lon=${lon}`);
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch weather for coordinates. Please try again.');
+            }
+
+            const data = await response.json();
+            displayWeather(data);
+
+        } catch (error) {
+            showError(error.message);
+        }
+    });
+});
+
 // Form submission handler
 document.getElementById('searchForm').addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -33,9 +72,12 @@ document.getElementById('searchForm').addEventListener('submit', async (e) => {
 
 // Display weather data
 function displayWeather(data) {
-    // Location
+    // Location (handle both city names and coordinate-only locations)
+    const locationName = data.location.name || `${data.location.latitude.toFixed(2)}°, ${data.location.longitude.toFixed(2)}°`;
+    const locationCountry = data.location.country || '';
+
     const locationHTML = `
-        <h2>${data.location.name}, ${data.location.country}</h2>
+        <h2>${locationName}${locationCountry ? ', ' + locationCountry : ''}</h2>
         <p>Coordinates: ${data.location.latitude.toFixed(2)}°, ${data.location.longitude.toFixed(2)}°</p>
     `;
     document.getElementById('location').innerHTML = locationHTML;
@@ -63,7 +105,23 @@ function displayWeather(data) {
     `).join('');
     document.getElementById('forecast').innerHTML = forecastHTML;
 
-    // Show results, hide error and loading
+    // RSB-6: Center map on location and add marker
+    const lat = data.location.latitude;
+    const lon = data.location.longitude;
+
+    // Remove previous marker if exists
+    if (marker) {
+        map.removeLayer(marker);
+    }
+
+    // Center map and add new marker
+    map.setView([lat, lon], 10);
+    marker = L.marker([lat, lon]).addTo(map)
+        .bindPopup(locationName + (locationCountry ? ', ' + locationCountry : ''))
+        .openPopup();
+
+    // Show map and results, hide error and loading
+    document.getElementById('map').classList.remove('hidden');
     document.getElementById('results').classList.remove('hidden');
     document.getElementById('error').classList.add('hidden');
     document.getElementById('loading').classList.add('hidden');

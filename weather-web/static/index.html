@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Forecast</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body>
     <div class="container">
@@ -24,6 +26,9 @@
 
         <!-- Loading Indicator -->
         <div id="loading" class="hidden">Loading...</div>
+
+        <!-- Map Container -->
+        <div id="map" class="hidden"></div>
 
         <!-- Results Display -->
         <div id="results" class="hidden">
