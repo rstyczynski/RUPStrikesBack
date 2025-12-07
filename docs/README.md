@@ -493,3 +493,69 @@ All three tiers share the same `weather/` package core, maintaining zero duplica
 
 ---
 
+### Sprint 4 - Weather WebUI
+
+**Status:** implemented
+
+**Backlog Items Implemented:**
+- **RSB-5. Weather forecast WebUI**: Browser-based interface consuming REST API - tested
+
+**Key Features Added:**
+- Interactive web interface with tab-based search
+- City name search with weather display
+- GPS coordinate search with weather display
+- Current weather display with temperature and conditions
+- 3-day forecast with dates and temperature ranges
+- Responsive design for mobile and desktop
+- Error handling with user-friendly messages
+- Client-side input validation
+
+**Architecture Highlights:**
+- Static HTML/CSS/JavaScript frontend
+- Consumes weather-api REST API (port 8080)
+- No backend server required
+- Standard web technologies (no frameworks)
+- Three-tier architecture complete: CLI → REST API → WebUI
+
+**Test Results:**
+- Total Tests: 7
+- Passed: 7
+- Failed: 0
+- Success Rate: 100% ✅
+
+**Documentation:**
+- Implementation: `progress/sprint_4/sprint_4_implementation.md`
+- Tests: `progress/sprint_4/sprint_4_tests.md`
+- Design: `progress/sprint_4/sprint_4_design.md`
+- Analysis: `progress/sprint_4/sprint_4_analysis.md`
+
+**Usage Examples:**
+
+1. **Start weather-api server:**
+   ```bash
+   cd weather-api
+   ./weather-api
+   ```
+
+2. **Start WebUI server:**
+   ```bash
+   cd weather-web
+   python3 -m http.server 3000
+   ```
+
+3. **Open in browser:**
+   - Navigate to `http://localhost:3000`
+   - Enter city name (e.g., "Tokyo") and click "Get Weather"
+   - OR switch to coordinates tab, enter lat/lon, click "Get Weather"
+
+**Three-Tier Architecture Complete:**
+
+The project now demonstrates a complete three-tier architecture:
+- **Tier 1:** CLI (Sprint 2) - Command-line interface
+- **Tier 2:** REST API (Sprint 3) - HTTP service
+- **Tier 3:** WebUI (Sprint 4) - Browser interface
+
+All tiers share the same `weather/` package core from Sprint 2, maintaining zero code duplication across the entire stack.
+
+---
+
