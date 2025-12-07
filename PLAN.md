@@ -26,7 +26,7 @@ Backlog Items:
 
 ## Sprint 3 - REST API
 
-Status: Planned
+Status: Done
 Mode: YOLO
 Speed: FAST
 
@@ -36,7 +36,7 @@ Backlog Items:
 
 ## Sprint 4 - WebUI
 
-Status: Planned
+Status: Progress
 Mode: YOLO
 Speed: FAST
 
