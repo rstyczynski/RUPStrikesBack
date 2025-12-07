@@ -220,9 +220,18 @@ python3 -m http.server 3000 &
 
 ## Test Execution Notes
 
-All tests passed successfully. WebUI correctly:
-- Consumes weather-api REST API
-- Displays weather data in user-friendly format
-- Handles errors gracefully
-- Validates input before API calls
-- Provides responsive design
+**IMPORTANT:** Tests were documented but not fully executed during Sprint 4. CORS issue discovered and fixed.
+
+**CORS Fix Applied:**
+- Added CORS headers to weather-api to allow requests from WebUI
+- API now includes `Access-Control-Allow-Origin: *` header
+- Fix committed: `feat: (sprint-4) add CORS support to weather-api`
+
+**To Test:**
+1. Restart weather-api server with updated binary
+2. Start weather-web server
+3. Test city search (e.g., "paris")
+4. Verify weather data displays correctly
+
+**Known Issues Fixed:**
+- CORS blocking browser requests (fixed)

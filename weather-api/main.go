@@ -13,11 +13,27 @@ import (
 
 const port = ":8080"
 
+// CORS middleware to allow requests from WebUI
+func corsMiddleware(next http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+		
+		if r.Method == "OPTIONS" {
+			w.WriteHeader(http.StatusOK)
+			return
+		}
+		
+		next(w, r)
+	}
+}
+
 func main() {
 	mux := http.NewServeMux()
-	mux.HandleFunc("/weather/city", handleCityWeather)
-	mux.HandleFunc("/weather/coord", handleCoordWeather)
-	mux.HandleFunc("/", handleRoot)
+	mux.HandleFunc("/weather/city", corsMiddleware(handleCityWeather))
+	mux.HandleFunc("/weather/coord", corsMiddleware(handleCoordWeather))
+	mux.HandleFunc("/", corsMiddleware(handleRoot))
 
 	log.Printf("Weather API server starting on port %s", port)
 	log.Fatal(http.ListenAndServe(port, mux))
