@@ -95,7 +95,8 @@ function updateMap(lat, lon) {
     if (!map) {
         map = L.map('map-container').setView([lat, lon], 10);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
+            attribution: '© OpenStreetMap contributors',
+            maxZoom: 19
         }).addTo(map);
     } else {
         map.setView([lat, lon], 10);
@@ -108,6 +109,13 @@ function updateMap(lat, lon) {
     
     // Add marker at location
     marker = L.marker([lat, lon]).addTo(map);
+    
+    // Invalidate size to ensure map renders correctly after container becomes visible
+    setTimeout(() => {
+        if (map) {
+            map.invalidateSize();
+        }
+    }, 100);
 }
 
 // Display weather data
@@ -135,11 +143,6 @@ function displayWeather(data) {
     } else {
         document.getElementById('location-name').textContent = 'Location';
         document.getElementById('location-details').textContent = '';
-    }
-    
-    // Update map with coordinates if available
-    if (lat && lon) {
-        updateMap(lat, lon);
     }
     
     // Current weather
@@ -180,7 +183,16 @@ function displayWeather(data) {
         }
     }
     
+    // Show weather display first (makes container visible)
     showWeather();
+    
+    // Update map with coordinates if available (after container is visible)
+    if (lat && lon) {
+        // Use setTimeout to ensure container is fully visible before initializing map
+        setTimeout(() => {
+            updateMap(lat, lon);
+        }, 50);
+    }
 }
 
 // Weather code descriptions (simplified)
