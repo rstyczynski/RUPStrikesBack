@@ -70,7 +70,7 @@ cd weather-api
 2. Start WebUI server:
 ```bash
 cd weather-web
-python3 -m http.server 3000
+./weather-web
 ```
 
 3. Open browser to http://localhost:3000
