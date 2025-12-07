@@ -2,7 +2,7 @@
 
 ## RSB-4. Weather forecast exposes REST API
 
-Status: Proposed
+Status: Accepted
 
 ### Requirement Summary
 
