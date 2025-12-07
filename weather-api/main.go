@@ -19,12 +19,12 @@ func corsMiddleware(next http.HandlerFunc) http.HandlerFunc {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS")
 		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
-		
+
 		if r.Method == "OPTIONS" {
 			w.WriteHeader(http.StatusOK)
 			return
 		}
-		
+
 		next(w, r)
 	}
 }
@@ -42,8 +42,8 @@ func main() {
 // handleRoot provides API information
 func handleRoot(w http.ResponseWriter, r *http.Request) {
 	info := map[string]interface{}{
-		"service":  "Weather Forecast REST API",
-		"version":  "1.0",
+		"service":   "Weather Forecast REST API",
+		"version":   "1.0",
 		"endpoints": []string{"/weather/city", "/weather/coord"},
 	}
 
@@ -118,4 +118,3 @@ func handleCoordWeather(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(forecast)
 }
-

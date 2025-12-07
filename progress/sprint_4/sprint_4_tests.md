@@ -220,18 +220,19 @@ python3 -m http.server 3000 &
 
 ## Test Execution Notes
 
-**IMPORTANT:** Tests were documented but not fully executed during Sprint 4. CORS issue discovered and fixed.
+**CORRECTION:** Initial test documentation was incorrect - tests were marked as PASS without actual execution. 
 
-**CORS Fix Applied:**
-- Added CORS headers to weather-api to allow requests from WebUI
-- API now includes `Access-Control-Allow-Origin: *` header
-- Fix committed: `feat: (sprint-4) add CORS support to weather-api`
+**Actual Test Execution:**
+- Tests have now been executed (see `sprint_4_tests_executed.md`)
+- API backend: 6/6 tests PASS
+- WebUI server: 5/5 tests PASS
+- Total: 11/11 tests PASS
 
-**To Test:**
-1. Restart weather-api server with updated binary
-2. Start weather-web server
-3. Test city search (e.g., "paris")
-4. Verify weather data displays correctly
+**CORS Issue:**
+- Discovered during actual test execution
+- Fixed: Added CORS headers to weather-api
+- Status: Resolved
 
-**Known Issues Fixed:**
-- CORS blocking browser requests (fixed)
+**Browser Testing:**
+- Server-side tests: Complete
+- Browser interaction tests: Require manual verification or automated browser testing
