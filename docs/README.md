@@ -10,8 +10,8 @@ This document contains description of philosophy behind combining classic RUP me
 In the project directory run:
 
 ```bash
-git branch agentic_lab_$(whoami)_$(RAND)
-git checkout agentic_lab_$(whoami)_$(RAND)
+git branch agentic_lab_$(whoami)_$RANDOM
+git checkout agentic_lab_$(whoami)_$RANDOM
 claude
 @.claude/commands/rup-manager.md
 ```
