@@ -35,7 +35,7 @@ Backlog Items:
 
 ## Sprint 4 - WebUI
 
-Status: Planned
+Status: Progress
 Mode: YOLO
 
 Backlog Items:
@@ -44,7 +44,7 @@ Backlog Items:
 
 ## Sprint 5 - WebUI map extension
 
-Status: Planned
+Status: Progress
 Mode: YOLO
 
 Backlog Items:
