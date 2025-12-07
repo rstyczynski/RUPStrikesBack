@@ -79,7 +79,8 @@ async function searchByCoordinates() {
         }
         
         const data = await response.json();
-        displayWeather(data);
+        // API returns forecast object directly, wrap it for displayWeather
+        displayWeather({ forecast: data });
     } catch (error) {
         showError(`Failed to get weather: ${error.message}`);
         hideLoading();
