@@ -126,6 +126,17 @@ async function handleMapClick(e) {
     const lat = e.latlng.lat;
     const lon = e.latlng.lng;
     
+    // Immediately update marker to clicked location
+    if (map) {
+        map.setView([lat, lon], map.getZoom());
+        // Remove existing marker if any
+        if (marker) {
+            map.removeLayer(marker);
+        }
+        // Add marker at clicked location
+        marker = L.marker([lat, lon]).addTo(map);
+    }
+    
     hideError();
     showLoading();
     hideWeather();
