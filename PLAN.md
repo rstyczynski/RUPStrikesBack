@@ -18,7 +18,7 @@ Backlog Items:
 
 ## Sprint 2 - CLI
 
-Status: Planned
+Status: Done
 
 Backlog Items:
 
@@ -26,7 +26,7 @@ Backlog Items:
 
 ## Sprint 3 - REST API
 
-Status: Done
+Status: Planned
 Mode: YOLO
 
 Backlog Items:
