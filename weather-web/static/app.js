@@ -37,10 +37,9 @@ document.addEventListener('DOMContentLoaded', () => {
             showError(error.message);
         }
     });
-});
 
-// Form submission handler
-document.getElementById('searchForm').addEventListener('submit', async (e) => {
+    // Form submission handler (moved inside DOMContentLoaded)
+    document.getElementById('searchForm').addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const city = document.getElementById('cityInput').value.trim();
@@ -68,6 +67,7 @@ document.getElementById('searchForm').addEventListener('submit', async (e) => {
     } catch (error) {
         showError(error.message);
     }
+    });
 });
 
 // Display weather data
@@ -114,14 +114,19 @@ function displayWeather(data) {
         map.removeLayer(marker);
     }
 
+    // Show map first (before manipulating it)
+    document.getElementById('map').classList.remove('hidden');
+
+    // FIX: Invalidate map size after showing (Leaflet needs visible container)
+    map.invalidateSize();
+
     // Center map and add new marker
     map.setView([lat, lon], 10);
     marker = L.marker([lat, lon]).addTo(map)
         .bindPopup(locationName + (locationCountry ? ', ' + locationCountry : ''))
         .openPopup();
 
-    // Show map and results, hide error and loading
-    document.getElementById('map').classList.remove('hidden');
+    // Show results, hide error and loading
     document.getElementById('results').classList.remove('hidden');
     document.getElementById('error').classList.add('hidden');
     document.getElementById('loading').classList.add('hidden');
