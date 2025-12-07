@@ -68,17 +68,50 @@ document.addEventListener('DOMContentLoaded', () => {
         showError(error.message);
     }
     });
+
+    // Coordinate form submission handler
+    document.getElementById('coordForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const lat = document.getElementById('latInput').value.trim();
+        const lon = document.getElementById('lonInput').value.trim();
+
+        if (!lat || !lon) {
+            showError('Please enter both latitude and longitude');
+            return;
+        }
+
+        // Show loading state
+        showLoading();
+
+        try {
+            const response = await fetch(`${API_URL}/weather?lat=${lat}&lon=${lon}`);
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch weather for coordinates. Please try again.');
+            }
+
+            const data = await response.json();
+            displayWeather(data);
+
+        } catch (error) {
+            showError(error.message);
+        }
+    });
 });
 
 // Display weather data
 function displayWeather(data) {
-    // Location (handle both city names and coordinate-only locations)
-    const locationName = data.location.name || `${data.location.latitude.toFixed(2)}°, ${data.location.longitude.toFixed(2)}°`;
-    const locationCountry = data.location.country || '';
+    // FIX: Handle different API response structures (city vs coordinates)
+    const location = data.location || {};
+    const latitude = location.latitude || data.latitude || 0;
+    const longitude = location.longitude || data.longitude || 0;
+    const locationName = location.name || `${latitude.toFixed(2)}°, ${longitude.toFixed(2)}°`;
+    const locationCountry = location.country || '';
 
     const locationHTML = `
         <h2>${locationName}${locationCountry ? ', ' + locationCountry : ''}</h2>
-        <p>Coordinates: ${data.location.latitude.toFixed(2)}°, ${data.location.longitude.toFixed(2)}°</p>
+        <p>Coordinates: ${latitude.toFixed(2)}°, ${longitude.toFixed(2)}°</p>
     `;
     document.getElementById('location').innerHTML = locationHTML;
 
@@ -106,8 +139,9 @@ function displayWeather(data) {
     document.getElementById('forecast').innerHTML = forecastHTML;
 
     // RSB-6: Center map on location and add marker
-    const lat = data.location.latitude;
-    const lon = data.location.longitude;
+    // FIX: Use the extracted latitude/longitude variables
+    const lat = latitude;
+    const lon = longitude;
 
     // Remove previous marker if exists
     if (marker) {

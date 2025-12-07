@@ -28,14 +28,14 @@ h1 {
     font-size: 2rem;
 }
 
-/* Search Form */
-#searchForm {
+/* Search Forms */
+#searchForm, #coordForm {
     display: flex;
     gap: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 
-#cityInput {
+#cityInput, #latInput, #lonInput {
     flex: 1;
     padding: 12px 16px;
     border: 2px solid #ddd;
@@ -44,7 +44,7 @@ h1 {
     transition: border-color 0.3s;
 }
 
-#cityInput:focus {
+#cityInput:focus, #latInput:focus, #lonInput:focus {
     outline: none;
     border-color: #667eea;
 }
