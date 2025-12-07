@@ -103,7 +103,9 @@ function updateMap(lat, lon) {
         // Add click handler for map clicks
         map.on('click', handleMapClick);
     } else {
-        map.setView([lat, lon], 10);
+        // Preserve current zoom level when updating
+        const currentZoom = map.getZoom();
+        map.setView([lat, lon], currentZoom);
     }
     
     // Remove existing marker if any
@@ -141,9 +143,10 @@ async function handleMapClick(e) {
         document.getElementById('coord-search').classList.add('active');
     }
     
-    // Immediately update marker to clicked location
+    // Immediately update marker to clicked location (preserve zoom)
     if (map) {
-        map.setView([lat, lon], map.getZoom());
+        const currentZoom = map.getZoom();
+        map.setView([lat, lon], currentZoom);
         // Remove existing marker if any
         if (marker) {
             map.removeLayer(marker);
