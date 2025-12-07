@@ -1,5 +1,9 @@
 const API_BASE = 'http://localhost:8080';
 
+// Map instance
+let map = null;
+let marker = null;
+
 // Tab switching
 document.querySelectorAll('.tab').forEach(tab => {
     tab.addEventListener('click', () => {
@@ -82,11 +86,36 @@ async function searchByCoordinates() {
     }
 }
 
+// Initialize or update map with coordinates
+function updateMap(lat, lon) {
+    const mapContainer = document.getElementById('map-container');
+    if (!mapContainer) return;
+    
+    // Initialize map if not exists
+    if (!map) {
+        map = L.map('map-container').setView([lat, lon], 10);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+    } else {
+        map.setView([lat, lon], 10);
+    }
+    
+    // Remove existing marker if any
+    if (marker) {
+        map.removeLayer(marker);
+    }
+    
+    // Add marker at location
+    marker = L.marker([lat, lon]).addTo(map);
+}
+
 // Display weather data
 function displayWeather(data) {
     hideLoading();
     
     // Location info
+    let lat, lon;
     if (data.location) {
         document.getElementById('location-name').textContent = data.location.name;
         const details = [];
@@ -94,9 +123,23 @@ function displayWeather(data) {
         if (data.location.country) details.push(data.location.country);
         document.getElementById('location-details').textContent = details.join(', ') || 
             `Lat: ${data.location.latitude.toFixed(2)}, Lon: ${data.location.longitude.toFixed(2)}`;
+        lat = data.location.latitude;
+        lon = data.location.longitude;
+    } else if (data.forecast) {
+        // Coordinate search returns only forecast with coordinates
+        document.getElementById('location-name').textContent = 'Location';
+        lat = data.forecast.latitude;
+        lon = data.forecast.longitude;
+        document.getElementById('location-details').textContent = 
+            `Lat: ${lat.toFixed(2)}, Lon: ${lon.toFixed(2)}`;
     } else {
         document.getElementById('location-name').textContent = 'Location';
         document.getElementById('location-details').textContent = '';
+    }
+    
+    // Update map with coordinates if available
+    if (lat && lon) {
+        updateMap(lat, lon);
     }
     
     // Current weather
