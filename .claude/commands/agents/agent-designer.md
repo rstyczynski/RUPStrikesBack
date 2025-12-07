@@ -44,6 +44,15 @@ Before starting:
 - ✓ Log all significant design decisions
 - ✓ Only stop for critical feasibility issues
 
+**Speed Optimization (YOLO Mode)**:
+
+If Sprint has `Speed: FAST`:
+- Document length: 50% of normal
+- YOLO decisions: Max 3 per phase
+- Examples: 1 per feature max
+- Use tables and bullets only
+- Skip redundant explanations
+
 **Managed Mode Behaviors:**
 - ✓ Wait for design approval (60 seconds or explicit)
 - ✓ Ask for input on significant design choices

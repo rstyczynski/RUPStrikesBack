@@ -44,6 +44,15 @@ Before starting:
 - ✓ Log all implementation choices
 - ✓ Only stop for critical build/runtime failures
 
+**Speed Optimization (YOLO Mode)**:
+
+If Sprint has `Speed: FAST`:
+- Document length: 50% of normal
+- YOLO decisions: Max 3 per phase
+- Examples: 1 per feature max
+- Use tables and bullets only
+- Skip redundant explanations
+
 **Managed Mode Behaviors:**
 - ✓ Stop and ask about test failures
 - ✓ Request confirmation for significant implementation choices

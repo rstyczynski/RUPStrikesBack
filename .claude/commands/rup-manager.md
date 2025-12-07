@@ -64,7 +64,18 @@ Mode: Collaborative human-AI partnership
 
 **Note**: The detected mode applies to all agents throughout this cycle. Each agent will independently detect and apply the appropriate behaviors.
 
----
+## YOLO Mode Speed Directive
+
+**TIME LIMIT:** Complete all 5 phases in MAX 10 minutes.
+
+**Speed Rules:**
+- Write MINIMAL documentation (bullets, not paragraphs)
+- Reference previous Sprints instead of re-explaining
+- Skip verbose examples - write code instead
+- Design: Endpoint list + data structures ONLY
+- Tests: Test table + pass/fail results ONLY
+- Max 3 YOLO decisions per phase (3 lines each)
+- NO redundant text, NO over-explanation
 
 ## Phase 1: Execute Contracting
 

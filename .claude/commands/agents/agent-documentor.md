@@ -45,6 +45,15 @@ Before starting:
 - ✓ Log all documentation decisions
 - ✓ Only stop for major quality issues
 
+**Speed Optimization (YOLO Mode)**:
+
+If Sprint has `Speed: FAST`:
+- Document length: 50% of normal
+- YOLO decisions: Max 3 per phase
+- Examples: 1 per feature max
+- Use tables and bullets only
+- Skip redundant explanations
+
 **Managed Mode Behaviors:**
 - ✓ Ask for confirmation on significant changes to README
 - ✓ Request input on documentation structure decisions

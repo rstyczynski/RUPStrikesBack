@@ -42,6 +42,15 @@ Before starting:
 - ✓ Log all assumptions in analysis document
 - ✓ Only stop for critical missing information
 
+**Speed Optimization (YOLO Mode)**:
+
+If Sprint has `Speed: FAST`:
+- Document length: 50% of normal
+- YOLO decisions: Max 3 per phase
+- Examples: 1 per feature max
+- Use tables and bullets only
+- Skip redundant explanations
+
 **Managed Mode Behaviors:**
 - ✓ Ask for clarification on any ambiguity
 - ✓ Wait for human confirmation
