@@ -53,13 +53,4 @@ Speed: FAST
 Backlog Items:
 
 * RSB-6. WebUI: Add map presentation for city location disambiguation
-
-## Sprint 6 - WebUI weather by click extension
-
-Status: Planned
-Mode: YOLO
-Speed: FAST
-
-Backlog Items:
-
 * RSB-7. WebUI: User clicks on a map to get forecast for this point
