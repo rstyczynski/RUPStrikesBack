@@ -37,3 +37,7 @@ Enhance the WebUI by integrating a map view that visually presents the location 
 ### RSB-7. WebUI: User clicks on a map to get forecast for this point
 
 WebUI enables users to click on any location within the map embedded in the WebUI to instantly receive a weather forecast for that specific point. Upon a map click, the application should extract the corresponding coordinates, request the appropriate weather data from the REST API, and display the forecast details in the user interface. This feature improves interactivity and flexibility by allowing both city-based and arbitrary geographic weather queries directly from the map.
+
+### RSB-8. WebUI: make up look&feel
+
+Update Web UI look&feel to be a modern minimalistic GUI using Tailwind CSS. It should be as stunning as Apple's - that's all, yet that's everything.
