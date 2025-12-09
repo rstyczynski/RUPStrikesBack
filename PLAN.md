@@ -46,7 +46,7 @@ Backlog Items:
 
 ## Sprint 5 - WebUI: make up look&feel
 
-Status: Progress
+Status: Done
 Mode: YOLO
 Speed: FAST
 
@@ -54,7 +54,17 @@ Backlog Items:
 
 * RSB-8. WebUI: make up look&feel
 
-## Sprint 6 - WebUI map extension
+## Sprint 6 - WebUI: Pro-level look&feel and UX (one sprint)
+
+Status: Progress
+Mode: YOLO
+Speed: FAST
+
+Backlog Items:
+
+* RSB-9. WebUI: Pro-level look&feel and UX (one sprint)
+
+## Sprint 7 - WebUI map extension
 
 Status: Planned
 Mode: YOLO
