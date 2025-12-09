@@ -302,6 +302,8 @@ main {
     border: 1px solid var(--color-neutral-2);
     background: var(--color-air);
     transition: all 0.3s ease;
+    position: relative;
+    width: 100%;
 }
 
 .map-container.hidden {
@@ -317,12 +319,18 @@ main {
 
 /* Responsive Map */
 @media (max-width: 768px) {
+    .map-container {
+        height: 300px;
+    }
     #map {
         height: 300px;
     }
 }
 
 @media (max-width: 480px) {
+    .map-container {
+        height: 250px;
+    }
     #map {
         height: 250px;
     }
