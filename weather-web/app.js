@@ -16,6 +16,14 @@ const mapContainer = document.getElementById('map-container');
 const locationName = document.getElementById('location-name');
 const locationCoords = document.getElementById('location-coords');
 
+// Map variables
+let map = null;
+let cityMarker = null;
+let clickMarker = null;
+
+// Global scope for clickMarker
+window.clickMarker = null;
+
 // Weather icon mapping (WMO weather codes → Unicode emoji)
 const WEATHER_ICONS = {
     0: '☀️',    // Clear sky
@@ -156,7 +164,14 @@ async function getWeatherForPoint(lat, lon) {
         displayWeather(data);
         
         // Add red marker for clicked location
-        addLocationMarker(lat, lon);
+        if (map) {
+            if (window.clickMarker) {
+                map.removeLayer(window.clickMarker);
+            }
+            window.clickMarker = L.marker([lat, lon], {
+                color: 'red'
+            }).addTo(map);
+        }
         
     } catch (err) {
         if (err.message.includes('Failed to fetch')) {
@@ -189,10 +204,10 @@ function centerMapOnLocation(lat, lon) {
 
 function addLocationMarker(lat, lon) {
     if (map) {
-        if (clickMarker) {
-            map.removeLayer(clickMarker);
+        if (window.clickMarker) {
+            map.removeLayer(window.clickMarker);
         }
-        clickMarker = L.marker([lat, lon], {
+        window.clickMarker = L.marker([lat, lon], {
             color: 'red'
         }).addTo(map);
     }
@@ -352,12 +367,15 @@ async function checkAPIHealth() {
 
 // Initialize map when page loads
 document.addEventListener('DOMContentLoaded', () => {
-    initializeMap();
-    
-    // Add click handler to map
-    if (map) {
-        map.on('click', handleMapClick);
-    }
+    // Small delay to ensure container is visible
+    setTimeout(() => {
+        initializeMap();
+        
+        // Add click handler to map
+        if (map) {
+            map.on('click', handleMapClick);
+        }
+    }, 100);
 });
 
 // Initialize app
