@@ -75,7 +75,13 @@ func (s *Server) routes() http.Handler {
 			_ = json.NewEncoder(w).Encode(map[string]string{"error": err.Error()})
 			return
 		}
-		_ = json.NewEncoder(w).Encode(map[string]any{"forecast": forecast})
+		_ = json.NewEncoder(w).Encode(map[string]any{
+			"location": map[string]any{
+				"latitude":  lat,
+				"longitude": lon,
+			},
+			"forecast": forecast,
+		})
 	})
 
 	return s.cors(mux)

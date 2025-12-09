@@ -9,11 +9,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="styles.css" />
   <style>
     .hidden{display:none}
     .table{width:100%;border-collapse:collapse}
     .table th,.table td{border:1px solid #e5e7eb;padding:6px 8px;text-align:left}
+    #map{height:320px}
   </style>
 </head>
 <body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100" style="font-family: Inter, -apple-system, Segoe UI, Roboto, sans-serif">
@@ -72,10 +74,12 @@
       <div id="location" class="hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4"></div>
       <div id="current" class="hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4"></div>
       <div id="forecast" class="hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4"></div>
+      <div id="map" class="hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-1"></div>
     </div>
   </div>
 
   <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
