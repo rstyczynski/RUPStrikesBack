@@ -56,7 +56,7 @@ Backlog Items:
 
 ## Sprint 6 - WebUI: Pro-level look&feel and UX (one sprint)
 
-Status: Progress
+Status: Done
 Mode: YOLO
 Speed: FAST
 
@@ -66,9 +66,8 @@ Backlog Items:
 
 ## Sprint 7 - WebUI map extension
 
-Status: Planned
+Status: Progress
 Mode: YOLO
-Speed: FAST
 
 Backlog Items:
 
