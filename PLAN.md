@@ -26,7 +26,7 @@ Backlog Items:
 
 ## Sprint 3 - REST API
 
-Status: Planned
+Status: Done
 Mode: YOLO
 Speed: FAST
 
@@ -36,7 +36,7 @@ Backlog Items:
 
 ## Sprint 4 - WebUI
 
-Status: Planned
+Status: Done
 Mode: YOLO
 Speed: FAST
 
@@ -44,7 +44,17 @@ Backlog Items:
 
 * RSB-5. Weather forecast WebUI
 
-## Sprint 5 - WebUI map extension
+## Sprint 5 - WebUI: make up look&feel
+
+Status: Progress
+Mode: YOLO
+Speed: FAST
+
+Backlog Items:
+
+* RSB-8. WebUI: make up look&feel
+
+## Sprint 6 - WebUI map extension
 
 Status: Planned
 Mode: YOLO
