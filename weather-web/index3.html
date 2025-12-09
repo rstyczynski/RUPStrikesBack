@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast</title>
+    
+    <!-- Cache Control -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌤️ Weather Forecast</h1>
+            <p>Get current weather and 3-day forecast</p>
+        </header>
+
+        <main>
+            <!-- Search Form -->
+            <div class="search-section">
+                <form id="search-form">
+                    <input
+                        type="text"
+                        id="city-input"
+                        placeholder="Enter city name (e.g., London, New York)"
+                        required
+                        autocomplete="off"
+                    >
+                    <button type="submit" class="btn-primary">Search</button>
+                </form>
+                <button id="location-btn" class="btn-secondary">
+                    📍 Use Current Location
+                </button>
+            </div>
+
+            <!-- Loading Spinner -->
+            <div id="loading" class="loading hidden">
+                <div class="spinner"></div>
+                <p>Loading weather data...</p>
+            </div>
+
+            <!-- Error Message -->
+            <div id="error" class="error hidden"></div>
+
+            <!-- Weather Display -->
+            <div id="weather-display" class="weather-display hidden">
+                <!-- Location Info -->
+                <div class="location-info">
+                    <h2 id="location-name"></h2>
+                    <p id="location-coords"></p>
+                </div>
+
+                <!-- Current Weather -->
+                <div class="current-weather">
+                    <h3>Current Conditions</h3>
+                    <div class="current-card">
+                        <div class="weather-icon" id="current-icon">☀️</div>
+                        <div class="weather-details">
+                            <div class="temperature" id="current-temp">--°C</div>
+                            <div class="weather-desc" id="current-desc">--</div>
+                            <div class="weather-time" id="current-time">--</div>
+                        </div>
+                    </div>
+                </div>
+
+            <!-- Map Toggle -->
+            <div class="map-section">
+                <button id="map-toggle-btn" class="btn-secondary">🗺️ Show Map</button>
+            </div>
+
+            <!-- Map Container -->
+            <div id="map-container" class="map-container hidden">
+                <div id="map" style="height: 400px; width: 100%;"></div>
+            </div>
+
+            <!-- 3-Day Forecast -->
+            <div class="forecast-section">
+                <h3>3-Day Forecast</h3>
+                <div class="forecast-grid" id="forecast-grid">
+                    <!-- Forecast cards will be inserted here -->
+                </div>
+            </div>
+        </div>
+        </main>
+
+        <footer>
+            <p>Data provided by <a href="https://open-meteo.com/" target="_blank">Open-Meteo</a></p>
+            <p>Weather API: <span id="api-status">Not connected</span></p>
+        </footer>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

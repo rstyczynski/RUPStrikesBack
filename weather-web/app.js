@@ -24,6 +24,17 @@ let clickMarker = null;
 // Global scope for clickMarker
 window.clickMarker = null;
 
+// Create custom red marker icon
+function createRedMarkerIcon() {
+    return L.divIcon({
+        className: 'custom-red-marker',
+        html: '<div style="background-color: #A85532; width: 24px; height: 24px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); border: 2px solid #312D2A;"><div style="width: 8px; height: 8px; background: white; border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div></div>',
+        iconSize: [24, 24],
+        iconAnchor: [12, 24],
+        popupAnchor: [0, -24]
+    });
+}
+
 // Enhanced weather icon mapping (WMO weather codes → Unicode emoji + CSS styling)
 const WEATHER_ICONS = {
     0: { icon: '☀️', class: 'weather-sunny' },    // Clear sky
@@ -170,7 +181,7 @@ async function getWeatherForPoint(lat, lon) {
                 map.removeLayer(window.clickMarker);
             }
             window.clickMarker = L.marker([lat, lon], {
-                color: 'red'
+                icon: createRedMarkerIcon()
             }).addTo(map);
         }
         
@@ -209,7 +220,7 @@ function addLocationMarker(lat, lon) {
             map.removeLayer(window.clickMarker);
         }
         window.clickMarker = L.marker([lat, lon], {
-            color: 'red'
+            icon: createRedMarkerIcon()
         }).addTo(map);
     }
 }
@@ -218,8 +229,9 @@ function toggleMap() {
     if (mapContainer.classList.contains('hidden')) {
         showElement(mapContainer);
         mapToggleBtn.textContent = '🗺️ Hide Map';
-        if (map && !map._container) {
-            map.invalidateSize();
+        if (map) {
+            // Recalculate map size after showing container
+            setTimeout(() => map.invalidateSize(), 100);
         }
     } else {
         hideElement(mapContainer);
@@ -276,7 +288,7 @@ function displayWeather(data) {
 
             card.innerHTML = `
                 <div class="date">${formatDate(data.forecast.daily.time[i])}</div>
-                <div class="icon">${icon}</div>
+                <div class="icon ${icon.class}">${icon.icon}</div>
                 <div class="temps">${maxTemp}° / ${minTemp}°</div>
                 <div class="temp-range">High / Low</div>
             `;
