@@ -136,32 +136,32 @@ function displayWeather(data) {
     }
 
     // Current weather
-    if (data.current) {
-        const currentIcon = getWeatherIcon(data.current.weather_code);
+    if (data.forecast && data.forecast.current) {
+        const currentIcon = getWeatherIcon(data.forecast.current.weather_code);
         document.getElementById('current-icon').textContent = currentIcon;
         document.getElementById('current-temp').textContent =
-            `${Math.round(data.current.temperature_2m)}°C`;
+            `${Math.round(data.forecast.current.temperature_2m)}°C`;
         document.getElementById('current-desc').textContent =
-            getWeatherDescription(data.current.weather_code);
+            getWeatherDescription(data.forecast.current.weather_code);
         document.getElementById('current-time').textContent =
-            `As of ${data.current.time}`;
+            `As of ${data.forecast.current.time}`;
     }
 
     // 3-day forecast
-    if (data.daily) {
+    if (data.forecast && data.forecast.daily) {
         const forecastGrid = document.getElementById('forecast-grid');
         forecastGrid.innerHTML = '';
 
-        for (let i = 0; i < Math.min(3, data.daily.time.length); i++) {
+        for (let i = 0; i < Math.min(3, data.forecast.daily.time.length); i++) {
             const card = document.createElement('div');
             card.className = 'forecast-card';
 
-            const icon = getWeatherIcon(data.daily.weather_code[i]);
-            const maxTemp = Math.round(data.daily.temperature_2m_max[i]);
-            const minTemp = Math.round(data.daily.temperature_2m_min[i]);
+            const icon = getWeatherIcon(data.forecast.daily.weather_code[i]);
+            const maxTemp = Math.round(data.forecast.daily.temperature_2m_max[i]);
+            const minTemp = Math.round(data.forecast.daily.temperature_2m_min[i]);
 
             card.innerHTML = `
-                <div class="date">${formatDate(data.daily.time[i])}</div>
+                <div class="date">${formatDate(data.forecast.daily.time[i])}</div>
                 <div class="icon">${icon}</div>
                 <div class="temps">${maxTemp}° / ${minTemp}°</div>
                 <div class="temp-range">High / Low</div>
