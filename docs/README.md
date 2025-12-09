@@ -548,3 +548,113 @@ All three tiers share the same `weather/` package core, maintaining zero duplica
 
 ---
 
+### Sprint 4 - Weather WebUI
+
+**Status:** implemented
+
+**Backlog Items Implemented:**
+- **RSB-5. Weather forecast WebUI**: Browser-based graphical interface consuming REST API - tested
+
+**Key Features Added:**
+- Single-page web application (SPA) with vanilla HTML/CSS/JS
+- City search with text input and validation
+- Current location feature using browser geolocation API
+- Visual weather icons (Unicode emoji mapped from WMO codes)
+- Current conditions display (temperature, icon, description, time)
+- 3-day forecast with cards (date, icon, high/low temps)
+- Responsive mobile-first design (320px+ screens)
+- CSS Grid layout (1/2/3 columns based on screen size)
+- Loading spinner and error handling UI
+- API health status indicator in footer
+- Zero external dependencies (no npm, no build tools)
+
+**Architecture Highlights:**
+- **HTML** (`index.html`): 78 lines - Semantic structure, forms, display containers
+- **CSS** (`style.css`): 334 lines - Responsive layout, animations, weather cards
+- **JavaScript** (`app.js`): 263 lines - API calls, DOM manipulation, error handling
+- **Total Code:** 675 lines
+- **Dependencies:** Zero (pure vanilla web stack)
+- **Build Tools:** None required (open index.html directly in browser)
+- **Browser Support:** Chrome 51+, Firefox 54+, Safari 10+ (ES6+)
+
+**Test Results:**
+- Total Tests: 8
+- Passed: 8
+- Failed: 0
+- Success Rate: 100% ✅
+
+**Documentation:**
+- Implementation: `progress/sprint_4/sprint_4_implementation.md`
+- Tests: `progress/sprint_4/sprint_4_tests.md`
+- Design: `progress/sprint_4/sprint_4_design.md`
+- Analysis: `progress/sprint_4/sprint_4_analysis.md`
+- Contract Review: `progress/sprint_4/sprint_4_contract_review_1.md`
+- Inception Summary: `progress/sprint_4/sprint_4_inception.md`
+- Elaboration Summary: `progress/sprint_4/sprint_4_elaboration.md`
+
+**Usage Examples:**
+
+1. **Start the REST API server** (required for WebUI):
+   ```bash
+   cd weather-api
+   ./weather-api --port 8080
+   ```
+
+2. **Open the WebUI in browser:**
+   ```bash
+   open weather-web/index.html
+   # OR on Linux: xdg-open weather-web/index.html
+   # OR on Windows: start weather-web/index.html
+   ```
+
+3. **Search for weather by city:**
+   - Type city name in search box (e.g., "London", "Tokyo", "New York")
+   - Click "Search" button
+   - View current conditions + 3-day forecast
+
+4. **Use current location:**
+   - Click "📍 Use Current Location" button
+   - Allow browser location permission
+   - View weather for your GPS coordinates
+
+**Visual Features:**
+- **Weather Icons:** 40 Unicode emoji symbols mapped from WMO weather codes
+  - Clear sky: ☀️
+  - Partly cloudy: ⛅
+  - Rain: 🌧️
+  - Snow: ❄️
+  - Thunderstorm: ⛈️
+  - Fog: 🌫️
+- **Responsive Breakpoints:**
+  - Mobile (320-479px): 1-column stacked layout
+  - Tablet (480-767px): 2-column grid
+  - Desktop (768px+): 3-column grid
+- **Color Scheme:** Purple gradient (#667eea → #764ba2)
+- **Animations:** Smooth fade-in for weather data, rotating spinner for loading
+
+**Error Handling:**
+- Network errors: "Unable to connect to weather service..."
+- Invalid city: Displays API error message ("City not found")
+- Geolocation denied: "Location access denied. Please search by city name."
+- API down: Footer shows "✗ Not connected" in red
+
+**Sprint 5/6 Readiness:**
+
+WebUI architecture ready for future map integration (Sprint 5/6):
+- Location coordinates already displayed
+- Modular JavaScript (easy to extend with map libraries)
+- CSS Grid flexible (can add map container)
+- Geolocation API already integrated
+
+**Three-Tier Architecture Complete:**
+
+| Tier | Sprint | Interface | Input | Output | Status |
+|------|--------|-----------|-------|--------|--------|
+| 1 | Sprint 2 | CLI | Terminal args | Text | ✅ Tested |
+| 2 | Sprint 3 | REST API | HTTP GET | JSON | ✅ Tested |
+| 3 | Sprint 4 | WebUI | Browser GUI | Visual | ✅ Tested |
+
+All three tiers share the Sprint 2 `weather/` package core, maintaining zero code duplication across the entire stack.
+
+---
+
