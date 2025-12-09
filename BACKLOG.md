@@ -41,3 +41,27 @@ WebUI enables users to click on any location within the map embedded in the WebU
 ### RSB-8. WebUI: make up look&feel
 
 Update Web UI look&feel to be a modern minimalistic GUI using Tailwind CSS. It should be as stunning as Apple's - that's all, yet that's everything.
+
+### RSB-9. WebUI: Pro-level look&feel and UX (one sprint)
+
+Deliver a pro-level, Apple-grade UI in one sprint. Decisions and implementation occur within the sprint.
+
+Scope:
+- Tailwind with custom config/theme (colors, spacing, typography with Inter)
+- Component set: buttons, inputs, cards, tables, alerts, skeletons
+- Icon set: Heroicons/Lucide
+- Dark mode (toggle + prefers-color-scheme)
+- Responsive layout and spacing scale
+- Micro-interactions: hover/focus/active states, transitions
+- Subtle motion/elevation, gradients where appropriate
+- Accessibility: WCAG AA, keyboard nav, focus rings, ARIA
+- Performance: Lighthouse ≥95, purge/treeshake CSS
+
+Acceptance Criteria:
+- Inter font loaded; design tokens applied via Tailwind config
+- Dark mode available and persisted
+- All key components styled and consistent
+- Loading/error/skeleton states implemented
+- A11y checks pass (keyboard-only, color contrast)
+- Lighthouse Performance/Best Practices/Accessibility ≥95
+- No API or JS behavior regressions
