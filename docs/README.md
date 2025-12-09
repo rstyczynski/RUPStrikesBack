@@ -409,6 +409,45 @@ This architecture ensures Sprint 3 will reuse ~80% of Sprint 2 code with zero du
 
 **Status:** implemented
 
+---
+
+### Sprint 4 - Weather WebUI
+
+**Status:** implemented
+
+**Backlog Items Implemented:**
+- RSB-5. Weather forecast WebUI - tested
+
+**Key Features Added:**
+- Static SPA (index.html, script.js, styles.css)
+- Fetch by city or coordinates
+- Configurable API base URL
+- Error handling and simple responsive layout
+
+**Documentation:**
+- Implementation: `progress/sprint_4/sprint_4_implementation.md`
+- Tests: `progress/sprint_4/sprint_4_tests.md`
+- Design: `progress/sprint_4/sprint_4_design.md`
+- Analysis: `progress/sprint_4/sprint_4_analysis.md`
+- Documentation Summary: `progress/sprint_4/sprint_4_documentation.md`
+
+**Usage Examples:**
+
+1. Start API:
+```bash
+cd weather-api && go build -o weather-api && ./weather-api
+```
+
+2. Serve WebUI:
+```bash
+cd weather-web && python3 -m http.server 8000
+```
+
+3. Open:
+```bash
+open http://localhost:8000
+```
+
 **Backlog Items Implemented:**
 - **RSB-4. Weather forecast exposes REST API**: RESTful HTTP service with JSON responses - tested
 
