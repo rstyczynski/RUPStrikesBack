@@ -24,36 +24,37 @@ let clickMarker = null;
 // Global scope for clickMarker
 window.clickMarker = null;
 
-// Weather icon mapping (WMO weather codes → Unicode emoji)
+// Enhanced weather icon mapping (WMO weather codes → Unicode emoji + CSS styling)
 const WEATHER_ICONS = {
-    0: '☀️',    // Clear sky
-    1: '🌤️',    // Mainly clear
-    2: '⛅',    // Partly cloudy
-    3: '☁️',    // Overcast
-    45: '🌫️',   // Fog
-    48: '🌫️',   // Depositing rime fog
-    51: '🌦️',   // Drizzle light
-    53: '🌦️',   // Drizzle moderate
-    55: '🌧️',   // Drizzle dense
-    61: '🌧️',   // Rain slight
-    63: '🌧️',   // Rain moderate
-    65: '🌧️',   // Rain heavy
-    71: '❄️',   // Snow fall slight
-    73: '❄️',   // Snow fall moderate
-    75: '❄️',   // Snow fall heavy
-    80: '🌦️',   // Rain showers slight
-    81: '🌧️',   // Rain showers moderate
-    82: '🌧️',   // Rain showers violent
-    85: '🌨️',   // Snow showers slight
-    86: '🌨️',   // Snow showers heavy
-    95: '⛈️',   // Thunderstorm
-    96: '⛈️',   // Thunderstorm with slight hail
-    99: '⛈️'    // Thunderstorm with heavy hail
+    0: { icon: '☀️', class: 'weather-sunny' },    // Clear sky
+    1: { icon: '🌤️', class: 'weather-mostly-sunny' },    // Mainly clear
+    2: { icon: '⛅', class: 'weather-partly-cloudy' },    // Partly cloudy
+    3: { icon: '☁️', class: 'weather-cloudy' },    // Overcast
+    45: { icon: '🌫️', class: 'weather-foggy' },   // Fog
+    48: { icon: '🌫️', class: 'weather-foggy' },   // Depositing rime fog
+    51: { icon: '🌦️', class: 'weather-light-rain' },   // Drizzle light
+    53: { icon: '🌦️', class: 'weather-light-rain' },   // Drizzle moderate
+    55: { icon: '🌧️', class: 'weather-heavy-rain' },   // Drizzle dense
+    61: { icon: '🌧️', class: 'weather-light-rain' },   // Rain slight
+    63: { icon: '🌧️', class: 'weather-moderate-rain' },   // Rain moderate
+    65: { icon: '🌧️', class: 'weather-heavy-rain' },   // Rain heavy
+    71: { icon: '❄️', class: 'weather-light-snow' },   // Snow fall slight
+    73: { icon: '❄️', class: 'weather-moderate-snow' },   // Snow fall moderate
+    75: { icon: '❄️', class: 'weather-heavy-snow' },   // Snow fall heavy
+    80: { icon: '🌦️', class: 'weather-light-rain' },   // Rain showers slight
+    81: { icon: '🌧️', class: 'weather-moderate-rain' },   // Rain showers moderate
+    82: { icon: '🌧️', class: 'weather-heavy-rain' },   // Rain showers violent
+    85: { icon: '🌨️', class: 'weather-light-snow' },   // Snow showers slight
+    86: { icon: '🌨️', class: 'weather-heavy-snow' },   // Snow showers heavy
+    95: { icon: '⛈️', class: 'weather-thunderstorm' },   // Thunderstorm
+    96: { icon: '⛈️', class: 'weather-thunderstorm' },   // Thunderstorm with slight hail
+    99: { icon: '⛈️', class: 'weather-thunderstorm' }    // Thunderstorm with heavy hail
 };
 
 // Get weather icon for WMO code
 function getWeatherIcon(code) {
-    return WEATHER_ICONS[code] || '🌤️';
+    const iconData = WEATHER_ICONS[code] || { icon: '🌤️', class: 'weather-mostly-sunny' };
+    return iconData;
 }
 
 // Format date from YYYY-MM-DD to readable format
@@ -249,7 +250,9 @@ function displayWeather(data) {
     // Current weather
     if (data.forecast && data.forecast.current) {
         const currentIcon = getWeatherIcon(data.forecast.current.weather_code);
-        document.getElementById('current-icon').textContent = currentIcon;
+        const currentIconElement = document.getElementById('current-icon');
+        currentIconElement.textContent = currentIcon.icon;
+        currentIconElement.className = `weather-icon ${currentIcon.class}`;
         document.getElementById('current-temp').textContent =
             `${Math.round(data.forecast.current.temperature_2m)}°C`;
         document.getElementById('current-desc').textContent =
