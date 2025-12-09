@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Forecast</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
     <div class="container">
@@ -61,12 +62,21 @@
                     </div>
                 </div>
 
-                <!-- 3-Day Forecast -->
-                <div class="forecast-section">
-                    <h3>3-Day Forecast</h3>
-                    <div class="forecast-grid" id="forecast-grid">
-                        <!-- Forecast cards will be inserted here -->
-                    </div>
+            <!-- Map Toggle -->
+            <div class="map-section">
+                <button id="map-toggle-btn" class="btn-secondary">🗺️ Show Map</button>
+            </div>
+
+            <!-- Map Container -->
+            <div id="map-container" class="map-container hidden">
+                <div id="map" style="height: 400px; width: 100%;"></div>
+            </div>
+
+            <!-- 3-Day Forecast -->
+            <div class="forecast-section">
+                <h3>3-Day Forecast</h3>
+                <div class="forecast-grid" id="forecast-grid">
+                    <!-- Forecast cards will be inserted here -->
                 </div>
             </div>
         </main>
@@ -77,6 +87,7 @@
         </footer>
     </div>
 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
