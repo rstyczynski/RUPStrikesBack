@@ -39,7 +39,6 @@ Autonomous Execution Enabled:
 ✓ Agents will make reasonable assumptions
 ✓ Minimal human interaction required
 ✓ All decisions logged in implementation docs
-✓ Faster iteration cycles
 ✓ Audit trail preserved in git history
 
 Safety: Critical failures still stop execution

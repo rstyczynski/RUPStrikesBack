@@ -44,7 +44,6 @@ The RUP process supports two execution modes configured in `PLAN.md`:
 - Fully autonomous execution
 - Agents make reasonable assumptions for weak problems
 - No human interaction required
-- Faster iteration cycles
 - All decisions logged in implementation docs
 - Recommended for well-understood, low-risk sprints
 

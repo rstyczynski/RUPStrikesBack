@@ -79,7 +79,6 @@ You control agent autonomy by setting the Mode field in each Sprint section of `
 - Agents make reasonable assumptions
 - Auto-approve designs
 - Minimal human interaction
-- Faster iteration (10-20 minutes per sprint)
 - All decisions logged in documentation
 - Recommended for routine/low-risk work
 
