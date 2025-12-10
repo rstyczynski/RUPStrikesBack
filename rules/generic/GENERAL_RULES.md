@@ -146,37 +146,11 @@ When in YOLO mode, optimize for speed as directed in Sprint label `Speed`.
 
 **Speed Levels:**
 
-- `FAST`: Max 10 min, minimal docs (bullets only)
-- `NORMAL`: Max 20 min, standard docs
-- `THOROUGH`: No time limit, comprehensive docs
+- `FAST`: minimal docs (bullets only)
+- `NORMAL`: standard docs
+- `DETAILED`: comprehensive docs
 
-Regular speed is `FAST`, and is applied when no label is detected.
-
-#### Documentation Length Limits (STRICT)
-
-- **Contracting:** Max 100 lines (reference previous Sprint)
-- **Analysis:** Max 200 lines (core requirements only)
-- **Design:** Max 250 lines (essential specs, no examples)
-- **Implementation:** Max 250 lines (code + brief usage)
-- **Tests:** Max 200 lines (test list + summary table)
-- **Documentation:** Max 150 lines (validation checklist only)
-
-#### What to SKIP in YOLO Mode
-
-**Never write:**
-
-- ❌ Long "YOLO Mode Decisions" sections (max 3 decisions, 5 lines each)
-- ❌ Example code blocks in design (just describe, don't show)
-- ❌ Detailed error response examples (one example max)
-- ❌ Redundant architecture explanations
-- ❌ Verbose summaries
-
-**Always prioritize:**
-
-- ✅ Bullet points over paragraphs
-- ✅ Tables over prose
-- ✅ Reference previous docs instead of repeating
-- ✅ Code over documentation
+Regular speed is `NORMAL`, and is applied when no label is detected.
 
 ## Progress Tracking
 
