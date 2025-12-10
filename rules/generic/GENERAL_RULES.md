@@ -309,6 +309,7 @@ The RUP process follows a 5-phase workflow:
 - Proposed changes (`sprint_${no}_proposedchanges.md`)
 - More information needed (`sprint_${no}_openquestions.md`)
 - **EXCEPTION:** `PROGRESS_BOARD.md` - Agents update during their respective phases
+- **EXCEPTION:** `PLAN.md` - you can update status label from `Progress` to `Done` or `Failed`.
 
 **PREREQUISITES:**
 
