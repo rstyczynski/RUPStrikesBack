@@ -1,4 +1,4 @@
-# c: Agentic Programming Cooperation Model
+# Agentic Programming Cooperation Model
 
 **Author:** Ryszard Styczynski  
 **Date:** 2025-12-15
