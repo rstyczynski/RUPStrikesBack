@@ -18,7 +18,7 @@ claude
 
 You may work with `codex`, `cursor` or `opencode` however Claude Code gives the best results.
 
-## Make working for your project working for you
+## Make RUPStrikesBack working for your project
 
 To start working RSB for your project - copy/paste below prompt to Claude Code in repository. No worries with missing plan/backlog - RBS will create templates for you.
 
