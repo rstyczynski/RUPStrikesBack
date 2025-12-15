@@ -22,7 +22,7 @@ You may work with `codex`, `cursor` or `opencode` however Claude Code gives the 
 
 To start working RSB for your project - copy/paste below prompt to Claude Code in repository. No worries with missing plan/backlog - RBS will create templates for you.
 
-```markdown
+```markdown 
 Work on this directory / project as main goal, by using agentic instructions and files from RUPStrikesBack project.
 
 What have to be done is defined in `backlog.md` with iterations defined in `plan.md`.
