@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌤️ Weather Forecast</h1>
+        </header>
+
+        <div class="search-section">
+            <form id="searchForm">
+                <input
+                    type="text"
+                    id="cityInput"
+                    placeholder="Enter city name..."
+                    required
+                    autocomplete="off">
+                <button type="submit">Get Weather</button>
+            </form>
+        </div>
+
+        <div id="errorMessage" class="error hidden"></div>
+        <div id="loadingMessage" class="loading hidden">Loading weather data...</div>
+
+        <div id="weatherDisplay" class="weather-display hidden">
+            <div class="location-info">
+                <h2 id="cityName"></h2>
+                <p id="coordinates"></p>
+            </div>
+
+            <div class="current-weather">
+                <h3>Current Weather</h3>
+                <div class="weather-main">
+                    <span class="weather-icon" id="currentIcon"></span>
+                    <span class="temperature" id="currentTemp"></span>
+                </div>
+                <p id="currentConditions"></p>
+            </div>
+
+            <div class="forecast">
+                <h3>3-Day Forecast</h3>
+                <div id="forecastDays" class="forecast-days"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
