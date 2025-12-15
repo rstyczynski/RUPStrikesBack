@@ -1,7 +1,7 @@
-# RUP Strikes Back: Agentic Programming Cooperation Model
+# c: Agentic Programming Cooperation Model
 
 **Author:** Ryszard Styczynski  
-**Date:** 2025-11-13
+**Date:** 2025-12-15
 
 ## TL;DR
 
@@ -16,7 +16,23 @@ claude
 @.claude/commands/rup-manager.md
 ```
 
-You may work with `codex` or `cursor` however Claude Code gives the best results.
+You may work with `codex`, `cursor` or `opencode` however Claude Code gives the best results.
+
+## Make working for your project working for you
+
+To start working RSB for your project - copy/paste below prompt to Claude Code in repository. No worries with missing plan/backlog - RBS will create templates for you.
+
+```markdown
+Work on this directory / project as main goal, by using agentic instructions and files from RUPStrikesBack project.
+
+What have to be done is defined in `backlog.md` with iterations defined in `plan.md`.
+
+How to proceed - all instructions, rules, etc. are taken from RUPStrikesBack. Add RUPStrikesBack `https://github.com/rstyczynski/RUPStrikesBack.git` as a submodule, refresh if needed (git submodule update --remote), and run `@RUPStrikesBack/.claude/commands/rup-manager.md`.
+
+Initialize git in the directory if needed and push to github with the name of directory as private repository. If the repository exist create a branch for this session.
+
+If `BACKLOG.md` or/and `PLAN.md` does not exist - create template files for me and stop waiting for goals to be defined.
+```
 
 ## Overview
 
