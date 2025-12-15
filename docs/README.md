@@ -410,31 +410,28 @@ This architecture ensures Sprint 3 will reuse ~80% of Sprint 2 code with zero du
 **Status:** implemented
 
 **Backlog Items Implemented:**
-- **RSB-4. Weather forecast exposes REST API**: RESTful HTTP service with JSON responses - tested
+- **RSB-4. Weather forecast exposes REST API**: RESTful HTTP service with JSON responses and CORS - tested
 
 **Key Features Added:**
-- REST API server with 3 endpoints
+- REST API server on port 8080
+- Single GET endpoint: `/weather?city={name}`
 - JSON-formatted weather data responses
-- City name query support (`/weather/city?name={city}`)
-- GPS coordinates query support (`/weather/coordinates?lat={lat}&lon={lon}`)
-- Service health check endpoint (`/health`)
+- CORS enabled for all origins (WebUI ready)
 - Comprehensive HTTP status codes (200, 400, 404, 500)
-- Error handling with informative JSON error messages
-- Port configuration via environment variable
-- Request logging for debugging
+- Error handling with JSON error messages
 - **Zero code duplication achieved** - imports Sprint 2 `weather/` package
 
 **Architecture Highlights:**
-- **Sprint 3 NEW code** (`weather-api/main.go`): HTTP server, routing, JSON encoding (~180 lines)
+- **Sprint 3 NEW code** (`weather-api/main.go`): HTTP server, handlers, CORS middleware (~80 lines)
 - **Sprint 2 REUSED package** (`weather-cli/weather`): All weather logic, API calls, data structures (~150 lines)
-- **Result:** 80%+ code reuse, zero duplication of API logic ✅
-- Standard library only (no external HTTP frameworks)
-- Binary size: 8.4 MB
-- Port: 8080 (default, configurable via PORT env var)
+- **Result:** 100% code reuse for business logic ✅
+- Standard library only (net/http, encoding/json)
+- Binary size: ~6.8 MB
+- Port: 8080 (fixed)
 
 **Test Results:**
-- Total Tests: 16
-- Passed: 16
+- Total Tests: 5
+- Passed: 5
 - Failed: 0
 - Success Rate: 100% ✅
 
@@ -459,30 +456,39 @@ This architecture ensures Sprint 3 will reuse ~80% of Sprint 2 code with zero du
 
    Expected output:
    ```
-   Starting weather API server on :8080
-   Endpoints:
-     GET /weather/city?name=<city>
-     GET /weather/coordinates?lat=<lat>&lon=<lon>
-     GET /health
+   Weather API server starting on :8080
+   Example: curl 'http://localhost:8080/weather?city=London'
    ```
 
-2. **Health check:**
+2. **Get weather by city name:**
    ```bash
-   curl http://localhost:8080/health
+   curl 'http://localhost:8080/weather?city=London'
    ```
 
    Response:
    ```json
    {
-     "status": "healthy",
-     "service": "weather-api",
-     "version": "1.0.0"
+     "location": {
+       "name": "London",
+       "latitude": 51.50853,
+       "longitude": -0.12574,
+       "country": "United Kingdom",
+       "admin1": "England"
+     },
+     "forecast": {
+       "latitude": 51.5,
+       "longitude": -0.12,
+       "timezone": "Europe/London",
+       "current": { ... },
+       "daily": { ... }
+     }
    }
    ```
 
-3. **Get weather by city name:**
+3. **Test error handling:**
    ```bash
-   curl "http://localhost:8080/weather/city?name=Tokyo"
+   curl 'http://localhost:8080/weather'
+   # Returns: {"error":"city parameter required"}
    ```
 
    Response:
