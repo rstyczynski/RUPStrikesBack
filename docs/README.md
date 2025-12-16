@@ -22,16 +22,14 @@ You may work with `codex`, `cursor` or `opencode` however Claude Code gives the 
 
 To start working RSB for your project - copy/paste below prompt to Claude Code in repository. No worries with missing plan/backlog - RBS will create templates for you.
 
-```markdown 
+```markdown
 Work on this directory / project as main goal, by using agentic instructions and files from RUPStrikesBack project.
-
-What have to be done is defined in `backlog.md` with iterations defined in `plan.md`.
 
 How to proceed - all instructions, rules, etc. are taken from RUPStrikesBack. Add RUPStrikesBack `https://github.com/rstyczynski/RUPStrikesBack.git` as a submodule, refresh if needed (git submodule update --remote), and run `@RUPStrikesBack/.claude/commands/rup-manager.md`.
 
 Initialize git in the directory if needed and push to github with the name of directory as private repository. If the repository exist create a branch for this session.
 
-If `BACKLOG.md` or/and `PLAN.md` does not exist - create template files for me and stop waiting for goals to be defined.
+What have to be done is defined in `BACKLOG.md` with iterations defined in `PLAN.md`.If these files do not exist - create template files for me and stop waiting for goals to be defined. IMPORTANT: Do NOT invent any formats or templates. ALL formats, templates, rules, and procedures MUST come from RUPStrikesBack. First step is ALWAYS to examine RUPStrikesBack for the correct approach. Do not create any other files on this stage! Especially do not create `PROGRESS_BOARD.md` which will be created later. 
 ```
 
 ## Overview
