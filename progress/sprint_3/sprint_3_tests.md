@@ -21,14 +21,14 @@ Tests below start the server in the background, run requests, then stop it.
 
 **Test Sequence:**
 ```bash
-# Build and run the server in background
+# Build and run the server in background (uses PORT, default 8081 if unset)
 cd weather-api
 go build -o weather-api .
-./weather-api & SERVER_PID=$!
+PORT=${PORT:-8081} ./weather-api & SERVER_PID=$!
 sleep 3
 
 # Call endpoint and check basics
-HTTP_CODE=$(curl -s -o response.json -w "%{http_code}" "http://localhost:8080/weather?city=Berlin")
+HTTP_CODE=$(curl -s -o response.json -w "%{http_code}" "http://localhost:${PORT:-8081}/weather?city=Berlin")
 echo "HTTP_CODE=$HTTP_CODE"
 cat response.json | jq '.location.name, .forecast.current.temperature_2m, .forecast.daily.time' | head -n 10
 
@@ -54,11 +54,11 @@ cd ..
 **Test Sequence:**
 ```bash
 cd weather-api
-./weather-api & SERVER_PID=$!
+PORT=${PORT:-8081} ./weather-api & SERVER_PID=$!
 sleep 3
 
 # Call without city
-curl -i -s "http://localhost:8080/weather" | head -n 1
+curl -i -s "http://localhost:${PORT:-8081}/weather" | head -n 1
 
 # Stop server
 kill $SERVER_PID
@@ -81,11 +81,11 @@ cd ..
 **Test Sequence:**
 ```bash
 cd weather-api
-./weather-api & SERVER_PID=$!
+PORT=${PORT:-8081} ./weather-api & SERVER_PID=$!
 sleep 3
 
 # Call with non-existing city
-curl -i -s "http://localhost:8080/weather?city=NoSuchCityXYZ" | head -n 1
+curl -i -s "http://localhost:${PORT:-8081}/weather?city=NoSuchCityXYZ" | head -n 1
 
 # Stop server
 kill $SERVER_PID
@@ -108,11 +108,11 @@ cd ..
 **Test Sequence:**
 ```bash
 cd weather-api
-./weather-api & SERVER_PID=$!
+PORT=${PORT:-8081} ./weather-api & SERVER_PID=$!
 sleep 3
 
 # Check headers for CORS
-curl -i -s "http://localhost:8080/weather?city=Berlin" | grep -i "^Access-Control-Allow-Origin:"
+curl -i -s "http://localhost:${PORT:-8081}/weather?city=Berlin" | grep -i "^Access-Control-Allow-Origin:"
 
 # Stop server
 kill $SERVER_PID
