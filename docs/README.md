@@ -114,7 +114,7 @@ human-to-AI collaboration.
 <div class="text-center" wrapper="1" width="450">
 
 <figure>
-<img src="images/Development-iterative.png"
+<img src="images/Development-iterative.png" width="450"
 alt="Iterative and incremental software development" />
 </figure>
 
@@ -235,7 +235,7 @@ collaboration paradigm.
 <div class="text-center" wrapper="1" width="300">
 
 <figure>
-<img src="images/oum_scrum_xp.png" alt="RUP" />
+<img src="images/oum_scrum_xp.png" width="300" alt="RUP" />
 </figure>
 
 </div>
@@ -570,7 +570,7 @@ like ’agile’ practices without structure and rules.
 <div class="text-center" wrapper="1" width="300">
 
 <figure>
-<img src="images/agile_anarchy.png" alt="Agile Anarchy" />
+<img src="images/agile_anarchy.png" width="300" alt="Agile Anarchy" />
 </figure>
 
 </div>

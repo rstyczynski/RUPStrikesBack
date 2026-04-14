@@ -109,6 +109,13 @@ perl -i -0pe 's/```\nflowchart/```mermaid\nflowchart/g' README.md
 perl -i -0pe 's/```text\nflowchart/```mermaid\nflowchart/g' README.md
 echo "✓ Mermaid diagrams fixed"
 
+# Fix image widths (pandoc doesn't preserve asciidoc width attribute)
+echo "Fixing image widths..."
+sed -i '' 's|src="images/Development-iterative.png"|src="images/Development-iterative.png" width="450"|g' README.md
+sed -i '' 's|src="images/oum_scrum_xp.png"|src="images/oum_scrum_xp.png" width="300"|g' README.md
+sed -i '' 's|src="images/agile_anarchy.png"|src="images/agile_anarchy.png" width="300"|g' README.md
+echo "✓ Image widths fixed"
+
 echo
 echo "✓ Build complete!"
 echo "  HTML output: README.html"
