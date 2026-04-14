@@ -24,9 +24,14 @@ set -e  # Exit on error
 #    Install globally using npm:
 #      npm install -g @mermaid-js/mermaid-cli
 #
+# 4. PANDOC (Universal document converter for Markdown output)
+#    Install using Homebrew:
+#      brew install pandoc
+#
 # QUICK INSTALL (run these commands if tools are not installed):
 #   gem install --user-install asciidoctor asciidoctor-diagram
 #   npm install -g @mermaid-js/mermaid-cli
+#   brew install pandoc
 #
 # ============================================================================
 
@@ -47,6 +52,13 @@ if ! command -v mmdc &> /dev/null; then
     exit 1
 fi
 
+# Check if pandoc is installed
+if ! command -v pandoc &> /dev/null; then
+    echo "ERROR: pandoc is not installed"
+    echo "Install with: brew install pandoc"
+    exit 1
+fi
+
 # Check if asciidoctor-diagram is available
 if ! gem list -i asciidoctor-diagram &> /dev/null; then
     echo "WARNING: asciidoctor-diagram gem not found in default location"
@@ -58,17 +70,34 @@ fi
 echo "Converting README.adoc to HTML with Mermaid diagrams..."
 asciidoctor -r asciidoctor-diagram -a imagesoutdir=images README.adoc
 
-# Check if build was successful
+# Check if HTML build was successful
 if [ -f "README.html" ]; then
-    echo
-    echo "✓ Build successful!"
-    echo "  Output: README.html"
-    echo "  Diagrams: images/diag-mermaid-*.svg"
-    echo
-    echo "Open README.html in your browser to view the document."
+    echo "✓ HTML build successful: README.html"
 else
     echo
     echo "✗ Build failed - README.html was not generated"
     exit 1
 fi
+
+# Convert to Markdown using pandoc
+echo "Converting README.adoc to Markdown..."
+pandoc -f asciidoc -t gfm -o README.md README.adoc
+
+# Check if MD build was successful
+if [ -f "README.md" ]; then
+    echo "✓ Markdown build successful: README.md"
+else
+    echo
+    echo "✗ Build failed - README.md was not generated"
+    exit 1
+fi
+
+echo
+echo "✓ Build complete!"
+echo "  HTML output: README.html"
+echo "  Markdown output: README.md"
+echo "  Diagrams: images/diag-mermaid-*.svg"
+echo
+echo "Open README.html in your browser to view the document."
+echo "README.md is used by GitHub for repository display."
 

@@ -1,102 +1,252 @@
-# RUP Strikes Back: Agentic Programming Cooperation Model
-
-**Author:** Ryszard Styczynski  
-**Date:** 2025-11-13
-
-## TL;DR
-
-This document contains description of philosophy behind combining classic RUP method with agentic coding. Reading is good, hoverer seeing is better, so before reading try it. Repository comes with exemplary weather forecast project, that is implemented to CLI level; other capabilities as REST API and WEB UI will be coded autonomously. Note that this README file is extended by the implementor with progress information. Detailed progress traceability is available in `progress/` directory.
+# TLTR
 
 In the project directory run:
 
-```bash
-git branch agentic_lab_$(whoami)_$RANDOM
-git checkout agentic_lab_$(whoami)_$RANDOM
-claude
-@.claude/commands/rup-manager.md
-```
+1.  git checkout tags/2.0.0
 
-You may work with `codex` or `cursor` however Claude Code gives the best results.
+2.  git checkout -b mycode
 
-## Overview
+3.  claude
 
-The Agentic Programming Cooperation Model represents a collaborative framework where a Product Owner and an AI Agent work together through a structured software development process. The model emphasizes clear communication, iterative refinement, and formal quality gates to ensure both parties remain aligned throughout the project lifecycle.
+4.  /rup-manager
 
-At its core, this model establishes a partnership built on explicit specifications and review cycles. Rather than ad-hoc interactions, the collaboration follows a defined pathway that moves from establishing working agreements, through requirements definition and design, to final implementation. Each transition point requires explicit acceptance, ensuring nothing moves forward until both parties agree the current stage meets quality standards.
+# Overview
 
-The terminology deliberately borrows from multiple methodological traditions. The Product Owner role comes from Scrum, representing the person who holds the vision for what needs to be built and maintains authority over requirements and acceptance criteria. This choice reflects that agentic programming isn't purely technical—it requires someone with product thinking and decision-making authority to guide the AI effectively. Unlike traditional Scrum where the Product Owner works with a human development team, here they work directly with an AI Agent, requiring even more explicit communication and formal specifications.
+The Agentic Programming Cooperation Model represents a collaborative
+framework where a Product Owner and an AI Agent work together through a
+structured software development process. The model emphasizes clear
+communication, iterative refinement, and formal quality gates to ensure
+both parties remain aligned throughout the project lifecycle.
 
-Scrum's emphasis on defined roles and adaptive iteration complements the agentic model by preserving human decision authority while allowing the AI to iterate rapidly within explicit acceptance criteria. This structure ensures that while the AI accelerates delivery, the Product Owner maintains strategic control and quality oversight.
+At its core, this model establishes a partnership built on explicit
+specifications and review cycles. Rather than ad-hoc interactions, the
+collaboration follows a defined pathway that moves from establishing
+working agreements, through requirements definition and design, to final
+implementation. Each transition point requires explicit acceptance,
+ensuring nothing moves forward until both parties agree the current
+stage meets quality standards.
 
-### Project Organization
+The terminology deliberately borrows from multiple methodological
+traditions. The Product Owner role comes from Scrum, representing the
+person who holds the vision for what needs to be built and maintains
+authority over requirements and acceptance criteria. This choice
+reflects that agentic programming isn’t purely technical—it requires
+someone with product thinking and decision-making authority to guide the
+AI effectively. Unlike traditional Scrum where the Product Owner works
+with a human development team, here they work directly with an AI Agent,
+requiring even more explicit communication and formal specifications.
 
-The collaboration uses structured artifacts: **Backlog** defines what to build, **Plan** organizes work into Sprints (iterations), and **Progress Board** tracks status. Each Sprint progresses through defined states (Planned → Progress → Designed → Implemented → Tested → Done), with execution modes supporting both interactive (managed) and autonomous (YOLO) workflows.
+Scrum’s emphasis on defined roles and adaptive iteration complements the
+agentic model by preserving human decision authority while allowing the
+AI to iterate rapidly within explicit acceptance criteria. This
+structure ensures that while the AI accelerates delivery, the Product
+Owner maintains strategic control and quality oversight.
 
-## The Return of Structured Methodology in the Age of AI
+## Project Organization
 
-Interestingly, this model resurrects principles from the Rational Unified Process (RUP) that many developers thought had been permanently replaced by agile methodologies. RUP, which emerged in the late 1990s and early 2000s, emphasized formal phases - `Inception`, `Elaboration`, `Construction`, and `Transition` - along with comprehensive documentation and explicit phase gates. As agile methodologies gained dominance in the 2010s, these structured approaches fell out of favor, dismissed as too heavyweight and bureaucratic for fast-moving software teams.
+The collaboration uses structured artifacts: **Backlog** defines what to
+build, **Plan** organizes work into Sprints (iterations), and **Progress
+Board** tracks status. Each Sprint progresses through defined states
+(Planned → Progress → Designed → Implemented → Tested → Done), with
+execution modes supporting both interactive (managed) and autonomous
+(YOLO) workflows.
 
-However, working with AI agents creates a fundamentally different dynamic that makes RUP-like structure surprisingly relevant again. When collaborating with an AI, explicit documentation isn't bureaucratic overhead - it's the primary communication medium. Unlike human team members who can infer context, understand implicit requirements, and course-correct through casual conversation, AI agents require precision and explicitness to function effectively. The formality that seemed excessive in human-to-human collaboration becomes essential in human-to-AI collaboration.
+Sprints are configured with:
 
-<div align="center">
+- **Status**: `Planned`, `Progress`, `Done`
 
-![Iterative and incremental software development](images/Development-iterative.png)
+- **Mode**: `managed` (interactive) or `YOLO` (autonomous)
 
-*Figure 1: Iterative development cycle. Structured methods like RUP bring formal review loops to every phase, providing clear gates for human-AI collaboration.*
+- **Test**: `smoke`, `unit`, `integration`, `none` — quality gates for
+  new code
+
+- **Regression**: `smoke`, `unit`, `integration`, `none` — quality gates
+  for existing code
+
+## Management Commands (Version 2.0)
+
+Version 2.0 introduces management commands for lifecycle operations:
+
+    /backlog add|list|prioritize      # Manage backlog items
+    /sprint create|start|status|close # Manage sprints
+    /bug report|triage|list           # Handle bugs during sprints
+    /archive-sprint <N>               # Archive completed sprints
+
+These commands provide structured workflows for backlog item definition,
+sprint configuration, and bug handling with fold-in/promote policies.
+
+# The Return of Structured Methodology in the Age of AI
+
+Interestingly, this model resurrects principles from the Rational
+Unified Process (RUP) that many developers thought had been permanently
+replaced by agile methodologies. RUP, which emerged in the late 1990s
+and early 2000s, emphasized formal phases - `Inception`, `Elaboration`,
+`Construction`, and `Transition` - along with comprehensive
+documentation and explicit phase gates. As agile methodologies gained
+dominance in the 2010s, these structured approaches fell out of favor,
+dismissed as too heavyweight and bureaucratic for fast-moving software
+teams.
+
+However, working with AI agents creates a fundamentally different
+dynamic that makes RUP-like structure surprisingly relevant again. When
+collaborating with an AI, explicit documentation isn’t bureaucratic
+overhead - it’s the primary communication medium. Unlike human team
+members who can infer context, understand implicit requirements, and
+course-correct through casual conversation, AI agents require precision
+and explicitness to function effectively. The formality that seemed
+excessive in human-to-human collaboration becomes essential in
+human-to-AI collaboration.
+
+<div class="text-center" wrapper="1" width="600">
+
+<figure>
+<img src="Development-iterative.png"
+alt="Iterative and incremental software development" />
+</figure>
 
 </div>
 
-The phase names themselves - `Inception`, `Elaboration`, `Construction` - echo RUP deliberately. This isn't coincidence but recognition that these phases represent natural boundaries in the design and development process. What's different is the addition of the Contracting phase, which has no direct RUP equivalent. This phase acknowledges that before any project work begins, the human and AI must establish a shared understanding of how they'll work together. This meta-level agreement about collaboration protocols, documentation standards, and feedback mechanisms creates the foundation for effective partnership.
+*Figure 1: Iterative development cycle. Structured methods like RUP
+bring formal review loops to every phase, providing clear gates for
+human-AI collaboration.*
 
-RUP was often criticized for its documentation-heavy approach, but in agentic programming, documentation serves a different purpose. Rather than creating artifacts for compliance or future maintenance, documents become active collaboration tools. The Software Requirements Specification isn't filed away - it's read, analyzed, and questioned by the Agent. The Design document isn't a one-way communication - it evolves through explicit review cycles where both parties contribute. Documentation transforms from a burden into a dialogue.
+The phase names themselves - `Inception`, `Elaboration`,
+`Construction` - echo RUP deliberately. This isn’t coincidence but
+recognition that these phases represent natural boundaries in the design
+and development process. What’s different is the addition of the
+Contracting phase, which has no direct RUP equivalent. This phase
+acknowledges that before any project work begins, the human and AI must
+establish a shared understanding of how they’ll work together. This
+meta-level agreement about collaboration protocols, documentation
+standards, and feedback mechanisms creates the foundation for effective
+partnership.
 
-The iterative nature of RUP also finds new relevance. Each phase's review loop allows for refinement without chaos, providing structured opportunities for the Agent to request clarifications or point out inconsistencies. This formalized iteration prevents the drift and misalignment that can occur when working with AI through informal, ad-hoc interactions. The phase gates ensure that foundational issues are resolved before they cascade into later stages, a principle RUP championed that becomes even more critical when one party in the collaboration is an AI system.
+RUP was often criticized for its documentation-heavy approach, but in
+agentic programming, documentation serves a different purpose. Rather
+than creating artifacts for compliance or future maintenance, documents
+become active collaboration tools. The Software Requirements
+Specification isn’t filed away - it’s read, analyzed, and questioned by
+the Agent. The Design document isn’t a one-way communication - it
+evolves through explicit review cycles where both parties contribute.
+Documentation transforms from a burden into a dialogue.
 
-What's emerging is a synthesis: the structure and formality of RUP adapted for the unique requirements of human-AI collaboration, combined with the iterative refinement and feedback loops that modern development practices value. Agentic programming doesn't simply resurrect old methodologies - it demonstrates that certain principles remain valid regardless of who (or what) you're collaborating with, as long as they're applied with understanding of the collaboration context.
+The iterative nature of RUP also finds new relevance. Each phase’s
+review loop allows for refinement without chaos, providing structured
+opportunities for the Agent to request clarifications or point out
+inconsistencies. This formalized iteration prevents the drift and
+misalignment that can occur when working with AI through informal,
+ad-hoc interactions. The phase gates ensure that foundational issues are
+resolved before they cascade into later stages, a principle RUP
+championed that becomes even more critical when one party in the
+collaboration is an AI system.
 
-## Pair Programming Reimagined
+What’s emerging is a synthesis: the structure and formality of RUP
+adapted for the unique requirements of human-AI collaboration, combined
+with the iterative refinement and feedback loops that modern development
+practices value. Agentic programming doesn’t simply resurrect old
+methodologies - it demonstrates that certain principles remain valid
+regardless of who (or what) you’re collaborating with, as long as
+they’re applied with understanding of the collaboration context.
 
-Perhaps the most apt comparison comes from Extreme Programming (XP) and its practice of pair programming. In traditional XP, two developers work together at one workstation - the "driver" writes code while the "navigator" reviews each line, thinks strategically, and catches errors in real-time. This constant dialogue and immediate feedback loop was meant to improve code quality, spread knowledge, and reduce defects.
+# Pair Programming Reimagined
 
-Agentic programming is essentially pair programming evolved for the AI age. The Product Owner takes the navigator role - providing direction, reviewing output, and making strategic decisions - while the Agent acts as the driver, translating requirements into design and code. But unlike traditional pair programming where both parties share relatively equal technical capability, this partnership involves an asymmetry: the human excels at high-level reasoning, context understanding, and goal-setting, while the AI excels at rapid implementation, pattern recognition, and systematic execution.
+Perhaps the most apt comparison comes from Extreme Programming (XP) and
+its practice of pair programming. In traditional XP, two developers work
+together at one workstation - the "driver" writes code while the
+"navigator" reviews each line, thinks strategically, and catches errors
+in real-time. This constant dialogue and immediate feedback loop was
+meant to improve code quality, spread knowledge, and reduce defects.
 
-What XP got right was recognizing that software development benefits from continuous collaboration and real-time feedback rather than disconnected, asynchronous handoffs. The review loops in each phase of the Agentic Programming model embody this principle - the Product Owner and Agent remain in constant dialogue through formal review cycles, catching issues immediately rather than discovering them weeks later. The difference is that instead of sitting side-by-side at one machine, the collaboration happens through structured documents and explicit acceptance gates, adapted to the realities of working with an AI partner.
+Agentic programming is essentially pair programming evolved for the AI
+age. The Product Owner takes the navigator role - providing direction,
+reviewing output, and making strategic decisions - while the Agent acts
+as the driver, translating requirements into design and code. But unlike
+traditional pair programming where both parties share relatively equal
+technical capability, this partnership involves an asymmetry: the human
+excels at high-level reasoning, context understanding, and goal-setting,
+while the AI excels at rapid implementation, pattern recognition, and
+systematic execution.
 
-XP's pair programming also emphasized shared understanding and collective code ownership. In agentic programming, this manifests as the Agent questioning unclear requirements and the Product Owner reviewing and refining Agent-generated designs. Neither party works in isolation; both contribute to the final product's quality through their respective strengths. The formal structure doesn't eliminate the collaborative spirit of XP - it channels it through protocols that work effectively across the human-AI boundary.
+What XP got right was recognizing that software development benefits
+from continuous collaboration and real-time feedback rather than
+disconnected, asynchronous handoffs. The review loops in each phase of
+the Agentic Programming model embody this principle - the Product Owner
+and Agent remain in constant dialogue through formal review cycles,
+catching issues immediately rather than discovering them weeks later.
+The difference is that instead of sitting side-by-side at one machine,
+the collaboration happens through structured documents and explicit
+acceptance gates, adapted to the realities of working with an AI
+partner.
 
-Where XP's human pairs exchanged tacit understanding through conversation, agentic pairs exchange structured artifacts - specifications, reviews, and design updates. The medium changes from spontaneous discussion to formalized documentation, but the spirit of continuous mutual review and shared ownership remains unchanged.
+XP’s pair programming also emphasized shared understanding and
+collective code ownership. In agentic programming, this manifests as the
+Agent questioning unclear requirements and the Product Owner reviewing
+and refining Agent-generated designs. Neither party works in isolation;
+both contribute to the final product’s quality through their respective
+strengths. The formal structure doesn’t eliminate the collaborative
+spirit of XP - it channels it through protocols that work effectively
+across the human-AI boundary.
 
-## The Dream Comes True
+Where XP’s human pairs exchanged tacit understanding through
+conversation, agentic pairs exchange structured artifacts -
+specifications, reviews, and design updates. The medium changes from
+spontaneous discussion to formalized documentation, but the spirit of
+continuous mutual review and shared ownership remains unchanged.
 
-In 2008, I established a vision of combining software delivery methods to take the best from each level - organization (RUP/OUM), team (Scrum), and programmer (XP); the original file is available [here](refs/OUM,%20SCRUM,%20and%20XP%20-%20combined%20for%20flexible%20solution%20delivery,%20version%205.pdf). This vision, which seemed idealistic at the time, now comes to reality with the agentic shift in software development. The AI agent becomes the perfect partner for this synthesis: it can follow RUP's structured phases, respond to Scrum's Product Owner direction, and engage in XP's pair programming practices - all simultaneously.
+# The Dream Comes True
+
+In 2008, I established a vision of combining software delivery methods
+to take the best from each level - organization (RUP/OUM), team (Scrum),
+and programmer (XP); the original file is available
+[here](refs/OUM,%20SCRUM,%20and%20XP%20-%20combined%20for%20flexible%20solution%20delivery,%20version%205.pdf).
+This vision, which seemed idealistic at the time, now comes to reality
+with the agentic shift in software development. The AI agent becomes the
+perfect partner for this synthesis: it can follow RUP’s structured
+phases, respond to Scrum’s Product Owner direction, and engage in XP’s
+pair programming practices - all simultaneously.
 
 | Level | Human-AI Equivalent | Reference Methodology |
-|-------|---------------------|----------------------|
+|----|----|----|
 | Organizational | Phase governance, formal reviews | RUP / OUM |
 | Team | Product Owner guidance, adaptive iteration | Scrum |
 | Individual | Continuous collaboration and review | Extreme Programming (XP) |
 
-This multi-layer synthesis integrates structure, adaptability, and collaboration into one coherent delivery model.
+This multi-layer synthesis integrates structure, adaptability, and
+collaboration into one coherent delivery model.
 
-The following diagram illustrates this vision — how structured, team, and individual-level methodologies align naturally within the agentic collaboration paradigm.
+The following diagram illustrates this vision — how structured, team,
+and individual-level methodologies align naturally within the agentic
+collaboration paradigm.
 
-<div align="center">
+<div class="text-center" wrapper="1" width="400">
 
-![RUP, Scrum, and XP combined together](images/oum_scrum_xp.png)
-
-*Figure 2: The 2008 vision of combining methodologies at different levels - now realized through human-AI collaboration*
+<figure>
+<img src="oum_scrum_xp.png" alt="RUP" />
+</figure>
 
 </div>
 
-## The Collaboration Journey
+*Figure 2: The 2008 vision of combining methodologies at different
+levels - now realized through human-AI collaboration*
 
-### Contracting Phase
+# The Collaboration Journey
 
-The journey begins with `contracting`, where the Product Owner establishes the ground rules for how they'll work with the Agent. This isn't just about technical constraints - it's about setting expectations for communication, documentation standards, and feedback mechanisms. The Product Owner crafts an Agent Cooperation Specification (ACS) that outlines technology constraints, coding and testing standards, and defines how requirements, design documents, and feedback should be structured.
+## Contracting Phase
 
-The Agent reviews this specification and either accepts it or points out unclear or problematic elements. This back-and-forth continues until both parties have a shared understanding of the collaboration framework.
+The journey begins with `contracting`, where the Product Owner
+establishes the ground rules for how they’ll work with the Agent. This
+isn’t just about technical constraints - it’s about setting expectations
+for communication, documentation standards, and feedback mechanisms. The
+Product Owner crafts an Agent Cooperation Specification (ACS) that
+outlines technology constraints, coding and testing standards, and
+defines how requirements, design documents, and feedback should be
+structured.
 
-```mermaid
+The Agent reviews this specification and either accepts it or points out
+unclear or problematic elements. This back-and-forth continues until
+both parties have a shared understanding of the collaboration framework.
+
+```
 flowchart LR
     Start([Project Started]) --> C1
 
@@ -118,11 +268,21 @@ flowchart LR
     style C4 fill:#ffcccc
 ```
 
-### Inception Phase
+## Inception Phase
 
-Once the cooperation framework is solid, the process moves into `inception`. Here, the Product Owner translates their vision into a concrete Software Requirements Specification (SRS). This document captures the project goals, functional requirements, and non-functional requirements that define what needs to be built. The Agent carefully reviews this specification, identifying any errors, ambiguities, or areas where more information is needed. The Agent organizes its feedback into dedicated chapters - one for proposed changes addressing errors, another for clarification requests. This structured feedback helps the Product Owner refine the requirements until they're clear, complete, and implementable.
+Once the cooperation framework is solid, the process moves into
+`inception`. Here, the Product Owner translates their vision into a
+concrete Software Requirements Specification (SRS). This document
+captures the project goals, functional requirements, and non-functional
+requirements that define what needs to be built. The Agent carefully
+reviews this specification, identifying any errors, ambiguities, or
+areas where more information is needed. The Agent organizes its feedback
+into dedicated chapters - one for proposed changes addressing errors,
+another for clarification requests. This structured feedback helps the
+Product Owner refine the requirements until they’re clear, complete, and
+implementable.
 
-```mermaid
+```
 flowchart LR
     From([From Contracting]) --> I1
 
@@ -144,11 +304,19 @@ flowchart LR
     style I4 fill:#ffcccc
 ```
 
-### Elaboration Phase
+## Elaboration Phase
 
-With requirements solidified, `elaboration` begins. The Product Owner requests that the Agent create a detailed design showing how the system will be built. The Agent develops implementation details, architectural decisions, and technical specifications. The Product Owner then reviews this design, and if changes are needed, enumerates them by updating the design documentation. This creates a clear record of design evolution and ensures the Agent understands exactly what modifications are required. The cycle continues until the Product Owner accepts the proposed approach.
+With requirements solidified, `elaboration` begins. The Product Owner
+requests that the Agent create a detailed design showing how the system
+will be built. The Agent develops implementation details, architectural
+decisions, and technical specifications. The Product Owner then reviews
+this design, and if changes are needed, enumerates them by updating the
+design documentation. This creates a clear record of design evolution
+and ensures the Agent understands exactly what modifications are
+required. The cycle continues until the Product Owner accepts the
+proposed approach.
 
-```mermaid
+```
 flowchart LR
     From([From Inception]) --> E1
 
@@ -169,11 +337,19 @@ flowchart LR
     style E2 fill:#ffcccc
 ```
 
-### Construction Phase
+## Construction Phase
 
-The construction phase brings the design to life. The Product Owner requests `implementation`, and the Agent builds the solution while ensuring comprehensive test coverage. This includes functional unit tests to verify behavior, performance tests to ensure efficiency, and crash or overload tests to validate robustness. When the Product Owner reviews the implementation, any issues discovered are documented by updating the design chapter, creating traceability between problems and their context. The Agent addresses these issues, and the review cycle continues until the Product Owner accepts the delivered product.
+The construction phase brings the design to life. The Product Owner
+requests `implementation`, and the Agent builds the solution while
+ensuring comprehensive test coverage. This includes functional unit
+tests to verify behavior, performance tests to ensure efficiency, and
+crash or overload tests to validate robustness. When the Product Owner
+reviews the implementation, any issues discovered are documented by
+updating the design chapter, creating traceability between problems and
+their context. The Agent addresses these issues, and the review cycle
+continues until the Product Owner accepts the delivered product.
 
-```mermaid
+```
 flowchart LR
     From([From Elaboration]) --> Co1
 
@@ -196,355 +372,150 @@ flowchart LR
     style Co2 fill:#ffcccc
 ```
 
-### Phase Integration
+## Phase Integration
 
-Throughout all phases, the model maintains formal review loops. These aren't bureaucratic obstacles but rather opportunities for course correction and quality assurance. Each loop allows the Product Owner to provide specific, actionable feedback while the Agent demonstrates its understanding through revisions. The Agent's role shifts appropriately across phases - from validator and questioner during specification phases to creator and implementer during design and construction.
+Throughout all phases, the model maintains formal review loops. These
+aren’t bureaucratic obstacles but rather opportunities for course
+correction and quality assurance. Each loop allows the Product Owner to
+provide specific, actionable feedback while the Agent demonstrates its
+understanding through revisions. The Agent’s role shifts appropriately
+across phases - from validator and questioner during specification
+phases to creator and implementer during design and construction.
 
-#### Phase Feedback Loop Summary
+### Phase Feedback Loop Summary
 
-An essential practice within each review loop is capturing chat summaries as project documentation. At the conclusion of each review iteration, the Product Owner or Agent should generate a summary of the discussion, capturing key decisions made and their rationale, questions raised and their answers, issues identified and how they were resolved, design alternatives considered and rejected, and clarifications that refined understanding.
+An essential practice within each review loop is capturing chat
+summaries as project documentation. At the conclusion of each review
+iteration, the Product Owner or Agent should generate a summary of the
+discussion, capturing key decisions made and their rationale, questions
+raised and their answers, issues identified and how they were resolved,
+design alternatives considered and rejected, and clarifications that
+refined understanding.
 
-Chat summaries are committed to the repository as markdown files in `progress/sprint_<id>/` directories, organized by phase e.g.:
+Chat summaries are committed to the repository as markdown files in
+`progress/sprint_<id>/` directories, organized by phase e.g.:
 
-* `progress/sprint_15/sprint_15_contract.md`
-* `progress/sprint_15/sprint_15_analysis.md`
-* `progress/sprint_15/sprint_15_design.md`
-* `progress/sprint_15/sprint_15_implementation.md`
+- `progress/sprint_15/sprint_15_contract.md`,
 
-This creates a living knowledge base that provides several critical benefits.
+- `progress/sprint_15/sprint_15_analysis.md`,
 
-Enhanced traceability emerges naturally from this practice. Future developers, whether human or AI, can understand not just what was decided, but why certain choices were made. The dialogue that led to specific design decisions becomes permanently accessible, preventing the loss of context that typically occurs in verbal or transient conversations.
+- `progress/sprint_15/sprint_15_design.md`,
 
-Team knowledge building follows as a natural consequence. When multiple Product Owners or team members work on related projects, these summaries serve as a collective memory. Patterns emerge across projects - common pitfalls identified, successful approaches validated, domain understanding deepened. The repository becomes not just a code base but a knowledge base.
+- `progress/sprint_15/sprint_15_implementation.md`.
 
-Continuity across sessions becomes possible through these documented conversations. AI agents, while powerful within a session, don't maintain context between separate engagements. Chat summaries allow new agent sessions to rapidly reconstruct understanding by reading previous dialogues. Similarly, if a different Agent takes over work, the historical summaries provide essential context that would otherwise be lost.
+This creates a living knowledge base that provides several critical
+benefits.
 
-A quality audit trail materializes as these summaries accumulate. For compliance or quality assurance purposes, the chat summaries demonstrate thorough review processes and thoughtful consideration of requirements. They show that specifications weren't blindly implemented but carefully examined and refined through structured dialogue.
+Enhanced traceability emerges naturally from this practice. Future
+developers, whether human or AI, can understand not just what was
+decided, but why certain choices were made. The dialogue that led to
+specific design decisions becomes permanently accessible, preventing the
+loss of context that typically occurs in verbal or transient
+conversations.
 
-The practice of recording these summaries transforms ephemeral conversations into persistent project assets. What might otherwise vanish at session's end becomes documented institutional knowledge, enriching both immediate project understanding and long-term organizational learning.
+Team knowledge building follows as a natural consequence. When multiple
+Product Owners or team members work on related projects, these summaries
+serve as a collective memory. Patterns emerge across projects - common
+pitfalls identified, successful approaches validated, domain
+understanding deepened. The repository becomes not just a code base but
+a knowledge base.
 
-The process concludes only when all phases have been successfully completed and accepted. This ensures no shortcuts compromise quality and that the final product reflects a true partnership between human vision and AI capability.
+Continuity across sessions becomes possible through these documented
+conversations. AI agents, while powerful within a session, don’t
+maintain context between separate engagements. Chat summaries allow new
+agent sessions to rapidly reconstruct understanding by reading previous
+dialogues. Similarly, if a different Agent takes over work, the
+historical summaries provide essential context that would otherwise be
+lost.
 
-### Final documentation check
+A quality audit trail materializes as these summaries accumulate. For
+compliance or quality assurance purposes, the chat summaries demonstrate
+thorough review processes and thoughtful consideration of requirements.
+They show that specifications weren’t blindly implemented but carefully
+examined and refined through structured dialogue.
 
-Each phase is responsible for building own documentation, however at the end one more documentation check phase is executed, what is executed by `agent-documentor` agent.
+The practice of recording these summaries transforms ephemeral
+conversations into persistent project assets. What might otherwise
+vanish at session’s end becomes documented institutional knowledge,
+enriching both immediate project understanding and long-term
+organizational learning.
 
-## Version Control and Git Workflow
+The process concludes only when all phases have been successfully
+completed and accepted. This ensures no shortcuts compromise quality and
+that the final product reflects a true partnership between human vision
+and AI capability.
 
-Version control plays a vital role in the agentic programming collaboration model. Each phase completion after closing its review loop is marked with a commit, creating clear checkpoints in the project history. Similarly, each work session completed by the Agent concludes with a commit, ensuring incremental progress is captured.
+## Final documentation check
 
-The Agent provides detailed commit messages following semantic commit conventions, making the repository history a valuable documentation trail. Project versions follow semantic versioning principles, with version increments tied to accepted phase completions. This approach creates a clear relationship between project milestones and version numbers, allowing both parties to understand the project's evolution at any point in its history.
+Each phase is responsible for building own documentation, however at the
+end one more documentation check phase is executed, what is executed by
+`agent-documentor` agent.
 
-## Key Success Factors
+# Version Control and Git Workflow
 
-In agentic programming, discipline returns - not as bureaucracy, but as the grammar of cooperation between human intent and machine execution. Agentic work without discipline can easily devolve into anarchy - much like 'agile' practices without structure and rules.
+Version control plays a vital role in the agentic programming
+collaboration model. Each phase completion after closing its review loop
+is marked with a commit, creating clear checkpoints in the project
+history. Similarly, each work session completed by the Agent concludes
+with a commit, ensuring incremental progress is captured.
 
-<div align="center">
+The Agent provides detailed commit messages following semantic commit
+conventions, making the repository history a valuable documentation
+trail. Project versions follow semantic versioning principles, with
+version increments tied to accepted phase completions. This approach
+creates a clear relationship between project milestones and version
+numbers, allowing both parties to understand the project’s evolution at
+any point in its history.
 
-![Agile Anarchy](images/agile_anarchy.png)
+# Key Success Factors
 
-*Figure 3: Agile Anarchy (from Stacey Matrix). Source: Strategic Management and Organizational Dynamics by Ralph Stacey in Agile Software Development with Scrum by Ken Schwaber and Mike Beedle.*
+In agentic programming, discipline returns - not as bureaucracy, but as
+the grammar of cooperation between human intent and machine execution.
+Agentic work without discipline can easily devolve into anarchy - much
+like ’agile’ practices without structure and rules.
+
+<div class="text-center" wrapper="1" width="400">
+
+<figure>
+<img src="agile_anarchy.png" alt="Agile Anarchy" />
+</figure>
 
 </div>
 
-Success in this model depends on clear role separation and mutual accountability. The Product Owner maintains authority over specifications and acceptance decisions while providing structured feedback that guides improvement. The Agent takes responsibility for identifying specification gaps, creating quality designs, and delivering well-tested implementations while requesting clarifications when needed.
-
-Documentation serves as the collaboration backbone, creating shared artifacts that both parties can reference and refine. Each document evolves through its review loop, becoming progressively more precise and complete. This documentation trail also provides valuable context for future phases and serves as a record of decisions made throughout the project.
-
-The model's iterative nature acknowledges that perfection rarely emerges on the first attempt. By building in explicit review cycles and structured feedback mechanisms, it creates space for refinement without creating chaos. Both parties know what to expect at each stage and how to communicate effectively when revisions are needed.
-
-In many ways, agentic programming brings software engineering full circle.
-The rigor once reserved for safety-critical systems now becomes necessary for everyday collaboration with autonomous systems.
-
-Agentic programming doesn't reinvent engineering - it reconciles rigor with agility. Structure no longer constrains creativity; it anchors trust between human intent and machine execution.
-
----
-
-## Recent Updates
-
-### Sprint 1 - Prerequisites
-
-**Status:** implemented
-
-**Backlog Items Implemented:**
-- **RSB-1. Prepare tools and techniques**: macOS prerequisites documented - tested
-
-**Key Features Added:**
-- Comprehensive macOS Go development environment setup guide
-- Open-Meteo weather API integration documentation
-- Geocoding API documentation for city name resolution
-- Copy-paste-able installation and testing commands
-- Complete verification checklist
-- Troubleshooting guide
-
-**Documentation:**
-- Implementation: `progress/sprint_1/sprint_1_implementation.md`
-- Tests: `progress/sprint_1/sprint_1_tests.md`
-- Design: `progress/sprint_1/sprint_1_design.md`
-- Analysis: `progress/sprint_1/sprint_1_analysis.md`
-- Prerequisites Guide: `docs/prerequisites.md`
-
-**Usage Examples:**
-
-To get started with the Weather Forecast Application development:
-
-1. Follow the prerequisites guide:
-   ```bash
-   cat docs/prerequisites.md
-   ```
-
-2. Install Go via Homebrew:
-   ```bash
-   brew install go
-   ```
-
-3. Verify installation:
-   ```bash
-   go version
-   ```
-
-4. Test weather API:
-   ```bash
-   curl "https://api.open-meteo.com/v1/forecast?latitude=37.7749&longitude=-122.4194&daily=temperature_2m_max,temperature_2m_min&timezone=auto"
-   ```
-
-See implementation documentation for complete usage examples and verification procedures.
-
----
-
-### Sprint 2 - Weather CLI
-
-**Status:** implemented
-
-**Backlog Items Implemented:**
-- **RSB-2. Create Weather Forecast CLI**: Command-line tool accepting city names or GPS coordinates - tested
-
-**Key Features Added:**
-- Weather CLI with dual input modes (city name and GPS coordinates)
-- Current weather display with human-readable conditions
-- 3-day forecast with max/min temperatures
-- Comprehensive error handling (invalid input, city not found, API errors)
-- Exit codes for proper shell integration (0: success, 1: invalid input, 2: API error)
-- Zero-code-duplication architecture for Sprint 3 REST API reuse
-
-**Architecture Highlights:**
-- **Reusable core package** (`weather/`): API client, data structures, business logic (80% Sprint 3 reuse)
-- **CLI-specific code** (`cli/` and `main.go`): Text formatting and argument parsing (20% CLI-only)
-- Standard library only (zero external dependencies)
-- 10-second HTTP timeout protection
-- Binary size: 8.2 MB
-
-**Documentation:**
-- Implementation: `progress/sprint_2/sprint_2_implementation.md`
-- Tests: `progress/sprint_2/sprint_2_tests.md`
-- Design: `progress/sprint_2/sprint_2_design.md`
-- Analysis: `progress/sprint_2/sprint_2_analysis.md`
-- Contract Review: `progress/sprint_2/sprint_2_contract_review_1.md`
-
-**Usage Examples:**
-
-To use the Weather CLI:
-
-1. Build the CLI:
-   ```bash
-   cd weather-cli
-   go build -o weather-cli
-   ```
-
-2. Get weather by city name:
-   ```bash
-   ./weather-cli "San Francisco"
-   ```
-
-3. Get weather by GPS coordinates:
-   ```bash
-   ./weather-cli "37.7749,-122.4194"
-   ```
-
-4. Display help:
-   ```bash
-   ./weather-cli --help
-   ```
-
-**Sample Output:**
-```
-Weather Forecast
-================
-
-Location: San Francisco, California, United States
-Coordinates: 37.77°N, -122.42°W
-
-Current Weather:
-  Temperature: 15.3°C
-  Conditions: Overcast
-
-3-Day Forecast:
-  2025-11-13: ↑17.4°C ↓12.7°C - Moderate rain
-  2025-11-14: ↑15.2°C ↓10.5°C - Moderate rain
-  2025-11-15: ↑17.5°C ↓9.9°C - Overcast
-```
-
-**Sprint 3 Integration:**
-
-The Weather CLI was architected with explicit zero-code-duplication for Sprint 3 REST API. The reusable `weather/` package will be imported directly by the REST API:
-
-```go
-// Sprint 3 REST API will import Sprint 2 logic:
-import "weather-cli/weather"
-
-func handleCityWeather(w http.ResponseWriter, r *http.Request) {
-    // SAME function as CLI uses:
-    forecast, location, err := weather.GetWeatherForCity(cityName)
-
-    // Different output format (JSON instead of text):
-    json.NewEncoder(w).Encode(forecast)
-}
-```
-
-This architecture ensures Sprint 3 will reuse ~80% of Sprint 2 code with zero duplication.
-
----
-
-### Sprint 3 - Weather REST API
-
-**Status:** implemented
-
-**Backlog Items Implemented:**
-- **RSB-4. Weather forecast exposes REST API**: RESTful HTTP service with JSON responses - tested
-
-**Key Features Added:**
-- REST API server with 3 endpoints
-- JSON-formatted weather data responses
-- City name query support (`/weather/city?name={city}`)
-- GPS coordinates query support (`/weather/coordinates?lat={lat}&lon={lon}`)
-- Service health check endpoint (`/health`)
-- Comprehensive HTTP status codes (200, 400, 404, 500)
-- Error handling with informative JSON error messages
-- Port configuration via environment variable
-- Request logging for debugging
-- **Zero code duplication achieved** - imports Sprint 2 `weather/` package
-
-**Architecture Highlights:**
-- **Sprint 3 NEW code** (`weather-api/main.go`): HTTP server, routing, JSON encoding (~180 lines)
-- **Sprint 2 REUSED package** (`weather-cli/weather`): All weather logic, API calls, data structures (~150 lines)
-- **Result:** 80%+ code reuse, zero duplication of API logic ✅
-- Standard library only (no external HTTP frameworks)
-- Binary size: 8.4 MB
-- Port: 8080 (default, configurable via PORT env var)
-
-**Test Results:**
-- Total Tests: 16
-- Passed: 16
-- Failed: 0
-- Success Rate: 100% ✅
-
-**Documentation:**
-- Implementation: `progress/sprint_3/sprint_3_implementation.md`
-- Tests: `progress/sprint_3/sprint_3_tests.md`
-- Design: `progress/sprint_3/sprint_3_design.md`
-- Analysis: `progress/sprint_3/sprint_3_analysis.md`
-- API Documentation: `weather-api/README.md`
-- Contract Review: `progress/sprint_3/sprint_3_contract_review_1.md`
-- Inception Summary: `progress/sprint_3/sprint_3_inception.md`
-- Elaboration Summary: `progress/sprint_3/sprint_3_elaboration.md`
-- Documentation Summary: `progress/sprint_3/sprint_3_documentation.md`
-
-**Usage Examples:**
-
-1. **Start the REST API server:**
-   ```bash
-   cd weather-api
-   ./weather-api
-   ```
-
-   Expected output:
-   ```
-   Starting weather API server on :8080
-   Endpoints:
-     GET /weather/city?name=<city>
-     GET /weather/coordinates?lat=<lat>&lon=<lon>
-     GET /health
-   ```
-
-2. **Health check:**
-   ```bash
-   curl http://localhost:8080/health
-   ```
-
-   Response:
-   ```json
-   {
-     "status": "healthy",
-     "service": "weather-api",
-     "version": "1.0.0"
-   }
-   ```
-
-3. **Get weather by city name:**
-   ```bash
-   curl "http://localhost:8080/weather/city?name=Tokyo"
-   ```
-
-   Response:
-   ```json
-   {
-     "location": {
-       "name": "Tokyo",
-       "latitude": 35.6895,
-       "longitude": 139.6917,
-       "country": "Japan",
-       "admin1": "Tokyo"
-     },
-     "forecast": {
-       "current": {
-         "temperature_2m": 10.7,
-         "weather_code": 0
-       },
-       "daily": {
-         "time": ["2025-12-07", "2025-12-08", "2025-12-09"],
-         "temperature_2m_max": [14.2, 18.0, 11.4],
-         "temperature_2m_min": [2.5, 4.5, 5.6]
-       }
-     }
-   }
-   ```
-
-4. **Get weather by GPS coordinates:**
-   ```bash
-   curl "http://localhost:8080/weather/coordinates?lat=37.7749&lon=-122.4194"
-   ```
-
-5. **Use custom port:**
-   ```bash
-   PORT=9090 ./weather-api
-   curl http://localhost:9090/health
-   ```
-
-**Zero Code Duplication Verification:**
-
-Sprint 3 successfully imports and reuses Sprint 2's `weather/` package:
-
-```go
-// weather-api/main.go
-import "weather-cli/weather"
-
-func HandleCityWeather(w http.ResponseWriter, r *http.Request) {
-    // EXACT SAME FUNCTION AS CLI USES (zero duplication):
-    forecast, location, err := weather.GetWeatherForCity(cityName)
-
-    // Only difference: JSON output instead of text
-    json.NewEncoder(w).Encode(forecast)
-}
-```
-
-**Sprint 4 Integration:**
-
-Sprint 4 WebUI will consume this REST API via HTTP requests, creating a complete three-tier architecture:
-- **Tier 1:** CLI (Sprint 2) - Command-line interface
-- **Tier 2:** REST API (Sprint 3) - HTTP service
-- **Tier 3:** WebUI (Sprint 4) - Browser interface
-
-All three tiers share the same `weather/` package core, maintaining zero duplication across the entire stack.
-
----
-
+*Figure 3: Agile Anarchy (from Stacey Matrix). Source: Strategic
+Management and Organizational Dynamics by Ralph Stacey in Agile Software
+Development with Scrum by Ken Schwaber and Mike Beedle.*
+
+Success in this model depends on clear role separation and mutual
+accountability. The Product Owner maintains authority over
+specifications and acceptance decisions while providing structured
+feedback that guides improvement. The Agent takes responsibility for
+identifying specification gaps, creating quality designs, and delivering
+well-tested implementations while requesting clarifications when needed.
+
+Documentation serves as the collaboration backbone, creating shared
+artifacts that both parties can reference and refine. Each document
+evolves through its review loop, becoming progressively more precise and
+complete. This documentation trail also provides valuable context for
+future phases and serves as a record of decisions made throughout the
+project.
+
+The model’s iterative nature acknowledges that perfection rarely emerges
+on the first attempt. By building in explicit review cycles and
+structured feedback mechanisms, it creates space for refinement without
+creating chaos. Both parties know what to expect at each stage and how
+to communicate effectively when revisions are needed.
+
+In many ways, agentic programming brings software engineering full
+circle. The rigor once reserved for safety-critical systems now becomes
+necessary for everyday collaboration with autonomous systems.
+
+Agentic programming doesn’t reinvent engineering - it reconciles rigor
+with agility. Structure no longer constrains creativity; it anchors
+trust between human intent and machine execution.
+
+<div class="text-center" wrapper="1">
+
+\###
+
+</div>
