@@ -1,6 +1,6 @@
 = RUP Strikes Back: Agentic Programming Cooperation Model
 :author: Ryszard Styczynski
-:revdate: 2025-11-12
+:revdate: 2025-04-14
 :toc: left
 :toc-title: Table of Contents
 :toclevels: 3
@@ -10,10 +10,10 @@
 
 In the project directory run:
 
-1. git checkout tags/0.1.0
-2. git branch mycode
-2. claude
-3. @AGENTS.md
+1. git checkout tags/2.0.0
+2. git checkout -b mycode
+3. claude
+4. /rup-manager
 
 == Overview
 
@@ -28,6 +28,27 @@ Scrum's emphasis on defined roles and adaptive iteration complements the agentic
 === Project Organization
 
 The collaboration uses structured artifacts: **Backlog** defines what to build, **Plan** organizes work into Sprints (iterations), and **Progress Board** tracks status. Each Sprint progresses through defined states (Planned → Progress → Designed → Implemented → Tested → Done), with execution modes supporting both interactive (managed) and autonomous (YOLO) workflows.
+
+Sprints are configured with:
+
+* **Status**: `Planned`, `Progress`, `Done`
+* **Mode**: `managed` (interactive) or `YOLO` (autonomous)
+* **Test**: `smoke`, `unit`, `integration`, `none` — quality gates for new code
+* **Regression**: `smoke`, `unit`, `integration`, `none` — quality gates for existing code
+
+=== Management Commands (Version 2.0)
+
+Version 2.0 introduces management commands for lifecycle operations:
+
+[source]
+----
+/backlog add|list|prioritize      # Manage backlog items
+/sprint create|start|status|close # Manage sprints
+/bug report|triage|list           # Handle bugs during sprints
+/archive-sprint <N>               # Archive completed sprints
+----
+
+These commands provide structured workflows for backlog item definition, sprint configuration, and bug handling with fold-in/promote policies.
 
 == The Return of Structured Methodology in the Age of AI
 

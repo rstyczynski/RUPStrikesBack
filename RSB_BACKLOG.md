@@ -88,3 +88,9 @@ Test: AGENTS.md lists all commands with usage examples.
 HUMANS.md (Product Owner guide) must document Version 2.0 management commands and updated sprint fields (Test, Regression) to keep it synchronized with AGENTS.md.
 
 Test: HUMANS.md lists all management commands and sprint configuration options.
+
+### RSB-15. docs/README.adoc reflects Version 2.0
+
+Main methodology documentation (docs/README.adoc) must be updated with Version 2.0 references, management commands, and sprint configuration fields (Test, Regression).
+
+Test: README.adoc Quick Start references 2.0, includes management commands, and documents sprint fields.

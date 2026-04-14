@@ -73,3 +73,4 @@ Backlog Items:
 * RSB-12. Testing rules and procedures documentation
 * RSB-13. AGENTS.md documents all management commands
 * RSB-14. HUMANS.md documents all management commands
+* RSB-15. docs/README.adoc reflects Version 2.0
