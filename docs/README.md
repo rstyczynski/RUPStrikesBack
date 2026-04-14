@@ -82,10 +82,9 @@ Sprints are configured with:
 Version 2.0 provides commands for orchestration, phase execution, and
 lifecycle management.
 
-### Orchestration Commands
+### Orchestration Command
 
     /rup-manager                      # Main orchestrator - runs full sprint
-    /rup-cycle                        # Complete RUP cycle execution
 
 ### Phase Commands
 
