@@ -23,7 +23,7 @@ To start working RSB for your project - copy/paste below prompt to Claude Code i
 ----
 Work on this directory / project as main goal, by using agentic instructions and files from RUPStrikesBack project.
 
-How to proceed - all instructions, rules, etc. are taken from RUPStrikesBack. Add RUPStrikesBack `https://github.com/rstyczynski/RUPStrikesBack.git` as a submodule, refresh if needed (git submodule update --remote), and copy AGENTS.md and HUMANS.md from RUPStrikesBack to root of this repository. Then run `@RUPStrikesBack/.claude/commands/rup-manager.md`.
+How to proceed - all instructions, rules, etc. are taken from RUPStrikesBack. Add RUPStrikesBack `https://github.com/rstyczynski/RUPStrikesBack.git` as a submodule, refresh if needed (git submodule update --remote), and copy AGENTS_SUBMODULE.md and HUMANS_SUBMODULE.md from RUPStrikesBack to root of this repository as AGENTS.md and HUMANS.md (remove _SUBMODULE suffix). Then run `@RUPStrikesBack/.claude/commands/rup-manager.md`.
 
 Initialize git in the directory if needed and push to github with the name of directory as private repository. If the repository exist create a branch for this session.
 
