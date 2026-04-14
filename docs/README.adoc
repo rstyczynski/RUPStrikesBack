@@ -201,7 +201,7 @@ flowchart LR
 
 === Construction Phase
 
-The construction phase brings the design to life. The Product Owner requests `implementation`, and the Agent builds the solution while ensuring comprehensive test coverage. This includes functional unit tests to verify behavior, performance tests to ensure efficiency, and crash or overload tests to validate robustness. When the Product Owner reviews the implementation, any issues discovered are documented by updating the design chapter, creating traceability between problems and their context. The Agent addresses these issues, and the review cycle continues until the Product Owner accepts the delivered product.
+The construction phase brings the design to life. The Product Owner requests `implementation`, and the Agent builds the solution following the test specifications created during Elaboration. The Constructor fills in test skeletons but does NOT create new test cases - tests were already specified in the Design phase. When implementation is complete, the code proceeds to Quality Gates for validation.
 
 [mermaid, format=svg]
 ----
@@ -212,19 +212,87 @@ flowchart LR
         direction LR
         Co1[Product Owner<br/>requests<br/>implementation]
         Co2[Agent<br/>implements]
-        Co3[Product Owner<br/>reviews<br/>implementation]
-        Co4{Product<br/>accepted?}
+        Co3[Agent fills<br/>test skeletons]
+        Co4{Implementation<br/>complete?}
 
         Co1 --> Co2 --> Co3 --> Co4
         Co4 -->|no| Co2
     end
 
-    Co4 -->|yes| Final{All phases<br/>implemented?}
-    Final -->|no| Back([Return to Inception])
-    Final -->|yes| End([Project Finished])
+    Co4 -->|yes| Next([Continue to Quality Gates])
 
     style Construction fill:#d1ecf1
     style Co2 fill:#ffcccc
+    style Co3 fill:#ffcccc
+----
+
+=== Quality Gates Phase
+
+The Quality Gates phase validates the implementation through automated testing. This phase executes two categories of tests based on Sprint configuration: **New-Code Gates (A1-A3)** run tests specified in the `Test:` parameter, and **Regression Gates (B1-B3)** run tests specified in the `Regression:` parameter. If tests fail, the Agent fixes the code and re-runs the failing gate - this fix-and-retry loop continues until all gates pass or retry limits are reached.
+
+[mermaid, format=svg]
+----
+flowchart LR
+    From([From Construction]) --> Q1
+
+    subgraph QualityGates["<b>QUALITY GATES PHASE</b>"]
+        direction LR
+        Q1[Run New-Code<br/>Gates A1-A3]
+        Q2{Gates<br/>pass?}
+        Q3[Run Regression<br/>Gates B1-B3]
+        Q4{Gates<br/>pass?}
+        Q5[Fix code]
+
+        Q1 --> Q2
+        Q2 -->|no| Q5
+        Q5 --> Q1
+        Q2 -->|yes| Q3
+        Q3 --> Q4
+        Q4 -->|no| Q5
+    end
+
+    Q4 -->|yes| Next([Continue to Wrap-up])
+
+    style QualityGates fill:#f8d7da
+    style Q1 fill:#ffcccc
+    style Q3 fill:#ffcccc
+    style Q5 fill:#ffcccc
+----
+
+Test levels configurable per Sprint in `PLAN.md`:
+
+* **A1/B1 Smoke**: Quick sanity checks
+* **A2/B2 Unit**: Component-level tests
+* **A3/B3 Integration**: End-to-end tests
+
+=== Wrap-up Phase
+
+The Wrap-up phase finalizes documentation and ensures traceability. The Documentor agent validates that README is updated with new features, all progress files are complete, and the Sprint can be marked as Done. This phase runs even if Quality Gates failed (to document the failure).
+
+[mermaid, format=svg]
+----
+flowchart LR
+    From([From Quality Gates]) --> W1
+
+    subgraph Wrapup["<b>WRAP-UP PHASE</b>"]
+        direction LR
+        W1[Documentor<br/>validates docs]
+        W2[Update README<br/>with changes]
+        W3[Complete<br/>progress files]
+        W4{Documentation<br/>complete?}
+
+        W1 --> W2 --> W3 --> W4
+        W4 -->|no| W1
+    end
+
+    W4 -->|yes| Final{All phases<br/>implemented?}
+    Final -->|no| Back([Return to Inception])
+    Final -->|yes| End([Project Finished])
+
+    style Wrapup fill:#d4edda
+    style W1 fill:#ffcccc
+    style W2 fill:#ffcccc
+    style W3 fill:#ffcccc
 ----
 
 === Phase Integration
@@ -237,10 +305,12 @@ An essential practice within each review loop is capturing chat summaries as pro
 
 Chat summaries are committed to the repository as markdown files in `progress/sprint_<id>/` directories, organized by phase e.g.:
 
-* `progress/sprint_15/sprint_15_contract.md`, 
-* `progress/sprint_15/sprint_15_analysis.md`,
-* `progress/sprint_15/sprint_15_design.md`,
-* `progress/sprint_15/sprint_15_implementation.md`. 
+* `progress/sprint_15/sprint_15_setup.md` (Contracting + Inception)
+* `progress/sprint_15/sprint_15_design.md` (Elaboration + Test Specification)
+* `progress/sprint_15/sprint_15_implementation.md` (Construction)
+* `progress/sprint_15/sprint_15_tests.md` (Quality Gates)
+* `progress/sprint_15/sprint_15_bugs.md` (Bug tracking)
+* `progress/sprint_15/sprint_15_documentation.md` (Wrap-up) 
 
 This creates a living knowledge base that provides several critical benefits.
 
