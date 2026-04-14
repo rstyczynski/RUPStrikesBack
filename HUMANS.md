@@ -23,6 +23,27 @@ Welcome! This document is your starting point as a Product Owner or operator man
 5. Mark next Sprint as "Progress" when ready
 ```
 
+## Management Commands (Version 2.0)
+
+Use these commands to manage your project lifecycle:
+
+```
+/backlog add <title>              # Add new backlog item
+/backlog list [--status <status>] # List items (filtered)
+/backlog prioritize               # Reorder items
+
+/sprint create [<N>]              # Create new sprint
+/sprint start [<N>]               # Start sprint (Planned → Progress)
+/sprint status [<N>]              # Show sprint status
+/sprint close [<N>]               # Close sprint after gates pass
+
+/bug report <title>               # Report bug during sprint
+/bug triage [<BUG-ID>]            # Evaluate for promotion
+/bug list [--sprint <N>]          # List bugs
+
+/archive-sprint <N>               # Archive completed sprint
+```
+
 ## Your Role
 
 ### Files You Own and Modify
@@ -82,18 +103,27 @@ You control agent autonomy by setting the Mode field in each Sprint section of `
 - All decisions logged in documentation
 - Recommended for routine/low-risk work
 
-**How to Set Mode:**
+**How to Configure Sprint:**
 
 Edit PLAN.md for your Sprint:
 ```markdown
 ## Sprint 20
 
 Status: Progress
-Mode: YOLO          ← Add this line for autonomous mode
+Mode: YOLO                    # managed (default) or YOLO
+Test: unit, integration       # smoke, unit, integration, none
+Regression: unit              # smoke, unit, integration, none
 
 Backlog Items:
 * GH-27. Feature implementation
 ```
+
+| Field | Values | Default |
+|-------|--------|---------|
+| Status | `Planned`, `Progress`, `Done` | `Planned` |
+| Mode | `managed`, `YOLO` | `managed` |
+| Test | `smoke`, `unit`, `integration`, `none` | `unit, integration` |
+| Regression | `smoke`, `unit`, `integration`, `none` | `unit, integration` |
 
 **Audit Trail:**
 The Mode field creates a permanent git record showing which sprints were autonomous vs supervised - important for compliance and retrospectives.

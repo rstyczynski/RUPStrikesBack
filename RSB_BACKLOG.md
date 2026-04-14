@@ -82,3 +82,9 @@ Test: All testing documents exist in `rules/generic/` and are referenced by agen
 AGENTS.md must document all available commands including Version 2.0 management commands: `/backlog`, `/sprint`, `/bug`, and `/archive-sprint`.
 
 Test: AGENTS.md lists all commands with usage examples.
+
+### RSB-14. HUMANS.md documents all management commands
+
+HUMANS.md (Product Owner guide) must document Version 2.0 management commands and updated sprint fields (Test, Regression) to keep it synchronized with AGENTS.md.
+
+Test: HUMANS.md lists all management commands and sprint configuration options.

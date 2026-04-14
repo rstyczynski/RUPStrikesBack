@@ -72,3 +72,4 @@ Backlog Items:
 * RSB-11. Sprint archiving
 * RSB-12. Testing rules and procedures documentation
 * RSB-13. AGENTS.md documents all management commands
+* RSB-14. HUMANS.md documents all management commands
