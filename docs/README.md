@@ -93,7 +93,6 @@ lifecycle management.
     /elaboration                      # Phase 2: Design + test specification
     /construction                     # Phase 3: Implementation
     /documentation                    # Phase 5: Wrap-up
-    /feedback_loop                    # Interactive feedback cycle
 
 ### Management Commands
 
