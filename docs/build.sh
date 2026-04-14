@@ -92,6 +92,23 @@ else
     exit 1
 fi
 
+# Fix image paths in Markdown (pandoc doesn't handle asciidoc imagesdir)
+echo "Fixing image paths in README.md..."
+# Fix HTML img tags: src="image.png" -> src="images/image.png"
+sed -i '' 's|src="\([^"/]*\.png\)"|src="images/\1"|g' README.md
+sed -i '' 's|src="\([^"/]*\.svg\)"|src="images/\1"|g' README.md
+# Fix markdown image syntax: ![alt](image.png) -> ![alt](images/image.png)
+sed -i '' 's|](\([^/)]*\.png\))|](images/\1)|g' README.md
+sed -i '' 's|](\([^/)]*\.svg\))|](images/\1)|g' README.md
+echo "✓ Image paths fixed"
+
+# Fix mermaid code blocks for GitHub rendering
+echo "Fixing mermaid diagrams for GitHub..."
+# Replace code blocks containing flowchart with mermaid language tag
+perl -i -0pe 's/```\nflowchart/```mermaid\nflowchart/g' README.md
+perl -i -0pe 's/```text\nflowchart/```mermaid\nflowchart/g' README.md
+echo "✓ Mermaid diagrams fixed"
+
 echo
 echo "✓ Build complete!"
 echo "  HTML output: README.html"

@@ -100,7 +100,7 @@ human-to-AI collaboration.
 <div class="text-center" wrapper="1" width="600">
 
 <figure>
-<img src="Development-iterative.png"
+<img src="images/Development-iterative.png"
 alt="Iterative and incremental software development" />
 </figure>
 
@@ -221,7 +221,7 @@ collaboration paradigm.
 <div class="text-center" wrapper="1" width="400">
 
 <figure>
-<img src="oum_scrum_xp.png" alt="RUP" />
+<img src="images/oum_scrum_xp.png" alt="RUP" />
 </figure>
 
 </div>
@@ -246,7 +246,7 @@ The Agent reviews this specification and either accepts it or points out
 unclear or problematic elements. This back-and-forth continues until
 both parties have a shared understanding of the collaboration framework.
 
-```
+```mermaid
 flowchart LR
     Start([Project Started]) --> C1
 
@@ -282,7 +282,7 @@ another for clarification requests. This structured feedback helps the
 Product Owner refine the requirements until they’re clear, complete, and
 implementable.
 
-```
+```mermaid
 flowchart LR
     From([From Contracting]) --> I1
 
@@ -316,7 +316,7 @@ and ensures the Agent understands exactly what modifications are
 required. The cycle continues until the Product Owner accepts the
 proposed approach.
 
-```
+```mermaid
 flowchart LR
     From([From Inception]) --> E1
 
@@ -349,7 +349,7 @@ updating the design chapter, creating traceability between problems and
 their context. The Agent addresses these issues, and the review cycle
 continues until the Product Owner accepts the delivered product.
 
-```
+```mermaid
 flowchart LR
     From([From Elaboration]) --> Co1
 
@@ -477,7 +477,7 @@ like ’agile’ practices without structure and rules.
 <div class="text-center" wrapper="1" width="400">
 
 <figure>
-<img src="agile_anarchy.png" alt="Agile Anarchy" />
+<img src="images/agile_anarchy.png" alt="Agile Anarchy" />
 </figure>
 
 </div>
