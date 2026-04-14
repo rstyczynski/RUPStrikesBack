@@ -446,6 +446,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#_tltr">TLTR</a></li>
+<li><a href="#_make_rupstrikesback_working_for_your_project">Make RUPStrikesBack working for your project</a></li>
 <li><a href="#_overview">Overview</a>
 <ul class="sectlevel2">
 <li><a href="#_project_organization">Project Organization</a></li>
@@ -496,6 +497,25 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>/rup-manager</p>
 </li>
 </ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_make_rupstrikesback_working_for_your_project">Make RUPStrikesBack working for your project</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To start working RSB for your project - copy/paste below prompt to Claude Code in repository. No worries with missing plan/backlog - RSB will create templates for you.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>Work on this directory / project as main goal, by using agentic instructions and files from RUPStrikesBack project.
+
+How to proceed - all instructions, rules, etc. are taken from RUPStrikesBack. Add RUPStrikesBack `https://github.com/rstyczynski/RUPStrikesBack.git` as a submodule, refresh if needed (git submodule update --remote), and run `@RUPStrikesBack/.claude/commands/rup-manager.md`.
+
+Initialize git in the directory if needed and push to github with the name of directory as private repository. If the repository exist create a branch for this session.
+
+What have to be done is defined in `BACKLOG.md` with iterations defined in `PLAN.md`. If these files do not exist - create template files for me and stop waiting for goals to be defined. IMPORTANT: Do NOT invent any formats or templates. ALL formats, templates, rules, and procedures MUST come from RUPStrikesBack. First step is ALWAYS to examine RUPStrikesBack for the correct approach. Do not create any other files on this stage! Especially do not create `PROGRESS_BOARD.md` which will be created later.</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -821,7 +841,7 @@ The rigor once reserved for safety-critical systems now becomes necessary for ev
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-04-14 10:48:34 +0200
+Last updated 2026-04-14 10:58:44 +0200
 </div>
 </div>
 </body>
