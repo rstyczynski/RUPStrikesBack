@@ -72,7 +72,7 @@ Interestingly, this model resurrects principles from the Rational Unified Proces
 However, working with AI agents creates a fundamentally different dynamic that makes RUP-like structure surprisingly relevant again. When collaborating with an AI, explicit documentation isn't bureaucratic overhead - it's the primary communication medium. Unlike human team members who can infer context, understand implicit requirements, and course-correct through casual conversation, AI agents require precision and explicitness to function effectively. The formality that seemed excessive in human-to-human collaboration becomes essential in human-to-AI collaboration.
 
 [.text-center]
-image::Development-iterative.png[Iterative and incremental software development, width=600]
+image::Development-iterative.png[Iterative and incremental software development, width=450]
 _Figure 1: Iterative development cycle. Structured methods like RUP bring formal review loops to every phase, providing clear gates for human-AI collaboration._
 
 The phase names themselves - `Inception`, `Elaboration`, `Construction` - echo RUP deliberately. This isn't coincidence but recognition that these phases represent natural boundaries in the design and development process. What's different is the addition of the Contracting phase, which has no direct RUP equivalent. This phase acknowledges that before any project work begins, the human and AI must establish a shared understanding of how they'll work together. This meta-level agreement about collaboration protocols, documentation standards, and feedback mechanisms creates the foundation for effective partnership.
@@ -112,7 +112,7 @@ This multi-layer synthesis integrates structure, adaptability, and collaboration
 The following diagram illustrates this vision — how structured, team, and individual-level methodologies align naturally within the agentic collaboration paradigm.
 
 [.text-center]
-image::oum_scrum_xp.png[RUP, Scrum, and XP combined together, width=400]
+image::oum_scrum_xp.png[RUP, Scrum, and XP combined together, width=300]
 _Figure 2: The 2008 vision of combining methodologies at different levels - now realized through human-AI collaboration_
 
 == The Collaboration Journey
@@ -341,7 +341,7 @@ The Agent provides detailed commit messages following semantic commit convention
 In agentic programming, discipline returns - not as bureaucracy, but as the grammar of cooperation between human intent and machine execution. Agentic work without discipline can easily devolve into anarchy - much like 'agile' practices without structure and rules.
 
 [.text-center]
-image::agile_anarchy.png[Agile Anarchy, width=400]
+image::agile_anarchy.png[Agile Anarchy, width=300]
 _Figure 3: Agile Anarchy (from Stacey Matrix). Source: Strategic Management and Organizational Dynamics by Ralph Stacey in Agile Software Development with Scrum by Ken Schwaber and Mike Beedle._
 
 Success in this model depends on clear role separation and mutual accountability. The Product Owner maintains authority over specifications and acceptance decisions while providing structured feedback that guides improvement. The Agent takes responsibility for identifying specification gaps, creating quality designs, and delivering well-tested implementations while requesting clarifications when needed.

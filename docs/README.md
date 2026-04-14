@@ -111,7 +111,7 @@ and explicitness to function effectively. The formality that seemed
 excessive in human-to-human collaboration becomes essential in
 human-to-AI collaboration.
 
-<div class="text-center" wrapper="1" width="600">
+<div class="text-center" wrapper="1" width="450">
 
 <figure>
 <img src="images/Development-iterative.png"
@@ -232,7 +232,7 @@ The following diagram illustrates this vision — how structured, team,
 and individual-level methodologies align naturally within the agentic
 collaboration paradigm.
 
-<div class="text-center" wrapper="1" width="400">
+<div class="text-center" wrapper="1" width="300">
 
 <figure>
 <img src="images/oum_scrum_xp.png" alt="RUP" />
@@ -567,7 +567,7 @@ the grammar of cooperation between human intent and machine execution.
 Agentic work without discipline can easily devolve into anarchy - much
 like ’agile’ practices without structure and rules.
 
-<div class="text-center" wrapper="1" width="400">
+<div class="text-center" wrapper="1" width="300">
 
 <figure>
 <img src="images/agile_anarchy.png" alt="Agile Anarchy" />
