@@ -77,9 +77,26 @@ Sprints are configured with:
 - **Regression**: `smoke`, `unit`, `integration`, `none` — quality gates
   for existing code
 
-## Management Commands (Version 2.0)
+## Commands (Version 2.0)
 
-Version 2.0 introduces management commands for lifecycle operations:
+Version 2.0 provides commands for orchestration, phase execution, and
+lifecycle management.
+
+### Orchestration Commands
+
+    /rup-manager                      # Main orchestrator - runs full sprint
+    /rup-cycle                        # Complete RUP cycle execution
+
+### Phase Commands
+
+    /contract                         # Phase 1: Contracting (setup)
+    /inception                        # Phase 1: Inception (analysis)
+    /elaboration                      # Phase 2: Design + test specification
+    /construction                     # Phase 3: Implementation
+    /documentation                    # Phase 5: Wrap-up
+    /feedback_loop                    # Interactive feedback cycle
+
+### Management Commands
 
     /backlog add|list|prioritize      # Manage backlog items
     /sprint create|start|status|close # Manage sprints

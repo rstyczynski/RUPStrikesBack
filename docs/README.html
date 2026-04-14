@@ -450,7 +450,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_overview">Overview</a>
 <ul class="sectlevel2">
 <li><a href="#_project_organization">Project Organization</a></li>
-<li><a href="#_management_commands_version_2_0">Management Commands (Version 2.0)</a></li>
+<li><a href="#_commands_version_2_0">Commands (Version 2.0)</a>
+<ul class="sectlevel3">
+<li><a href="#_orchestration_commands">Orchestration Commands</a></li>
+<li><a href="#_phase_commands">Phase Commands</a></li>
+<li><a href="#_management_commands">Management Commands</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#_the_return_of_structured_methodology_in_the_age_of_ai">The Return of Structured Methodology in the Age of AI</a></li>
@@ -562,10 +568,34 @@ What have to be done is defined in `BACKLOG.md` with iterations defined in `PLAN
 </div>
 </div>
 <div class="sect2">
-<h3 id="_management_commands_version_2_0">Management Commands (Version 2.0)</h3>
+<h3 id="_commands_version_2_0">Commands (Version 2.0)</h3>
 <div class="paragraph">
-<p>Version 2.0 introduces management commands for lifecycle operations:</p>
+<p>Version 2.0 provides commands for orchestration, phase execution, and lifecycle management.</p>
 </div>
+<div class="sect3">
+<h4 id="_orchestration_commands">Orchestration Commands</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>/rup-manager                      # Main orchestrator - runs full sprint
+/rup-cycle                        # Complete RUP cycle execution</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_phase_commands">Phase Commands</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>/contract                         # Phase 1: Contracting (setup)
+/inception                        # Phase 1: Inception (analysis)
+/elaboration                      # Phase 2: Design + test specification
+/construction                     # Phase 3: Implementation
+/documentation                    # Phase 5: Wrap-up
+/feedback_loop                    # Interactive feedback cycle</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_management_commands">Management Commands</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code>/backlog add|list|prioritize      # Manage backlog items
@@ -576,6 +606,7 @@ What have to be done is defined in `BACKLOG.md` with iterations defined in `PLAN
 </div>
 <div class="paragraph">
 <p>These commands provide structured workflows for backlog item definition, sprint configuration, and bug handling with fold-in/promote policies.</p>
+</div>
 </div>
 </div>
 </div>
@@ -887,7 +918,7 @@ The rigor once reserved for safety-critical systems now becomes necessary for ev
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-04-14 11:06:11 +0200
+Last updated 2026-04-14 11:11:26 +0200
 </div>
 </div>
 </body>
