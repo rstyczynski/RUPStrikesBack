@@ -109,9 +109,9 @@ perl -i -0pe 's/```\nflowchart/```mermaid\nflowchart/g' README.md
 perl -i -0pe 's/```text\nflowchart/```mermaid\nflowchart/g' README.md
 echo "✓ Mermaid diagrams fixed"
 
-# Fix image widths (pandoc doesn't preserve asciidoc width attribute)
+# Fix image widths and centering (pandoc doesn't preserve asciidoc attributes)
 # Extract width from asciidoc and apply to markdown
-echo "Fixing image widths..."
+echo "Fixing image widths and centering..."
 grep -o 'image::[^[]*\[[^]]*width=[0-9]*' README.adoc | while read line; do
     # Extract filename and width from asciidoc image directive
     filename=$(echo "$line" | sed 's/image::\([^[]*\)\[.*/\1/')
@@ -121,7 +121,9 @@ grep -o 'image::[^[]*\[[^]]*width=[0-9]*' README.adoc | while read line; do
         sed -i '' "s|src=\"images/${filename}\"|src=\"images/${filename}\" width=\"${width}\"|g" README.md
     fi
 done
-echo "✓ Image widths fixed"
+# Center images using GitHub-compatible alignment
+sed -i '' 's|<div class="text-center"[^>]*>|<div align="center">|g' README.md
+echo "✓ Image widths and centering fixed"
 
 echo
 echo "✓ Build complete!"
