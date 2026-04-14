@@ -75,6 +75,35 @@ Problem to clarify: None
 Answer: None
 ```
 
+## Artifact Definitions
+
+The following rule files define the format and constraints for key artifacts:
+
+| Artifact | Rule File | Purpose |
+|----------|-----------|---------|
+| Backlog Item | `rules/generic/backlog_item_definition.md` | What/why format, no design details |
+| Sprint | `rules/generic/sprint_definition.md` | Required Test/Regression fields |
+| Bug | `rules/generic/bug_policy.md` | Fold-in vs promote criteria |
+
+## Test-First Quality Gates
+
+Sprints require explicit test parameters:
+
+| Parameter | Values | Default |
+|-----------|--------|---------|
+| `Test:` | `smoke`, `unit`, `integration`, `none` | `unit, integration` |
+| `Regression:` | `smoke`, `unit`, `integration`, `none` | `unit, integration` |
+| `Regression scope:` | component name | (full suite) |
+
+Related rule files:
+
+| Rule File | Purpose |
+|-----------|---------|
+| `rules/generic/testing_strategy_template.md` | Designer's testing strategy template |
+| `rules/generic/test_procedures.md` | Test Architect + Executor procedures |
+| `rules/generic/test_failure_classification.md` | Flaky vs broken handling |
+| `rules/generic/test_migration.md` | Migrating tests to centralized structure |
+
 ## Execution Modes
 
 The RUP process supports two execution modes configured in `PLAN.md`:
@@ -200,9 +229,13 @@ Progress board is a table showing sprint, and backlog items state. It's the only
 - `analysed` - Analysis complete
 - `under_design` - Design in progress
 - `designed` - Design approved
+- `test_specified` - Test specs and skeletons written, ready for construction
 - `under_construction` - Implementation in progress
+- `smoke_passed` - Smoke tests pass; build is testable
+- `unit_tested` - All unit tests pass (old + new)
+- `integration_tested` - All integration tests pass (old + new)
 - `implemented` - Code complete
-- `tested` - Tests passed
+- `tested` - All quality gates passed
 - `failed` - Failed after attempts
 
 **Update Rules:**
@@ -217,79 +250,71 @@ The PROGRESS_BOARD.md uses granular real-time states, while PLAN.md maintains hi
 
 ## Cooperation flow
 
-The RUP process follows a 5-phase workflow:
+The RUP process follows a 5-phase workflow with test-first quality gates:
 
-### Phase 1: Contracting
+### Phase 1: Setup (Contracting + Inception)
 
-1. Contractor Agent reviews project scope (`BACKLOG.md`)
-2. Reviews implementation plan (`PLAN.md`)
-3. Reviews all rules in `rules/generic` and `rules/specific` directories
-4. Confirms understanding of cooperation rules
-5. Documents any unclear points or conflicts
-6. Creates contracting summary and commits
+1. Review project scope (`BACKLOG.md`) and plan (`PLAN.md`)
+2. Review all rules in `rules/generic` and `rules/specific` directories
+3. Analyze Backlog Items assigned to Sprint
+4. Review previous Sprint artifacts for compatibility
+5. Updates PROGRESS_BOARD.md with `under_analysis` status
+6. Create combined setup document and commit
 
-**Output:** `progress/sprint_${no}/sprint_${no}_contract_review_${cnt}.md`
+**Output:** `progress/sprint_${no}/sprint_${no}_setup.md` (contains Contract + Analysis sections)
 
-### Phase 2: Inception (Analysis)
+### Phase 2: Design + Test Specification
 
-1. Analyst Agent identifies active Sprint(s) with status `Progress`
-2. Analyzes Backlog Items assigned to Sprint
-3. Reviews previous Sprint artifacts for compatibility
-4. Updates PROGRESS_BOARD.md with `under_analysis` status
-5. Creates analysis document
-6. Confirms readiness for design or requests clarification
-7. Commits analysis and inception review
-
-**Outputs:**
-
-- `progress/sprint_${no}/sprint_${no}_analysis.md`
-- `progress/sprint_${no}/sprint_${no}_inception_review_${cnt}.md`
-
-### Phase 3: Elaboration (Design)
-
-1. Designer Agent reviews analysis from Inception
+1. Designer Agent reviews analysis from Phase 1
 2. Creates detailed technical design for each Backlog Item
 3. Performs feasibility analysis against available APIs
-4. Updates PROGRESS_BOARD.md with `under_design` status
-5. Sets design Status to `Proposed`
-6. **Waits for Product Owner approval** (Status changed to `Accepted`)
-7. Creates elaboration summary and commits
+4. **Creates Testing Strategy section** (see `rules/generic/testing_strategy_template.md`)
+5. Test Architect creates test specifications and skeletons
+6. Updates PROGRESS_BOARD.md: `under_design` → `designed` → `test_specified`
+7. **YOLO mode:** Self-approve; **Managed mode:** Wait for approval
+8. Commits design, test spec, and test skeletons
 
 **Outputs:**
 
-- `progress/sprint_${no}/sprint_${no}_design.md`
-- `progress/sprint_${no}/sprint_${no}_elaboration_review_${cnt}.md`
+- `progress/sprint_${no}/sprint_${no}_design.md` (includes `## Test Specification`)
+- `progress/sprint_${no}/new_tests.manifest`
+- Test skeletons in `tests/smoke/`, `tests/unit/`, `tests/integration/`
 
-### Phase 4: Construction (Implementation)
+### Phase 3: Construction
 
 1. Constructor Agent reviews approved design
 2. Updates PROGRESS_BOARD.md to `under_construction`
 3. Implements code based on design specifications
-4. Creates functional tests (copy-paste-able sequences)
-5. Executes test loop (up to 10 attempts per failing test)
-6. Documents implementation with user-facing documentation
-7. Updates PROGRESS_BOARD.md with final statuses (`tested`, `implemented`, or `failed`)
-8. Commits implementation, tests, and documentation
+4. **Fills in test skeletons** (does NOT create new tests)
+5. Commits implementation
+
+**Output:** `progress/sprint_${no}/sprint_${no}_implementation.md`
+
+### Phase 4: Quality Gates
+
+1. Test Executor runs quality gates using `tests/run.sh`
+2. **Phase A (New-Code):** Run tests from `new_tests.manifest` (A1 smoke → A2 unit → A3 integration)
+3. **Phase B (Regression):** Run full suite at specified levels (B1 smoke → B2 unit → B3 integration)
+4. On failure: hand report to Constructor, fix, re-run (up to 10 retries)
+5. Updates PROGRESS_BOARD.md: `smoke_passed` → `unit_tested` → `integration_tested` → `tested`
+6. Commits test logs and results
 
 **Outputs:**
 
-- Code artifacts (scripts, tools, files)
-- `progress/sprint_${no}/sprint_${no}_implementation.md`
 - `progress/sprint_${no}/sprint_${no}_tests.md`
+- `progress/sprint_${no}/test_run_*.log` (timestamped logs per gate)
 
-### Phase 5: Documentation
+### Phase 5: Wrap-up (Documentation)
 
 1. Documentor Agent validates all Sprint documentation
 2. Verifies code snippets are copy-paste-able (no `exit` commands)
-3. Checks documentation consistency
-4. Creates symbolic links in `progress/backlog/` for traceability
-5. Updates `README.md` with recent developments
-6. Creates documentation summary and commits
+3. Creates symbolic links in `progress/backlog/` for traceability
+4. Updates `README.md` with recent developments
+5. Commits documentation updates
 
 **Outputs:**
 
 - Updated `README.md`
-- `progress/sprint_${no}/sprint_${no}_documentation.md`
 - Symbolic links in `progress/backlog/${BACKLOG_ITEM_ID}/`
 
 ## Chapter editing rules
@@ -414,7 +439,39 @@ Status: Progress
 Design details for <Backlog Item B>
 ```
 
+## Management Skills
+
+The following skills are available for artifact management outside the RUP cycle:
+
+| Skill | Purpose | Operations |
+|-------|---------|------------|
+| `/backlog` | Manage backlog items | `add`, `list`, `prioritize` |
+| `/sprint` | Manage sprints | `create`, `status`, `start`, `close` |
+| `/bug` | Handle bugs during sprints | `report`, `triage`, `list` |
+
+These skills enforce the format constraints defined in the corresponding rule files.
+
 ## Testing
+
+### Centralized Test Structure
+
+All executable tests live in `tests/` at the repo root:
+
+```
+tests/
+├── smoke/           # Quick critical checks
+├── unit/            # Function-level tests
+├── integration/     # End-to-end tests
+├── manifests/       # Component test registries
+│   └── component_*.manifest
+└── run.sh           # Test runner entry point
+```
+
+**Principles:**
+
+- One file per component/domain, NOT per sprint
+- New test cases are appended to existing files
+- `run.sh` is the single entry point (`--smoke`, `--unit`, `--integration`)
 
 ### General Testing Requirements
 

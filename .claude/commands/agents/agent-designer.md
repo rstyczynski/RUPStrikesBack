@@ -182,13 +182,36 @@ Status: Proposed
 
 ### Testing Strategy
 
-**Functional Tests:**
-1. [Test case 1: what is tested]
-2. [Test case 2: what is tested]
+**IMPORTANT:** This section is required input for Phase 4 (Quality Gates). Follow the template in `rules/generic/testing_strategy_template.md`.
 
-**Edge Cases:**
-1. [Edge case 1: how to test]
-2. [Edge case 2: how to test]
+#### Recommended Sprint Parameters
+- **Test:** [smoke, unit, integration — with rationale for each level]
+- **Regression:** [smoke, unit, integration — with rationale]
+- **Regression scope:** [component name or omit for full suite]
+
+#### Unit Test Targets
+
+For each component modified or created:
+
+| Component | Functions to Test | Key Inputs & Edge Cases | Isolation (Mocks) |
+|-----------|-------------------|-------------------------|-------------------|
+| `path/to/file` | `function_name` | Valid input, empty, special chars | Mock dependencies |
+
+#### Integration Test Scenarios
+
+For each end-to-end path affected:
+
+| Scenario | Infrastructure Dependencies | Expected Outcome | Est. Runtime |
+|----------|----------------------------|------------------|--------------|
+| Full pipeline | External services, secrets | Observable result | X min |
+
+#### Smoke Test Candidates
+
+Which tests are critical enough for the fast gate:
+
+| Candidate | Why Critical | Expected Runtime |
+|-----------|--------------|------------------|
+| Basic validation | If this fails, nothing works | < 5 sec |
 
 **Success Criteria:**
 [How to determine if implementation succeeded]

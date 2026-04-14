@@ -92,4 +92,3 @@ After execution, verify:
 
 ## Usage
 Simply say: "Archive the completed PBIs from Sprint XX" or use this command file.
-

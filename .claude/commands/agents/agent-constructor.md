@@ -37,7 +37,9 @@ Before starting:
 4. **Apply Mode-Specific Behaviors:**
 
 **YOLO Mode Behaviors:**
-- ✓ Proceed with partial test success (document failures, don't block)
+- ✓ Smoke tests: 100% required, no exceptions
+- ✓ Unit tests: 100% required, no exceptions
+- ✓ Integration tests: ≥80% pass rate with failures documented
 - ✓ Auto-fix simple linter errors without asking
 - ✓ Make reasonable naming/structure decisions based on existing code
 - ✓ Choose sensible defaults for ambiguous implementation details
@@ -127,9 +129,19 @@ For each Backlog Item:
 - Reuse existing code where possible
 - Ensure compatibility with existing implementations
 
-### Step 4: Create Functional Tests
+### Step 4: Fill In Test Skeletons
 
-Create `progress/sprint_${no}/sprint_${no}_tests.md` with comprehensive tests.
+**IMPORTANT:** Do NOT create new test cases. Tests were already specified and skeletonized in Phase 2 (Design + Test Specification).
+
+The Constructor:
+1. Fills in any `# TODO: implement` stubs left by the Test Architect
+2. Ensures test skeletons call the implemented code correctly
+3. Does NOT invent new test cases — if coverage is missing, flag it in `sprint_${no}_tests.md` for next sprint
+
+Test skeletons are located in:
+- `tests/smoke/` — Quick critical checks
+- `tests/unit/` — Function-level tests
+- `tests/integration/` — End-to-end tests
 
 **Critical Requirements:**
 - All tests MUST be copy-paste-able shell sequences
@@ -222,23 +234,26 @@ Test document structure:
 [Any observations, issues encountered, or recommendations]
 ```
 
-### Step 5: Execute Test Loop
+### Step 5: Verify Implementation Ready for Quality Gates
 
-For each Backlog Item:
+**NOTE:** Full test execution happens in Phase 4 (Quality Gates), not here. The Constructor:
 
-1. **Run all tests** in the test document
-2. **Record results** (PASS/FAIL)
-3. **If tests fail:**
-   - Analyze the failure
-   - Fix the implementation
-   - Re-run tests
-4. **Repeat up to 10 times** for each failing test
-5. **After 10 attempts:**
-   - Mark Backlog Item as `failed`
-   - Document the issue
-   - Move to next Backlog Item
+1. **Verify test skeletons are filled in** — all `# TODO: implement` stubs completed
+2. **Run a quick sanity check** — ensure tests are syntactically valid
+3. **Document any issues** in implementation notes
 
-**Do NOT proceed** until all tests pass or fail after 10 attempts.
+```bash
+# Quick validation (tests should fail gracefully, not error)
+tests/run.sh --unit --dry-run 2>&1 || true
+```
+
+**Test execution and retry loop is handled by Phase 4 (Quality Gates):**
+- Phase A gates run new tests from `new_tests.manifest`
+- Phase B gates run regression tests
+- On failure: Test Executor hands report back to Constructor for fixing
+- Up to 10 retries per gate
+
+See `rules/generic/test_procedures.md` for full Quality Gates procedure.
 
 ### Step 6: Create Implementation Documentation
 

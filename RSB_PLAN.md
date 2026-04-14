@@ -53,3 +53,21 @@ Enhance agents with autonomous capabilities and technology agnosticism, enabling
 Backlog Items:
 
 * RSB-3. YOLO mode - agent process full life cycle in autonomous mode
+
+---
+
+## Version 2.0 - Sprint and Backlog Management
+
+## RSB Sprint 5 - Sprint and Backlog Management Commands
+
+Status: Done
+
+Add structured management commands for sprints, backlog items, and bugs. Includes sprint lifecycle (create, start, close), backlog item definition constraints, and bug handling policy with fold-in/promote decision tree.
+
+Backlog Items:
+
+* RSB-8. Sprint management command
+* RSB-9. Backlog management command
+* RSB-10. Bug management with fold-in/promote policy
+* RSB-11. Sprint archiving
+* RSB-12. Testing rules and procedures documentation

@@ -13,12 +13,15 @@ To execute a complete development cycle automatically:
 To execute individual phases:
 
 ```
-@agent-contractor.md   # Phase 1: Contracting
-@agent-analyst.md      # Phase 2: Inception
-@agent-designer.md     # Phase 3: Elaboration
-@agent-constructor.md  # Phase 4: Construction
-@agent-documentor.md   # Phase 5: Documentation
+@agent-contractor.md   # Phase 1: Setup (Contracting)
+@agent-analyst.md      # Phase 1: Setup (Inception) — merged with contractor
+@agent-designer.md     # Phase 2: Design + Test Specification
+@agent-constructor.md  # Phase 3: Construction (fills test skeletons, no new tests)
+                       # Phase 4: Quality Gates (executed via rup-manager.md)
+@agent-documentor.md   # Phase 5: Wrap-up
 ```
+
+**Note:** Phase 4 (Quality Gates) is orchestrated by `rup-manager.md` using procedures from `rules/generic/test_procedures.md`. It runs quality gates (A1-A3 new-code, B1-B3 regression) and handles the fix-and-retry loop with the Constructor.
 
 ## Execution Modes
 
@@ -64,19 +67,26 @@ All YOLO mode decisions are logged in phase documents with:
 **Audit Trail:**
 The Mode field in PLAN.md creates a permanent git record showing which sprints were autonomous vs supervised.
 
-**How to Detect Mode:**
+**How to Detect Mode and Test Parameters:**
 Read the active Sprint section in PLAN.md:
 ```markdown
 ## Sprint 20
 
 Status: Progress
-Mode: YOLO          ← Autonomous mode active
+Mode: YOLO
+Test: unit, integration
+Regression: unit
 
 Backlog Items:
 * GH-27. Feature implementation
 ```
 
-If no Mode field or `Mode: managed` → Interactive mode (default)
+**Required fields:**
+- `Mode:` — `YOLO` or `managed` (default: managed)
+- `Test:` — `smoke`, `unit`, `integration`, `none` (default: unit, integration)
+- `Regression:` — `smoke`, `unit`, `integration`, `none` (default: unit, integration)
+
+See `rules/generic/sprint_definition.md` for full specification.
 
 ## Rules (MUST READ)
 

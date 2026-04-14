@@ -42,3 +42,37 @@ Each technology subdirectory contains rules specific to that technology, while g
 ### RSB-7. Remove v99 tag from names in rules directory
 
 Rules in rules directory are tracked by github and does not need _v99 tags in the name. Existing tags must be removed.
+
+---
+
+## Version 2.0 - Sprint and Backlog Management
+
+### RSB-8. Sprint management command
+
+Sprint management command `/sprint` allows creating, starting, closing and checking status of sprints. Sprints are defined in `PLAN.md` with structured format including status, mode, test and regression requirements.
+
+Test: `/sprint create`, `/sprint start`, `/sprint status`, `/sprint close` commands work as specified.
+
+### RSB-9. Backlog management command
+
+Backlog management command `/backlog` allows adding, listing and prioritizing backlog items. Items follow a constrained format: title (max 80 chars), description (2-4 sentences), and single-line test criterion.
+
+Test: `/backlog add`, `/backlog list`, `/backlog prioritize` commands work as specified.
+
+### RSB-10. Bug management with fold-in/promote policy
+
+Bug management command `/bug` handles bugs discovered during sprints. Default policy is fold-in (fix as part of current item) unless bug expands scope, is cross-cutting, or must be deferred - then it promotes to a new backlog item.
+
+Test: `/bug report`, `/bug triage`, `/bug list` commands work and follow bug policy.
+
+### RSB-11. Sprint archiving
+
+Archive sprint command `/archive-sprint` moves completed sprint artifacts to `docs/archive/` directory while maintaining backlog symbolic links for traceability.
+
+Test: Completed sprints are archived with proper symlink preservation.
+
+### RSB-12. Testing rules and procedures documentation
+
+Generic rules directory contains comprehensive testing documentation: testing strategy template, test procedures, test failure classification, and test migration guidelines.
+
+Test: All testing documents exist in `rules/generic/` and are referenced by agents.

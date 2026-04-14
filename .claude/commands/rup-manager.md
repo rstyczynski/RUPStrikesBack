@@ -1,67 +1,69 @@
 # RUP Cycle Manager - Complete Process Orchestration
 
-Execute the complete Rational Unified Process cycle with fully automated orchestration.
+Execute the complete Rational Unified Process cycle with test-first quality gates.
 
 ## Overview
 
 This manager orchestrates all RUP phases by executing specialized agent instructions in sequence:
 
-- **Contractor Agent**: Establishes Agent Cooperation Specification (ACS)
-- **Analyst Agent**: Reviews requirements and confirms readiness
-- **Designer Agent**: Creates detailed design documents and diagrams
-- **Constructor Agent**: Implements, tests, and delivers the product
-- **Documentor Agent**: Updates project documentation
+| Phase | Agents | Output |
+|-------|--------|--------|
+| Phase 1: Setup | Contractor + Analyst | `sprint_N_setup.md` |
+| Phase 2: Design | Designer + Test Architect | `sprint_N_design.md` (includes test spec) |
+| Phase 3: Construction | Constructor | `sprint_N_implementation.md` |
+| Phase 4: Quality Gates | Test Executor | logs + `sprint_N_tests.md` |
+| Phase 5: Wrap-up | Documentor | README + traceability |
 
 ## Instructions
 
 Execute all five phases in sequence. Each phase reads and executes its specialized agent's instructions. The manager handles transitions, git commits, and maintains flow continuity.
 
-## Step 0: Detect Execution Mode
+---
 
-**Before starting any phases, determine the execution mode:**
+## Step 0: Detect Mode and Test Parameters (ONCE)
+
+**Before starting any phases, determine execution parameters:**
 
 1. **Read PLAN.md**
 2. **Identify the active Sprint** (Sprint with `Status: Progress`)
-3. **Check for "Mode:" field** in that Sprint section
-   - If `Mode: YOLO` → **YOLO mode** (autonomous execution)
-   - If `Mode: managed` → **Managed mode** (interactive execution)
-   - If no Mode field → **Default to managed** (interactive execution)
+3. **Extract parameters:**
 
-4. **Display Mode Banner:**
+| Parameter | Values | Default |
+|-----------|--------|---------|
+| `Mode:` | `managed`, `YOLO` | `managed` |
+| `Test:` | `smoke`, `unit`, `integration`, `none` | `unit, integration` |
+| `Regression:` | `smoke`, `unit`, `integration`, `none` | `unit, integration` |
+| `Regression scope:` | component name | (full suite) |
 
-If **YOLO Mode Detected**:
-```
-═══════════════════════════════════════════════
-🚀 YOLO MODE: ACTIVE (You Only Live Once)
-═══════════════════════════════════════════════
+See `rules/generic/sprint_definition.md` for parameter details.
 
-Autonomous Execution Enabled:
-✓ Agents will make reasonable assumptions
-✓ Minimal human interaction required
-✓ All decisions logged in implementation docs
-✓ Audit trail preserved in git history
+4. **Display Combined Banner:**
 
-Safety: Critical failures still stop execution
-═══════════════════════════════════════════════
+```text
+═══════════════════════════════════════════════════════════════
+SPRINT [N] | MODE: [YOLO|managed] | Test: [values] | Regression: [values]
+═══════════════════════════════════════════════════════════════
 ```
 
-If **Managed Mode** (default):
+If **YOLO Mode**:
 ```
-═══════════════════════════════════════════════
-👤 MANAGED MODE: ACTIVE
-═══════════════════════════════════════════════
-
-Interactive Execution Enabled:
-✓ Human-supervised at each phase
-✓ Agents ask for clarification
-✓ Explicit approvals required
-✓ Recommended for complex/high-risk work
-
-Mode: Collaborative human-AI partnership
-═══════════════════════════════════════════════
+YOLO: All outputs self-approved, no waits, 10-min limit.
+- Agents make reasonable assumptions
+- All decisions logged in implementation docs
+- Critical failures still stop execution
 ```
 
-**Note**: The detected mode applies to all agents throughout this cycle. Each agent will independently detect and apply the appropriate behaviors.
+If **Managed Mode**:
+```
+MANAGED: Human-supervised at each phase.
+- Explicit approvals required
+- Agents ask for clarification
+- Recommended for complex/high-risk work
+```
+
+**All subsequent phases use this banner. Do NOT re-read PLAN.md for mode or sprint number.**
+
+---
 
 ## YOLO Mode Speed Directive
 
@@ -76,124 +78,238 @@ Mode: Collaborative human-AI partnership
 - Max 3 YOLO decisions per phase (3 lines each)
 - NO redundant text, NO over-explanation
 
-## Phase 1: Execute Contracting
+---
 
-Read `.claude/commands/agents/agent-contractor.md` and execute all its instructions.
+## Phase 1: Execute Setup (Contracting + Inception)
 
-**Important**: After completing this phase, commit all changes following semantic commit message conventions as described in `rules/generic/GIT_RULES*`. Push to remote after commit.
+Read `.claude/commands/agents/agent-contractor.md` and `.claude/commands/agents/agent-analyst.md` — skip Step 0 (mode detection) in both; mode is already set in the Step 0 banner.
 
-This phase establishes the Agent Cooperation Specification (ACS) and confirms understanding of technology constraints, coding standards, testing standards, and cooperation rules.
+Produce a **single file** `progress/sprint_N/sprint_N_setup.md` with two sections:
 
-**Decision Point**: If any clarifications are needed, stop and request them before proceeding to Phase 2.
+```markdown
+## Contract
+[contractor output: rules understood, responsibilities, constraints, open questions]
+
+## Analysis
+[analyst output: backlog items analyzed, feasibility, compatibility, open questions]
+```
+
+Update `PROGRESS_BOARD.md`: Sprint → `under_analysis`; Backlog Items → `analysed`
+
+**Decision Point:** If any critical ambiguity exists in either section, stop and request clarification.
+
+**Commit:** `docs(sprint-N): setup phase — contract and analysis` · Push.
 
 ---
 
-## Phase 2: Execute Inception
+## Phase 2: Execute Design + Test Specification
 
-Read `.claude/commands/agents/agent-analyst.md` and execute all its instructions.
+Read `.claude/commands/agents/agent-designer.md` — skip Step 0 and Step 8 ("Await Approval").
 
-**Important**: After completing this phase, commit all changes following semantic commit message conventions as described in `rules/generic/GIT_RULES*`. Push to remote after commit.
+- **YOLO mode:** Self-approve immediately after writing; no wait.
+- **Managed mode:** Wait for explicit Product Owner approval before continuing.
 
-This phase reviews the Backlog and Plan for the iteration, analyzes requirements, ensures compatibility with existing work, and confirms readiness to proceed to design.
+The design document `progress/sprint_N/sprint_N_design.md` **MUST** include a `### Testing Strategy` section. See `rules/generic/testing_strategy_template.md` for the required format.
 
-**Decision Point**: If any clarifications are needed, stop and request them before proceeding to Phase 3.
+**Immediately after writing the design** (no separate commit), execute Test Architect procedure from `rules/generic/test_procedures.md` Part 1:
 
----
+1. Read the `### Testing Strategy` section and the `Test:` param from the Step 0 banner
+2. Append a `## Test Specification` section to `sprint_N_design.md` (SM-N / UT-N / IT-N + traceability table)
+3. Append test skeletons to existing files in `tests/smoke/`, `tests/unit/`, `tests/integration/` (one file per component/domain, not per sprint)
+4. Register new tests in appropriate `tests/manifests/component_*.manifest`
+5. Write `progress/sprint_N/new_tests.manifest` (format: `suite:script[:function]`)
+6. Verify skeletons run and produce expected failures: `tests/run.sh --unit`
 
-## Phase 3: Execute Elaboration
+Update `PROGRESS_BOARD.md`: Backlog Items → `designed` → `test_specified`
 
-**Note**: Wait 60 seconds for design acceptance. After that assume approval.
+**Decision Point:** If test scope is unclear after reading the Testing Strategy, stop and request clarification before writing skeletons.
 
-Read `.claude/commands/agents/agent-designer.md` and execute all its instructions.
-
-**Important**: After completing this phase, commit all changes following semantic commit message conventions as described in `rules/generic/GIT_RULES*`. Push to remote after commit.
-
-This phase creates detailed design documents, diagrams, class/data models, and verifies feasibility against available APIs for the product increment.
-
-Once design is accepted (after 60 second wait or explicit approval), right away proceed to Phase 4.
-
----
-
-## Phase 4: Execute Construction
-
-Read `.claude/commands/agents/agent-constructor.md` and execute all its instructions.
-
-**Important**: After completing this phase, commit all changes following semantic commit message conventions as described in `rules/generic/GIT_RULES*`. Push to remote after commit.
-
-This phase implements the design, creates and runs functional and performance tests, creates comprehensive documentation, and delivers the product increment.
-
-Proceed to Phase 5 regardless of test results (partial success is acceptable and will be documented).
+**Commit:** `docs(sprint-N): design, test spec, and test skeletons` · Push.
 
 ---
 
-## Phase 5: Execute Documentation
+## Phase 3: Execute Construction
 
-Read `.claude/commands/agents/agent-documentor.md` and execute all its instructions.
+Read `.claude/commands/agents/agent-constructor.md` — skip Step 0.
 
-**Important**: After completing this phase, commit all changes following semantic commit message conventions as described in `rules/generic/GIT_RULES*`. Push to remote after commit.
+**Override:** Do NOT create new test cases. Tests were already specified in Phase 2. The Constructor:
 
-This phase validates all Sprint documentation, ensures compliance with documentation standards, verifies code snippets are tested and copy-paste-able, and updates the README with recent developments.
+1. Implements code to satisfy the design
+2. Fills in any `# TODO: implement` stubs in test skeletons
+3. Does NOT invent new test cases
+
+Produce `progress/sprint_N/sprint_N_implementation.md`.
+
+Update `PROGRESS_BOARD.md`: Sprint → `under_construction`; Backlog Items → `under_construction`
+
+**Commit:** `feat(sprint-N): implement [brief description]` · Push.
+
+**Do NOT proceed to Phase 5. Proceed to Phase 4.**
 
 ---
 
-## Step 6: Final Summary ⚠️ MANDATORY
+## Phase 4: Execute Quality Gates
 
-**CRITICAL**: After all phases complete, you MUST provide a comprehensive summary using the template below.
+Execute Test Executor procedure from `rules/generic/test_procedures.md` Part 2. Use `Test:` and `Regression:` from the Step 0 banner.
 
-**DO NOT SKIP THIS STEP** - Even if all phases succeeded, the Final Summary is required for audit trail and metrics tracking.
+### Mandatory Log Artifacts
 
-### RUP Cycle Completion Report
+Every gate execution **MUST** produce a timestamped log file:
 
-**Phases Executed:**
+```bash
+TS="$(date -u '+%Y%m%d_%H%M%S')"
+LOG="progress/sprint_N/test_run_<gate>_${TS}.log"
+tests/run.sh --<level> [flags] 2>&1 | tee "$LOG"
+```
 
-- ✓ Contracting → Inception → Elaboration → Construction → Documentation
+Gate names: `A1_smoke`, `A2_unit`, `A3_integration`, `B1_smoke`, `B2_unit`, `B3_integration`
 
-**Sprint Information:**
+### Phase A: New-Code Gates (per `Test:` parameter)
 
-- Sprint Number: [number]
-- Sprint Status: [status]
+Run only new tests from `new_tests.manifest`. Each must pass before the next:
 
-**Backlog Items:**
+| Gate | Command | Condition |
+|------|---------|-----------|
+| A1 Smoke | `tests/run.sh --smoke --new-only progress/sprint_N/new_tests.manifest` | if `Test:` includes `smoke` |
+| A2 Unit | `tests/run.sh --unit --new-only progress/sprint_N/new_tests.manifest` | if `Test:` includes `unit` |
+| A3 Integration | `tests/run.sh --integration --new-only progress/sprint_N/new_tests.manifest` | if `Test:` includes `integration` |
 
-- [List each Backlog Item with final status: implemented/tested/failed]
+A1 fail = skip A2/A3 (build is too broken).
 
-**Files Modified:**
+### Phase B: Regression Gates (per `Regression:` parameter)
 
-- [List all modified/created files]
+Run after Phase A passes. Full suite unless `Regression scope:` is set:
 
-**Test Results:**
+| Gate | Command | Condition |
+|------|---------|-----------|
+| B1 Smoke | `tests/run.sh --smoke [--component <scope>]` | if `Regression:` includes `smoke` |
+| B2 Unit | `tests/run.sh --unit [--component <scope>]` | if `Regression:` includes `unit` |
+| B3 Integration | `tests/run.sh --integration [--component <scope>]` | if `Regression:` includes `integration` |
 
-- Total Tests: [count]
-- Passed: [count]
-- Failed: [count]
+### Retry Policy
 
-**Commits Made:**
+| Mode | Retries 1-4 | Retry 5 | Retries 6-10 | After 10 |
+|------|-------------|---------|--------------|----------|
+| Managed | Auto fix-and-rerun | Human escalation | Continue if approved | Sprint `failed` |
+| YOLO | Auto fix-and-rerun | Auto | Auto | Sprint `failed` |
 
-- [List commit messages with hashes]
+See `rules/generic/test_failure_classification.md` for flaky vs broken handling.
 
-**Next Steps:**
+### YOLO Mode Thresholds
 
-- [Recommended follow-up actions]
-- [Any deferred items or issues to address]
+| Test Level | Required Pass Rate |
+|------------|-------------------|
+| Smoke | 100% (no exceptions) |
+| Unit | 100% (no exceptions) |
+| Integration | ≥80% with failures documented |
 
-**Quality Metrics:**
+### On Failure
 
-- Design Iterations: [count]
-- Construction Iterations: [count]
-- Overall Cycle Time: [if trackable]
+1. Hand failure report to Constructor (Phase 3)
+2. Constructor fixes the code
+3. Test Executor re-runs the failing gate
+4. Repeat until pass or retries exhausted
+
+Produce `progress/sprint_N/sprint_N_tests.md` with `## Artifacts` listing all log paths.
+
+Update `PROGRESS_BOARD.md`: Items → `smoke_passed` / `unit_tested` / `integration_tested` / `tested` (or `failed`); Sprint → `implemented` / `implemented_partially` / `failed`.
+
+**Commit:** `test(sprint-N): quality gates — [pass/fail summary]` · Push.
+
+**Phase 5 only after all gates pass (or YOLO threshold met). If retries exhausted → mark `failed`, still run Phase 5 for documentation.**
+
+---
+
+## Bug Handling
+
+Bugs discovered during phases follow `rules/generic/bug_policy.md`:
+
+- **Fold-in:** Fix as part of current backlog item (default)
+- **Promote:** Create new backlog item if scope expands
+
+Register bugs in `progress/sprint_N/sprint_N_bugs.md`.
+
+---
+
+## Phase 5: Execute Wrap-up
+
+Read `.claude/commands/agents/agent-documentor.md` and execute with these focuses:
+
+1. **Update `README.md`** — Add `### Sprint N — [title]` to Recent Updates section
+2. **Create backlog traceability symlinks** in `progress/backlog/[ITEM-ID]/`
+3. **Inline compliance check** (verify before committing):
+   - All sprint artifacts exist: `setup.md`, `design.md`, `implementation.md`, `tests.md`, log files
+   - No `exit` commands in copy-paste blocks
+   - All log file paths listed in `tests.md ## Artifacts`
+4. **Verify PROGRESS_BOARD.md** final state is correct
+
+**Commit:** `docs(sprint-N): update README and backlog traceability` · Push.
+
+---
+
+## Step 6: Final Summary (MANDATORY)
+
+**CRITICAL**: After all phases complete, you MUST provide this summary.
+
+```markdown
+# RUP Cycle — Sprint [N] Completion Report
+
+Sprint: N | Mode: [YOLO|managed] | Status: [implemented|implemented_partially|failed]
+
+## Phases Executed
+
+| Phase | Status | Output |
+|-------|--------|--------|
+| Phase 1 Setup | done | sprint_N_setup.md |
+| Phase 2 Design | done | sprint_N_design.md (includes test spec) |
+| Phase 3 Construction | done | sprint_N_implementation.md |
+| Phase 4 Quality Gates | [pass/fail] | [N] log files + sprint_N_tests.md |
+| Phase 5 Wrap-up | done | README + backlog traceability |
+
+## Backlog Items
+
+| Item | Status | Tests |
+|------|--------|-------|
+| PBI-N | tested/failed | N pass / N fail |
+
+## Quality Gates
+
+| Gate | Result | Retries |
+|------|--------|---------|
+| A1 Smoke | [pass/skip/fail] | N |
+| A2 Unit | [pass/skip/fail] | N |
+| A3 Integration | [pass/skip/fail] | N |
+| B1 Smoke | [pass/skip/fail] | N |
+| B2 Unit | [pass/skip/fail] | N |
+| B3 Integration | [pass/skip/fail] | N |
+
+## Test Parameters
+
+- Test: [value]
+- Regression: [value]
+- Regression scope: [component or "full suite"]
+- Flaky tests deferred: [list or "None"]
+
+## Commits
+
+- [hash] docs(sprint-N): setup phase — contract and analysis
+- [hash] docs(sprint-N): design, test spec, and test skeletons
+- [hash] feat(sprint-N): implement [description]
+- [hash] test(sprint-N): quality gates — [summary]
+- [hash] docs(sprint-N): update README and backlog traceability
+
+## Files Modified
+
+[list all modified/created files]
+
+## Deferred Items
+
+[list or "None"]
+```
 
 ---
 
 ## Orchestration Notes
-
-### Automated Execution
-
-This manager executes all phases automatically:
-- Reads each agent's instruction file
-- Executes all instructions from that agent
-- Handles git commits after each phase
-- Maintains flow continuity throughout
-- Provides comprehensive final summary
 
 ### Error Handling
 
@@ -202,42 +318,56 @@ If any phase encounters issues:
 - Report the issue clearly
 - Preserve partial progress via git commits
 - Wait for Product Owner clarification
-- Can resume by re-invoking this manager (it will continue from last checkpoint)
+- Can resume by re-invoking this manager
 
 ### State Management
 
 - PROGRESS_BOARD.md tracks Sprint and Backlog Item states
-- Each agent updates its respective sections
+- Each phase updates its respective sections
 - Git commits serve as synchronization checkpoints
-- State transitions follow project state machines
 
 ### Phase Independence
 
-While manager executes all phases:
-- Individual agents can still be invoked separately for iteration
+Individual agents can still be invoked separately:
 - Useful for resuming after manual fixes
 - Allows targeted phase re-execution
 
+---
+
 ## Execution Checklist
 
-**IMPORTANT**: The RUP Manager MUST complete ALL 6 steps. Use this checklist to verify:
+**IMPORTANT**: The RUP Manager MUST complete ALL 6 steps:
 
-- [ ] **Step 1: Phase 1 - Contracting** - Execute agent-contractor.md, commit, push
-- [ ] **Step 2: Phase 2 - Inception** - Execute agent-analyst.md, commit, push
-- [ ] **Step 3: Phase 3 - Elaboration** - Execute agent-designer.md, wait 60s for approval, commit, push
-- [ ] **Step 4: Phase 4 - Construction** - Execute agent-constructor.md, commit, push
-- [ ] **Step 5: Phase 5 - Documentation** - Execute agent-documentor.md, commit, push
-- [ ] **Step 6: Final Summary** - Provide RUP Cycle Completion Report in the format specified above (lines 81-122)
+- [ ] **Step 0** — Mode + test params detected; banner displayed
+- [ ] **Phase 1** — Setup (contract + analysis) → `sprint_N_setup.md` → commit, push
+- [ ] **Phase 2** — Design + test spec + skeletons → `sprint_N_design.md` + `new_tests.manifest` → commit, push
+- [ ] **Phase 3** — Construction (no new tests) → `sprint_N_implementation.md` → commit, push
+- [ ] **Phase 4** — Quality gates (Phase A + Phase B) → log files + `sprint_N_tests.md` → commit, push
+- [ ] **Phase 5** — Wrap-up (README + backlog traceability) → commit, push
+- [ ] **Step 6** — Final Summary (MANDATORY — never skip)
 
-**Reminder**: Step 6 is MANDATORY. Do not skip the Final Summary even if all phases completed successfully.
+---
+
+## Related Rules
+
+| Rule File | Purpose |
+|-----------|---------|
+| `rules/generic/sprint_definition.md` | Sprint format, Test/Regression params |
+| `rules/generic/backlog_item_definition.md` | Backlog item format |
+| `rules/generic/testing_strategy_template.md` | Designer's testing strategy template |
+| `rules/generic/test_procedures.md` | Test Architect + Executor procedures |
+| `rules/generic/test_failure_classification.md` | Flaky vs broken handling |
+| `rules/generic/bug_policy.md` | Bug fold-in vs promote |
+
+---
 
 ## Usage
 
-To execute a complete automated RUP cycle:
+To execute a complete RUP cycle:
 
-1. Ensure BACKLOG.md has a Sprint marked as `Progress`
-2. Invoke this manager: `@rup-manager.md`
-3. Manager automatically executes all 6 steps (5 phases + final summary)
-4. Verify all 6 checklist items above are completed
+1. Ensure PLAN.md has a Sprint with `Status: Progress` and required fields (`Mode:`, `Test:`, `Regression:`)
+2. Invoke this manager: `/rup-manager`
+3. Manager automatically executes all 6 steps
+4. Verify all checklist items are completed
 
-**Note**: For manual phase control, you can invoke individual agent commands directly (see `agents/README.md`).
+**Note**: For manual phase control, invoke individual agent commands directly (see `agents/README.md`).
