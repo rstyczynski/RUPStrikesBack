@@ -1,6 +1,6 @@
 = RUP Strikes Back: Agentic Programming Cooperation Model
 :author: Ryszard Styczynski
-:revdate: 2025-04-14
+:revdate: 2025-11-13
 :toc: left
 :toc-title: Table of Contents
 :toclevels: 3
