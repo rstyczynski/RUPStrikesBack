@@ -110,10 +110,17 @@ perl -i -0pe 's/```text\nflowchart/```mermaid\nflowchart/g' README.md
 echo "✓ Mermaid diagrams fixed"
 
 # Fix image widths (pandoc doesn't preserve asciidoc width attribute)
+# Extract width from asciidoc and apply to markdown
 echo "Fixing image widths..."
-sed -i '' 's|src="images/Development-iterative.png"|src="images/Development-iterative.png" width="450"|g' README.md
-sed -i '' 's|src="images/oum_scrum_xp.png"|src="images/oum_scrum_xp.png" width="300"|g' README.md
-sed -i '' 's|src="images/agile_anarchy.png"|src="images/agile_anarchy.png" width="300"|g' README.md
+grep -o 'image::[^[]*\[[^]]*width=[0-9]*' README.adoc | while read line; do
+    # Extract filename and width from asciidoc image directive
+    filename=$(echo "$line" | sed 's/image::\([^[]*\)\[.*/\1/')
+    width=$(echo "$line" | grep -o 'width=[0-9]*' | cut -d= -f2)
+    if [ -n "$filename" ] && [ -n "$width" ]; then
+        # Apply width to img tag in markdown
+        sed -i '' "s|src=\"images/${filename}\"|src=\"images/${filename}\" width=\"${width}\"|g" README.md
+    fi
+done
 echo "✓ Image widths fixed"
 
 echo
