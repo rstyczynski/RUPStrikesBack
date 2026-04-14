@@ -2,6 +2,11 @@
 
 Welcome! This document is your starting point after checking out this project.
 
+> **Submodule Usage:** If RUPStrikesBack is added as a submodule, prefix all paths with `RUPStrikesBack/`. For example:
+> - `rules/generic/` → `RUPStrikesBack/rules/generic/`
+> - `@rup-manager.md` → `@RUPStrikesBack/.claude/commands/rup-manager.md`
+> - `.claude/commands/` → `RUPStrikesBack/.claude/commands/`
+
 ## Quick Start
 
 To execute a complete development cycle automatically:
