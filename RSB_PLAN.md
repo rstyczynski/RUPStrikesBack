@@ -71,3 +71,4 @@ Backlog Items:
 * RSB-10. Bug management with fold-in/promote policy
 * RSB-11. Sprint archiving
 * RSB-12. Testing rules and procedures documentation
+* RSB-13. AGENTS.md documents all management commands

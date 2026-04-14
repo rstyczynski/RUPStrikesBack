@@ -76,3 +76,9 @@ Test: Completed sprints are archived with proper symlink preservation.
 Generic rules directory contains comprehensive testing documentation: testing strategy template, test procedures, test failure classification, and test migration guidelines.
 
 Test: All testing documents exist in `rules/generic/` and are referenced by agents.
+
+### RSB-13. AGENTS.md documents all management commands
+
+AGENTS.md must document all available commands including Version 2.0 management commands: `/backlog`, `/sprint`, `/bug`, and `/archive-sprint`.
+
+Test: AGENTS.md lists all commands with usage examples.

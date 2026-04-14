@@ -7,8 +7,29 @@ Welcome! This document is your starting point after checking out this project.
 To execute a complete development cycle automatically:
 
 ```
-@rup-manager.md
+/rup-manager
 ```
+
+## Management Commands (Version 2.0)
+
+```
+/backlog add <title>              # Add new backlog item
+/backlog list [--status <status>] # List items (filtered)
+/backlog prioritize               # Reorder items
+
+/sprint create [<N>]              # Create new sprint
+/sprint start [<N>]               # Start sprint (Planned → Progress)
+/sprint status [<N>]              # Show sprint status
+/sprint close [<N>]               # Close sprint after gates pass
+
+/bug report <title>               # Report bug during sprint
+/bug triage [<BUG-ID>]            # Evaluate for promotion
+/bug list [--sprint <N>]          # List bugs
+
+/archive-sprint <N>               # Archive completed sprint
+```
+
+## Phase Agents
 
 To execute individual phases:
 
